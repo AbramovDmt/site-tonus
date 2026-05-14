@@ -192,17 +192,22 @@
       gap: 7px;
       padding: 9px 18px;
       border-radius: var(--radius-pill);
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.28);
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
       font-size: var(--text-sm);
       font-weight: 500;
-      color: #fff;
+      color: var(--color-text);
       transition: background var(--transition), transform var(--transition);
       white-space: nowrap;
     }
-    .btn-messenger:hover { background: rgba(255,255,255,.26); transform: translateY(-1px); }
-    .btn-messenger.light { background: var(--color-bg-soft); border-color: var(--color-border); color: var(--color-text); }
-    .btn-messenger.light:hover { background: var(--color-bg-accent); }
+    .btn-messenger:hover { background: var(--color-bg-accent); transform: translateY(-1px); }
+    /* Вариант для тёмных фонов (если понадобится) */
+    .btn-messenger.on-dark {
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.28);
+      color: #fff;
+    }
+    .btn-messenger.on-dark:hover { background: rgba(255,255,255,.26); }
 
     /* ─────────────────────────────────────────
        КАРТОЧКИ (базовые стили + hover)
@@ -727,18 +732,56 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-visual { display: none; }
     }
+
     @media (max-width: 768px) {
       :root { --header-h: 60px; }
+
+      /* Header */
       .header-nav { display: none; }
       .header-phone span { display: none; }
       .header-contacts .btn-primary { display: none; }
       .burger { display: flex; }
+
+      /* Sections */
       section { padding: var(--space-12) 0; }
+      .section-sub { font-size: var(--text-md); margin-bottom: var(--space-8); }
+
+      /* Hero */
       .hero { padding-bottom: var(--space-10); }
+      .hero-grid { padding: var(--space-10) 0 var(--space-8); gap: var(--space-8); }
+      .hero-cta .btn-primary { width: 100%; justify-content: center; }
+
+      /* FAQ */
+      .faq-q { font-size: var(--text-md); padding: var(--space-4) 0; }
     }
+
     @media (max-width: 480px) {
+      /* Container чуть теснее */
+      .container { padding: 0 var(--space-4); }
+
+      /* Логотип: убираем разделитель и подпись чтобы не давило */
+      .logo-sep, .logo-sub { display: none; }
+
+      /* Hero заголовок — чуть меньше на малых экранах */
+      .hero-title { font-size: clamp(2rem, 9vw, 2.5rem); }
+
+      /* Hero отступы ужать */
+      .hero-grid { padding: var(--space-8) 0 var(--space-6); }
+      .hero-content { gap: var(--space-4); }
+
+      /* Кнопка CTA — полная ширина */
+      .hero-cta .btn-primary { width: 100%; justify-content: center; }
+
+      /* Мессенджеры — компактнее */
+      .btn-messenger { padding: 8px 13px; font-size: var(--text-xs); gap: 5px; }
+      .hero-messengers { gap: 6px; }
+
+      /* Trust — в колонку */
       .hero-trust { flex-direction: column; align-items: flex-start; gap: 4px; }
       .hero-trust-sep { display: none; }
+
+      /* FAQ */
+      .faq-q { font-size: var(--text-base); }
     }
 
     /* Уважаем prefers-reduced-motion */
