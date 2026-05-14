@@ -649,6 +649,66 @@
     .stagger-parent .reveal:nth-child(5) { transition-delay: .45s; }
 
     /* ─────────────────────────────────────────
+       БЛОК ПРОБЛЕМ
+    ───────────────────────────────────────── */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--space-6);
+    }
+    .problem-card {
+      grid-column: span 2;
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .problem-card:nth-child(1),
+    .problem-card:nth-child(2) { grid-column: span 3; }
+
+    .problem-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .pi-blue   { background: var(--color-bg-accent); color: var(--color-primary); }
+    .pi-teal   { background: rgba(78,173,160,.12);   color: var(--color-warm); }
+    .pi-amber  { background: rgba(224,152,0,.10);    color: #A87000; }
+    .pi-violet { background: rgba(111,87,167,.09);   color: #6F57A7; }
+    .pi-rose   { background: rgba(196,72,94,.09);    color: #C4485E; }
+
+    .problem-card h3 { font-size: var(--text-xl); }
+    .problem-card p  {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .problem-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+      transition: gap var(--transition), color var(--transition);
+    }
+    .problem-link:hover { gap: 10px; color: var(--color-primary-dark); }
+
+    @media (max-width: 960px) {
+      .problems-grid { grid-template-columns: repeat(2, 1fr); }
+      .problem-card,
+      .problem-card:nth-child(1),
+      .problem-card:nth-child(2) { grid-column: span 1; }
+    }
+    @media (max-width: 480px) {
+      .problems-grid { grid-template-columns: 1fr; }
+      .problem-card  { padding: var(--space-6); }
+    }
+
+    /* ─────────────────────────────────────────
        FAQ
     ───────────────────────────────────────── */
     .faq-section { background: var(--color-bg-soft); }
@@ -810,6 +870,7 @@
       </a>
 
       <nav class="header-nav" aria-label="Навигация">
+        <a href="#problems">Жалобы</a>
         <a href="#specialist">Специалист</a>
         <a href="#approach">Подход</a>
         <a href="#results">Отзывы</a>
@@ -830,6 +891,7 @@
     </div>
 
     <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <a href="#problems">Жалобы</a>
       <a href="#specialist">Специалист</a>
       <a href="#approach">Подход</a>
       <a href="#results">Отзывы</a>
@@ -958,6 +1020,95 @@
       <span>Дмитров, Московская обл.</span><span class="ticker-dot">·</span>
     </div>
   </div>
+
+  <!-- ═══════════════════ БЛОК ПРОБЛЕМ ═══════════════════ -->
+  <section id="problems" aria-label="С чем мы работаем">
+    <div class="container">
+
+      <h2 class="section-title reveal">Узнаёте себя?</h2>
+      <p class="section-sub reveal">Это то, с чем к нам обращаются чаще всего — и с чем мы умеем работать</p>
+
+      <div class="problems-grid stagger-parent">
+
+        <div class="card problem-card reveal">
+          <div class="problem-icon pi-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="2" x2="12" y2="22"/>
+              <rect x="8" y="4" width="8" height="5" rx="1.5"/>
+              <rect x="8" y="14" width="8" height="5" rx="1.5"/>
+            </svg>
+          </div>
+          <h3>Боль в спине и пояснице</h3>
+          <p>Острые прострелы, скованность по утрам или ощущение «заклинило». А может — хроническая ноющая боль, с которой вы уже привыкли жить. Работаем с причиной, а не маскируем симптом.</p>
+          <a href="#" class="problem-link" onclick="openForm(); return false;">
+            Записаться
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="card problem-card reveal">
+          <div class="problem-icon pi-teal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="6" r="3.5"/>
+              <path d="M9 10c-2 1.5-3 3.5-2 5.5L8 20h8l1-4.5c1-2-.5-4-2-5.5"/>
+            </svg>
+          </div>
+          <h3>Шея, голова и плечи</h3>
+          <p>Постоянное напряжение в шее, головные боли, тяжесть в плечах после долгого сидения. Чаще всего это не «от компьютера» — это зажимы в шейном отделе и нарушение кровотока.</p>
+          <a href="#" class="problem-link" onclick="openForm(); return false;">
+            Записаться
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="card problem-card reveal">
+          <div class="problem-icon pi-amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 3l3 9"/>
+              <circle cx="12" cy="12" r="2.5"/>
+              <path d="M14.5 12.5l3 8M9.5 12.5l-2.5 7"/>
+            </svg>
+          </div>
+          <h3>Боль в суставах</h3>
+          <p>Колено, тазобедренный, голеностоп — боль при ходьбе, отёк, ощущение нестабильности. Работаем и с самим суставом, и с тем, почему в него перегружается нагрузка.</p>
+          <a href="#" class="problem-link" onclick="openForm(); return false;">
+            Записаться
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="card problem-card reveal">
+          <div class="problem-icon pi-violet">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="4"/>
+              <path d="M12 8v8M8 12h8"/>
+            </svg>
+          </div>
+          <h3>После травмы или операции</h3>
+          <p>Реабилитация после переломов, эндопротезирования, хирургического вмешательства. Возвращаем подвижность, убираем компенсации и помогаем телу восстановиться полностью.</p>
+          <a href="#" class="problem-link" onclick="openForm(); return false;">
+            Записаться
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="card problem-card reveal">
+          <div class="problem-icon pi-rose">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>Послеродовое восстановление</h3>
+          <p>Боль в копчике, пояснице, тазовом дне — после родов тело восстанавливается медленно. Мягко и безопасно помогаем ему вернуться в норму без медикаментов.</p>
+          <a href="#" class="problem-link" onclick="openForm(); return false;">
+            Записаться
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- ═══════════════════ FAQ ═══════════════════ -->
   <section class="section faq-section bg-soft" id="faq">
