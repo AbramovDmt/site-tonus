@@ -790,7 +790,11 @@
     ───────────────────────────────────────── */
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
+
+      /* Фото — показываем меньшим размером под текстом */
+      .hero-visual { justify-content: center; }
+      .hero-blob { width: 300px; height: 360px; }
+      .hero-ring, .hero-float-badge { display: none; }
     }
 
     @media (max-width: 768px) {
@@ -802,6 +806,9 @@
       .header-contacts .btn-primary { display: none; }
       .burger { display: flex; }
 
+      /* Container — 20px сторона */
+      .container { padding: 0 20px; }
+
       /* Sections */
       section { padding: var(--space-12) 0; }
       .section-sub { font-size: var(--text-md); margin-bottom: var(--space-8); }
@@ -810,31 +817,34 @@
       .hero { padding-bottom: var(--space-10); }
       .hero-grid { padding: var(--space-10) 0 var(--space-8); gap: var(--space-8); }
       .hero-cta .btn-primary { width: 100%; justify-content: center; }
+      .hero-blob { width: 260px; height: 310px; }
 
       /* FAQ */
       .faq-q { font-size: var(--text-md); padding: var(--space-4) 0; }
     }
 
     @media (max-width: 480px) {
-      /* Container чуть теснее */
-      .container { padding: 0 var(--space-4); }
+      /* Container — 16px сторона */
+      .container { padding: 0 16px; }
 
-      /* Логотип: убираем разделитель и подпись чтобы не давило */
+      /* Логотип: убираем разделитель и подпись */
       .logo-sep, .logo-sub { display: none; }
 
-      /* Hero заголовок — чуть меньше на малых экранах */
-      .hero-title { font-size: clamp(2rem, 9vw, 2.5rem); }
+      /* Hero заголовок */
+      .hero-title { font-size: clamp(1.9rem, 9vw, 2.4rem); }
 
-      /* Hero отступы ужать */
+      /* Hero отступы */
       .hero-grid { padding: var(--space-8) 0 var(--space-6); }
       .hero-content { gap: var(--space-4); }
+      .hero-blob { width: 220px; height: 265px; }
 
       /* Кнопка CTA — полная ширина */
       .hero-cta .btn-primary { width: 100%; justify-content: center; }
 
       /* Мессенджеры — компактнее */
-      .btn-messenger { padding: 8px 13px; font-size: var(--text-xs); gap: 5px; }
+      .btn-messenger { padding: 8px 12px; font-size: var(--text-xs); gap: 5px; }
       .hero-messengers { gap: 6px; }
+      .hero-messengers-label { width: 100%; }
 
       /* Trust — в колонку */
       .hero-trust { flex-direction: column; align-items: flex-start; gap: 4px; }
