@@ -6,6 +6,9 @@ Thumbs.db
 .vscode/
 *.swp
 
+# Исходники фото (рабочие копии — в img/)
+Fhoto/
+
 # Secrets (если появятся)
 .env
 config.local.js
