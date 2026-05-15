@@ -504,68 +504,57 @@
       border-color: rgba(78,173,160,.08);
     }
 
-    /* Blob с фото — 3D-проём */
-    .hero-blob {
+    /* Hero photo — статичная 3D-рамка */
+    .hero-frame-outer {
       position: relative;
       z-index: 1;
-      width: 460px; height: 560px;
-      border-radius: 62% 38% 54% 46% / 44% 56% 44% 56%;
-      background: linear-gradient(145deg, var(--color-bg-accent) 0%, rgba(168,216,212,.35) 100%);
-      border: 3px solid rgba(43,127,191,.28);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      animation: blobMorph 18s ease-in-out infinite;
-      overflow: hidden;
-      /* Многослойная тень: глубина рамки + свечение */
-      box-shadow:
-        0 0 0 8px rgba(43,127,191,.05),
-        0 0 0 18px rgba(43,127,191,.025),
-        0 28px 72px rgba(43,127,191,.18);
-      will-change: transform;
+      width: 440px;
+      height: 560px;
     }
-    /* Инсет-тень — имитирует глубину стены/проёма */
-    .hero-blob::after {
+
+    /* Градиентное кольцо — цветной бортик */
+    .hero-frame-outer::before {
       content: '';
       position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background:
-        radial-gradient(ellipse at 28% 18%, rgba(255,255,255,.12) 0%, transparent 52%);
-      box-shadow:
-        inset 0 0 55px rgba(26,43,60,.18),
-        inset 6px 6px 28px rgba(26,43,60,.14),
-        inset -3px -3px 14px rgba(26,43,60,.07);
-      z-index: 2;
-      pointer-events: none;
+      inset: -4px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #2B7FBF 0%, #4EADA0 55%, #2B7FBF 100%);
+      opacity: .48;
     }
-    .hero-blob img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
+
+    /* Смещённая тень — даёт иллюзию объёма/глубины */
+    .hero-frame-outer::after {
+      content: '';
+      position: absolute;
+      top: 14px; left: 14px;
+      right: -18px; bottom: -22px;
+      border-radius: 20px;
+      background: linear-gradient(155deg, #2B7FBF 0%, #4EADA0 100%);
+      opacity: .14;
+      filter: blur(4px);
+      z-index: -1;
+    }
+
+    .hero-frame-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 5px solid #fff;
+      box-shadow:
+        0 4px 12px rgba(43,127,191,.14),
+        0 16px 44px rgba(43,127,191,.16),
+        0 32px 80px rgba(26,43,60,.16);
+    }
+
+    .hero-frame-inner img {
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: top center;
-      border-radius: inherit;
-      will-change: transform;
-    }
-    .hero-blob-hint {
-      position: relative; z-index: 1;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 10px;
-      padding: var(--space-6);
-    }
-    .hero-blob-icon {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: rgba(43,127,191,.12);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .hero-blob-hint p {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      text-align: center;
-      line-height: 1.5;
     }
 
     /* Floating badges на блобе */
@@ -597,10 +586,6 @@
     @keyframes badgeFloat {
       0%,100% { transform: translateY(0); }
       50%      { transform: translateY(-6px); }
-    }
-    @keyframes blobMorph {
-      0%,100% { border-radius: 62% 38% 54% 46% / 44% 56% 44% 56%; }
-      50%      { border-radius: 40% 60% 48% 52% / 52% 48% 52% 48%; }
     }
 
     /* ─────────────────────────────────────────
@@ -931,6 +916,123 @@
     }
 
     /* ─────────────────────────────────────────
+       ОБОРУДОВАНИЕ
+    ───────────────────────────────────────── */
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+
+    .eq-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+      transition: transform .3s ease, box-shadow .3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .eq-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 32px rgba(43,127,191,.14), 0 24px 56px rgba(26,43,60,.10);
+    }
+
+    .eq-photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--color-bg-accent);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .eq-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .eq-card:hover .eq-photo img { transform: scale(1.04); }
+
+    .eq-photo-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      color: var(--color-text-muted);
+    }
+    .eq-photo-ph svg { opacity: .45; }
+    .eq-photo-ph span {
+      font-size: var(--text-xs);
+      opacity: .5;
+      letter-spacing: .04em;
+    }
+
+    .eq-body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      flex: 1;
+    }
+    .eq-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .eq-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin: 0;
+    }
+    .eq-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .equipment-note {
+      text-align: center;
+      margin-top: var(--space-10);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .equipment-note::before,
+    .equipment-note::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    @media (max-width: 768px) {
+      .equipment-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* ─────────────────────────────────────────
        FAQ
     ───────────────────────────────────────── */
     .faq-section { background: var(--color-bg-soft); }
@@ -1015,7 +1117,7 @@
 
       /* Фото — показываем меньшим размером под текстом */
       .hero-visual { justify-content: center; }
-      .hero-blob { width: 300px; height: 360px; }
+      .hero-frame-outer { width: 300px; height: 360px; }
       .hero-ring, .hero-float-badge { display: none; }
     }
 
@@ -1039,7 +1141,7 @@
       .hero { padding-bottom: var(--space-10); }
       .hero-grid { padding: var(--space-10) 0 var(--space-8); gap: var(--space-8); }
       .hero-cta .btn-primary { width: 100%; justify-content: center; }
-      .hero-blob { width: 260px; height: 310px; }
+      .hero-frame-outer { width: 260px; height: 310px; }
 
       /* FAQ */
       .faq-q { font-size: var(--text-md); padding: var(--space-4) 0; }
@@ -1059,7 +1161,7 @@
       /* Hero отступы */
       .hero-grid { padding: var(--space-8) 0 var(--space-6); }
       .hero-content { gap: var(--space-4); }
-      .hero-blob { width: 220px; height: 265px; }
+      .hero-frame-outer { width: 220px; height: 265px; }
 
       /* Кнопка CTA — полная ширина */
       .hero-cta .btn-primary { width: 100%; justify-content: center; }
@@ -1080,7 +1182,6 @@
     /* Уважаем prefers-reduced-motion */
     @media (prefers-reduced-motion: reduce) {
       .ticker-track,
-      .hero-blob,
       .hero-float-badge,
       .hero-badge-dot,
       .hero-deco { animation: none !important; }
@@ -1204,30 +1305,17 @@
         <div class="hero-ring"></div>
         <div class="hero-ring hero-ring-2"></div>
 
-        <div class="hero-blob">
-          <img
-            src="img/specialist.jpg"
-            alt="Мария Федина — специалист по реабилитации и восстановлению, студия ТОНУС"
-            width="460"
-            height="560"
-            loading="eager"
-            fetchpriority="high"
-          >
-        </div>
-
-        <!-- Плавающие бейджи -->
-        <div class="hero-float-badge hero-float-badge-1">
-          <div class="badge-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="hero-frame-outer">
+          <div class="hero-frame-inner">
+            <img
+              src="Fhoto/main2.avif"
+              alt="Мария Федина — специалист по реабилитации и восстановлению, студия ТОНУС"
+              width="440"
+              height="560"
+              loading="eager"
+              fetchpriority="high"
+            >
           </div>
-          <span>Работа с первого сеанса</span>
-        </div>
-
-        <div class="hero-float-badge hero-float-badge-2">
-          <div class="badge-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-warm)" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <span>29 лет в медицине</span>
         </div>
 
       </div>
@@ -1422,6 +1510,82 @@
     </div><!-- /container -->
   </section>
 
+  <!-- ═══════════════════ EQUIPMENT ═══════════════════ -->
+  <section class="section" id="equipment">
+    <div class="container">
+
+      <h2 class="section-title reveal">Специальное оборудование</h2>
+      <p class="section-sub reveal">Профессиональные аппараты, которых нет в обычном массажном кабинете</p>
+
+      <div class="equipment-grid stagger-parent">
+
+        <!-- Правило -->
+        <div class="eq-card reveal">
+          <div class="eq-photo">
+            <div class="eq-photo-ph">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--color-primary)" stroke-width="1.5" aria-hidden="true">
+                <rect x="20" y="8" width="24" height="48" rx="12"/>
+                <line x1="32" y1="18" x2="32" y2="46"/>
+                <line x1="26" y1="26" x2="38" y2="26"/>
+                <line x1="26" y1="32" x2="38" y2="32"/>
+                <line x1="26" y1="38" x2="38" y2="38"/>
+              </svg>
+              <span>Фото аппарата</span>
+            </div>
+          </div>
+          <div class="eq-body">
+            <span class="eq-tag">Позвоночник и спина</span>
+            <p class="eq-title">Правúло</p>
+            <p class="eq-desc">Мягко вытягивает и выравнивает позвоночник — снимает нагрузку с дисков и зажатых нервов. Ощущение лёгкости чувствуется уже во время процедуры.</p>
+          </div>
+        </div>
+
+        <!-- Лимфодренаж -->
+        <div class="eq-card reveal">
+          <div class="eq-photo">
+            <div class="eq-photo-ph">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--color-warm)" stroke-width="1.5" aria-hidden="true">
+                <path d="M32 12 C20 24 14 32 14 40 a18 18 0 0 0 36 0 C50 32 44 24 32 12Z"/>
+                <path d="M24 38 C24 34 28 30 32 30 C36 30 40 34 40 38" stroke-linecap="round"/>
+              </svg>
+              <span>Фото аппарата</span>
+            </div>
+          </div>
+          <div class="eq-body">
+            <span class="eq-tag">Лимфодренаж</span>
+            <p class="eq-title">Аппарат лимфодренажа</p>
+            <p class="eq-desc">Восстанавливает лимфоток — убирает отёки, ускоряет восстановление, улучшает кровообращение. Работает с причиной, а не только с симптомом.</p>
+          </div>
+        </div>
+
+        <!-- Тракционный стол -->
+        <div class="eq-card reveal">
+          <div class="eq-photo">
+            <div class="eq-photo-ph">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--color-primary)" stroke-width="1.5" aria-hidden="true">
+                <rect x="10" y="26" width="44" height="12" rx="4"/>
+                <line x1="18" y1="38" x2="18" y2="50"/>
+                <line x1="46" y1="38" x2="46" y2="50"/>
+                <polyline points="6,32 12,28 12,36 6,32"/>
+                <polyline points="58,32 52,28 52,36 58,32"/>
+              </svg>
+              <span>Фото аппарата</span>
+            </div>
+          </div>
+          <div class="eq-body">
+            <span class="eq-tag">Позвоночник и суставы</span>
+            <p class="eq-title">Тракционный стол</p>
+            <p class="eq-desc">Безопасно снимает компрессию позвонков — облегчение ощущается уже во время процедуры. Особенно эффективен при грыжах и протрузиях.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="equipment-note reveal">Такое оборудование есть не в каждой студии</p>
+
+    </div>
+  </section>
+
   <!-- ═══════════════════ FAQ ═══════════════════ -->
   <section class="section faq-section bg-soft" id="faq">
     <div class="container container-narrow">
@@ -1586,46 +1750,6 @@
         }
       });
     });
-
-    // ── 3D-проём: наклон blob + параллакс фото ───────
-    (function() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if (window.matchMedia('(pointer: coarse)').matches) return; // пропускаем тач-устройства
-      const hero = document.getElementById('hero');
-      const blob = document.querySelector('.hero-blob');
-      const img  = blob ? blob.querySelector('img') : null;
-      if (!hero || !blob || !img) return;
-
-      let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
-
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      function tick() {
-        cx = lerp(cx, tx, 0.07);
-        cy = lerp(cy, ty, 0.07);
-
-        const rx =  cy * 12;   // вертикальная позиция → наклон X
-        const ry = -cx * 12;   // горизонтальная → наклон Y
-
-        blob.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        img.style.transform  = `translate(${cx * -16}px, ${cy * -16}px) scale(1.08)`;
-
-        const d = Math.abs(cx - tx) + Math.abs(cy - ty);
-        raf = d > 0.0004 ? requestAnimationFrame(tick) : null;
-      }
-
-      hero.addEventListener('mousemove', e => {
-        const r = hero.getBoundingClientRect();
-        tx = (e.clientX - r.left) / r.width  - 0.5;
-        ty = (e.clientY - r.top)  / r.height - 0.5;
-        if (!raf) raf = requestAnimationFrame(tick);
-      }, { passive: true });
-
-      hero.addEventListener('mouseleave', () => {
-        tx = 0; ty = 0;
-        if (!raf) raf = requestAnimationFrame(tick);
-      });
-    })();
 
     // ── Форма (заглушка до Шага 8) ───────────────────
     function openForm() {
