@@ -1,8 +1,30 @@
 {
+  "defaultMode": "bypassPermissions",
   "permissions": {
-    "allow": [
-      "WebSearch",
-      "WebFetch"
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(rm -r *)",
+      "Bash(Remove-Item -Recurse*)",
+      "Bash(Remove-Item -Force -Recurse*)",
+      "Bash(rd /s*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git push -f)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Bash(git clean -fd*)",
+      "Bash(git clean -fx*)",
+      "Read(**/.ssh/**)",
+      "Read(**/.aws/**)",
+      "Read(**/credentials.json)",
+      "Read(**/secrets.json)",
+      "Read(**/secrets/**)",
+      "Read(**/.env)",
+      "Read(**/config.local*)",
+      "Write(**/.ssh/**)",
+      "Write(**/.aws/**)",
+      "Write(**/credentials.json)",
+      "Write(**/secrets.json)"
     ]
   }
 }
