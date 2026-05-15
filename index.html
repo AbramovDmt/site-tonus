@@ -531,11 +531,10 @@
         0 8px 28px rgba(43,127,191,.14);
     }
 
-    /* Вращающийся блик по периметру рамки */
+    /* Двойной блик по периметру рамки: sweep по диагонали, раз в 4 секунды */
     .hero-frame-outer::before {
       content: '';
       position: absolute;
-      /* Квадрат в 142% — покрывает все углы при вращении */
       width: 142%;
       aspect-ratio: 1;
       top: 50%;
@@ -544,19 +543,32 @@
       background: conic-gradient(
         from var(--glint-angle) at 50% 50%,
         transparent 0deg,
-        transparent 83deg,
-        rgba(180,230,255,.55) 90deg,
-        rgba(255,255,255,.92) 95deg,
-        rgba(255,255,255,.98) 98deg,
-        rgba(180,230,255,.55) 105deg,
-        transparent 112deg,
+        transparent 72deg,
+        rgba(160,220,255,.4) 78deg,
+        rgba(255,255,255,.88) 83deg,
+        rgba(255,255,255,.96) 87deg,
+        rgba(160,220,255,.4) 93deg,
+        transparent 100deg,
+        transparent 170deg,
+        rgba(160,220,255,.4) 178deg,
+        rgba(255,255,255,.88) 183deg,
+        rgba(255,255,255,.96) 187deg,
+        rgba(160,220,255,.4) 193deg,
+        transparent 200deg,
         transparent 360deg
       );
-      animation: glintRotate 3s linear infinite;
+      animation: glintSweep 4s linear infinite, glintFade 4s linear infinite;
     }
 
-    @keyframes glintRotate {
-      to { --glint-angle: 360deg; }
+    @keyframes glintSweep {
+      0%           { --glint-angle: -20deg; animation-timing-function: ease-out; }
+      18%          { --glint-angle: 200deg; }
+      18.01%, 100% { --glint-angle: -20deg; }
+    }
+    @keyframes glintFade {
+      0%, 1%    { opacity: 0; }
+      3%, 15%   { opacity: 1; }
+      20%, 100% { opacity: 0; }
     }
 
     /* Внутренний оверлей — мягкая тень поверх фото */
@@ -695,7 +707,7 @@
     ───────────────────────────────────────── */
     .specialist-grid {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 360px minmax(0, 1fr);
       gap: var(--space-16);
       align-items: start;
     }
@@ -727,7 +739,7 @@
       border-radius: inherit;
     }
 
-    .specialist-content { display: flex; flex-direction: column; gap: var(--space-6); }
+    .specialist-content { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
 
     .specialist-name {
       font-family: var(--font-heading);
@@ -813,6 +825,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       border-radius: var(--radius-md);
+      width: 100%;
     }
     .diplomas-carousel-wrap::-webkit-scrollbar { display: none; }
     .diplomas-track {
@@ -859,7 +872,6 @@
     }
     @media (max-width: 480px) {
       .specialist-blob { width: 220px; height: 270px; }
-      .diploma-tile { flex: 0 0 130px; }
       .specialist-stats { gap: var(--space-6); }
     }
 
@@ -2150,11 +2162,12 @@
         var cols = window.innerWidth <= 480 ? 2 : 3;
         var w = Math.floor((wrap.clientWidth - GAP * (cols - 1)) / cols);
         Array.prototype.forEach.call(track.querySelectorAll('.diploma-tile'), function (t) {
-          t.style.width = w + 'px';
+          t.style.flexBasis = w + 'px';
         });
       }
 
-      setTileWidths();
+      requestAnimationFrame(setTileWidths);
+      window.addEventListener('load', setTileWidths);
       window.addEventListener('resize', setTileWidths);
 
       function scrollStep(dir) {
