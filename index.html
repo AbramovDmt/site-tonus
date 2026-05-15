@@ -504,58 +504,78 @@
       border-color: rgba(78,173,160,.08);
     }
 
-    /* Hero photo — 3D-рамка с глубиной */
+    /* Hero photo — 3D-рамка с вращающимся бликом */
+
+    /* @property для анимации угла conic-gradient (Chrome/Edge/Safari) */
+    @property --glint-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+
     .hero-frame-outer {
       position: relative;
       z-index: 1;
       width: 440px;
       height: 560px;
       transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+      overflow: hidden;
+      border-radius: 27px;
+      /* Градиент-подложка кольца */
+      background: linear-gradient(135deg, #2B7FBF 0%, #4EADA0 55%, #2B7FBF 100%);
+      /* 3D-глубина через box-shadow + белое кольцо */
+      box-shadow:
+        22px 26px 20px rgba(43,127,191,.22),
+        32px 38px 50px rgba(26,43,60,.18),
+        0 0 0 5px rgba(255,255,255,.92),
+        0 8px 28px rgba(43,127,191,.14);
     }
 
-    /* Градиентное кольцо + shimmer раз в 3 секунды */
+    /* Вращающийся блик по периметру рамки */
     .hero-frame-outer::before {
       content: '';
       position: absolute;
-      inset: -5px;
-      border-radius: 28px;
-      background: linear-gradient(135deg, #2B7FBF 0%, #4EADA0 55%, #2B7FBF 100%);
-      opacity: .56;
-      animation: frameShimmer 3s ease-in-out infinite;
+      /* Квадрат в 142% — покрывает все углы при вращении */
+      width: 142%;
+      aspect-ratio: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: conic-gradient(
+        from var(--glint-angle) at 50% 50%,
+        transparent 0deg,
+        transparent 83deg,
+        rgba(180,230,255,.55) 90deg,
+        rgba(255,255,255,.92) 95deg,
+        rgba(255,255,255,.98) 98deg,
+        rgba(180,230,255,.55) 105deg,
+        transparent 112deg,
+        transparent 360deg
+      );
+      animation: glintRotate 3s linear infinite;
     }
 
-    @keyframes frameShimmer {
-      0%, 70%  { opacity: .56; filter: none; }
-      82%      { opacity: .96; filter: drop-shadow(0 0 10px rgba(78,173,160,.8)) drop-shadow(0 0 22px rgba(43,127,191,.5)); }
-      100%     { opacity: .56; filter: none; }
+    @keyframes glintRotate {
+      to { --glint-angle: 360deg; }
     }
 
-    /* Смещённая тень — объём/глубина */
+    /* Внутренний оверлей — мягкая тень поверх фото */
     .hero-frame-outer::after {
       content: '';
       position: absolute;
-      top: 24px; left: 24px;
-      right: -32px; bottom: -38px;
-      border-radius: 22px;
-      background: linear-gradient(155deg, #2B7FBF 0%, #4EADA0 100%);
-      opacity: .30;
-      filter: blur(16px);
-      z-index: -1;
+      inset: 5px;
+      border-radius: 20px;
+      box-shadow: inset 0 0 24px rgba(26,43,60,.08), inset 0 -10px 22px rgba(43,127,191,.06);
+      z-index: 2;
+      pointer-events: none;
     }
 
     .hero-frame-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      border-radius: 22px;
+      position: absolute;
+      inset: 5px;        /* кольцо = 5px видимой подложки по периметру */
+      border-radius: 20px;
       overflow: hidden;
-      border: 5px solid #fff;
-      box-shadow:
-        0 4px 12px rgba(43,127,191,.18),
-        0 16px 44px rgba(43,127,191,.24),
-        0 36px 80px rgba(26,43,60,.26),
-        0 60px 120px rgba(26,43,60,.18);
+      z-index: 1;
     }
 
     .hero-frame-inner img {
@@ -783,6 +803,8 @@
     /* Diplomas carousel */
     .diplomas-carousel-outer {
       position: relative;
+      min-width: 0;   /* критично: без этого flex-item расширяется на весь трек */
+      width: 100%;
     }
     .diplomas-carousel-wrap {
       overflow-x: auto;
@@ -799,7 +821,7 @@
       padding-bottom: 2px;
     }
     .diploma-tile {
-      flex: 0 0 160px;
+      flex: 0 0 auto;  /* ширина задаётся через JS */
       aspect-ratio: 3/4;
       border-radius: var(--radius-md);
       background: var(--color-bg-soft);
@@ -1267,7 +1289,7 @@
 
       /* Фото — показываем меньшим размером под текстом */
       .hero-visual { justify-content: center; }
-      .hero-frame-outer { width: 300px; height: 360px; }
+      .hero-frame-outer { width: 300px; height: 360px; transform: none; }
       .hero-ring, .hero-float-badge { display: none; }
     }
 
@@ -1336,6 +1358,7 @@
       .hero-badge-dot,
       .hero-frame-outer::before,
       .hero-deco { animation: none !important; }
+      .hero-frame-outer::before { background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255,255,255,.7) 95deg, transparent 108deg, transparent 360deg); }
       .reveal { opacity: 1; transform: none; transition: none; }
       .hero-load, .hero-visual-load { opacity: 1; transform: none; animation: none; }
     }
@@ -2115,15 +2138,29 @@
 
     // ── Diplomas carousel ─────────────────────────────
     (function () {
-      const wrap = document.getElementById('diplomasWrap');
-      const prevBtn = document.getElementById('diplomasPrev');
-      const nextBtn = document.getElementById('diplomasNext');
-      if (!wrap || !prevBtn || !nextBtn) return;
+      var wrap = document.getElementById('diplomasWrap');
+      var track = document.getElementById('diplomasTrack');
+      var prevBtn = document.getElementById('diplomasPrev');
+      var nextBtn = document.getElementById('diplomasNext');
+      if (!wrap || !track || !prevBtn || !nextBtn) return;
+
+      var GAP = 16;
+
+      function setTileWidths() {
+        var cols = window.innerWidth <= 480 ? 2 : 3;
+        var w = Math.floor((wrap.clientWidth - GAP * (cols - 1)) / cols);
+        Array.prototype.forEach.call(track.querySelectorAll('.diploma-tile'), function (t) {
+          t.style.width = w + 'px';
+        });
+      }
+
+      setTileWidths();
+      window.addEventListener('resize', setTileWidths);
+
       function scrollStep(dir) {
-        const tile = wrap.querySelector('.diploma-tile');
+        var tile = track.querySelector('.diploma-tile');
         if (!tile) return;
-        var step = tile.offsetWidth + 16;
-        wrap.scrollBy({ left: dir * step, behavior: 'smooth' });
+        wrap.scrollBy({ left: dir * (tile.offsetWidth + GAP), behavior: 'smooth' });
       }
       prevBtn.addEventListener('click', function () { scrollStep(-1); });
       nextBtn.addEventListener('click', function () { scrollStep(1); });
