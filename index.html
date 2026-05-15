@@ -504,34 +504,42 @@
       border-color: rgba(78,173,160,.08);
     }
 
-    /* Hero photo — статичная 3D-рамка */
+    /* Hero photo — 3D-рамка с глубиной */
     .hero-frame-outer {
       position: relative;
       z-index: 1;
       width: 440px;
       height: 560px;
+      transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
     }
 
-    /* Градиентное кольцо — цветной бортик */
+    /* Градиентное кольцо + shimmer раз в 3 секунды */
     .hero-frame-outer::before {
       content: '';
       position: absolute;
-      inset: -4px;
+      inset: -5px;
       border-radius: 28px;
       background: linear-gradient(135deg, #2B7FBF 0%, #4EADA0 55%, #2B7FBF 100%);
-      opacity: .48;
+      opacity: .56;
+      animation: frameShimmer 3s ease-in-out infinite;
     }
 
-    /* Смещённая тень — даёт иллюзию объёма/глубины */
+    @keyframes frameShimmer {
+      0%, 70%  { opacity: .56; filter: none; }
+      82%      { opacity: .96; filter: drop-shadow(0 0 10px rgba(78,173,160,.8)) drop-shadow(0 0 22px rgba(43,127,191,.5)); }
+      100%     { opacity: .56; filter: none; }
+    }
+
+    /* Смещённая тень — объём/глубина */
     .hero-frame-outer::after {
       content: '';
       position: absolute;
-      top: 14px; left: 14px;
-      right: -18px; bottom: -22px;
-      border-radius: 20px;
+      top: 24px; left: 24px;
+      right: -32px; bottom: -38px;
+      border-radius: 22px;
       background: linear-gradient(155deg, #2B7FBF 0%, #4EADA0 100%);
-      opacity: .14;
-      filter: blur(4px);
+      opacity: .30;
+      filter: blur(16px);
       z-index: -1;
     }
 
@@ -544,9 +552,10 @@
       overflow: hidden;
       border: 5px solid #fff;
       box-shadow:
-        0 4px 12px rgba(43,127,191,.14),
-        0 16px 44px rgba(43,127,191,.16),
-        0 32px 80px rgba(26,43,60,.16);
+        0 4px 12px rgba(43,127,191,.18),
+        0 16px 44px rgba(43,127,191,.24),
+        0 36px 80px rgba(26,43,60,.26),
+        0 60px 120px rgba(26,43,60,.18);
     }
 
     .hero-frame-inner img {
@@ -790,7 +799,7 @@
       padding-bottom: 2px;
     }
     .diploma-tile {
-      flex: 0 0 calc(25% - 12px);
+      flex: 0 0 160px;
       aspect-ratio: 3/4;
       border-radius: var(--radius-md);
       background: var(--color-bg-soft);
@@ -825,11 +834,10 @@
     @media (max-width: 960px) {
       .specialist-grid { grid-template-columns: 1fr; }
       .specialist-blob { width: 260px; height: 320px; margin: 0 auto; }
-      .diploma-tile { flex: 0 0 calc(33.333% - 11px); }
     }
     @media (max-width: 480px) {
       .specialist-blob { width: 220px; height: 270px; }
-      .diploma-tile { flex: 0 0 calc(50% - 8px); }
+      .diploma-tile { flex: 0 0 130px; }
       .specialist-stats { gap: var(--space-6); }
     }
 
@@ -1326,6 +1334,7 @@
       .ticker-track,
       .hero-float-badge,
       .hero-badge-dot,
+      .hero-frame-outer::before,
       .hero-deco { animation: none !important; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .hero-load, .hero-visual-load { opacity: 1; transform: none; animation: none; }
