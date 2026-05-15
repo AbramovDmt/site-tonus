@@ -1033,6 +1033,125 @@
     }
 
     /* ─────────────────────────────────────────
+       RESULTS + REVIEWS
+    ───────────────────────────────────────── */
+
+    /* Cases */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+    }
+    .case-card {
+      background: rgba(255, 255, 255, .76);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(43, 127, 191, .13);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: 0 4px 20px rgba(43, 127, 191, .07), 0 1px 3px rgba(26, 43, 60, .04);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .case-step { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .case-step-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .case-step-icon svg { width: 14px; height: 14px; }
+    .case-step-icon.problem { background: rgba(239, 68, 68, .10); }
+    .case-step-icon.problem svg { stroke: #ef4444; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .case-step-icon.action  { background: rgba(43, 127, 191, .10); }
+    .case-step-icon.action svg  { stroke: var(--color-primary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .case-step-icon.result  { background: rgba(78, 173, 160, .10); }
+    .case-step-icon.result svg  { stroke: var(--color-secondary); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .case-step-body { flex: 1; }
+    .case-step-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-muted); margin-bottom: 3px; }
+    .case-step-text { font-size: var(--text-sm); color: var(--color-text); line-height: 1.55; margin: 0; }
+    .case-divider { width: 1px; height: 10px; background: var(--color-border); margin-left: 14px; }
+    .case-ph-note {
+      font-size: 11px; color: var(--color-text-muted); text-align: center;
+      padding: 5px 10px; border: 1px dashed var(--color-border);
+      border-radius: var(--radius-sm); font-style: italic; margin-top: var(--space-2);
+    }
+
+    /* Reviews slider */
+    .reviews-slider-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+    .reviews-track {
+      display: flex;
+      transition: transform .4s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+    }
+    .review-card {
+      min-width: 100%;
+      padding: var(--space-10) var(--space-12);
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      box-sizing: border-box;
+    }
+    .review-stars { display: flex; gap: 3px; margin-bottom: var(--space-4); }
+    .review-stars svg { width: 18px; height: 18px; fill: #f59e0b; }
+    .review-text {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.75;
+      margin: 0 0 var(--space-6);
+      font-style: italic;
+    }
+    .review-author { display: flex; align-items: center; gap: var(--space-4); }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: #fff; flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: var(--text-sm); color: var(--color-text); }
+    .review-meta { font-size: 12px; color: var(--color-text-muted); margin-top: 2px; }
+    .slider-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.25rem; margin-top: var(--space-6);
+    }
+    .slider-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid var(--color-border); background: #fff;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, background .2s; flex-shrink: 0;
+    }
+    .slider-btn:hover { border-color: var(--color-primary); background: var(--color-bg-accent); }
+    .slider-btn svg { width: 18px; height: 18px; stroke: var(--color-text); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .slider-dots { display: flex; gap: 8px; align-items: center; }
+    .slider-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--color-border); border: none; cursor: pointer; padding: 0;
+      transition: background .2s, transform .2s;
+    }
+    .slider-dot.active { background: var(--color-primary); transform: scale(1.35); }
+    .reviews-footer { text-align: center; margin-top: var(--space-8); }
+    .avito-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(43, 127, 191, .06); border: 1px solid rgba(43, 127, 191, .18);
+      border-radius: var(--radius-pill); padding: 9px 22px;
+      font-size: 13px; color: var(--color-primary); font-weight: 600;
+      text-decoration: none; transition: background .2s;
+    }
+    .avito-badge:hover { background: rgba(43, 127, 191, .12); }
+    .avito-badge svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .review-card-ph .review-avatar { background: var(--color-border); color: var(--color-text-muted); }
+    .review-text-ph { color: var(--color-text-muted); font-style: normal; }
+
+    @media (max-width: 768px) {
+      .cases-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .review-card { padding: 1.75rem var(--space-6); }
+    }
+
+    /* ─────────────────────────────────────────
        FAQ
     ───────────────────────────────────────── */
     .faq-section { background: var(--color-bg-soft); }
@@ -1586,6 +1705,208 @@
     </div>
   </section>
 
+  <!-- ═══════════════════ RESULTS + REVIEWS ═══════════════════ -->
+  <section class="section bg-soft" id="results">
+    <div class="container">
+
+      <h2 class="section-title reveal">Истории клиентов</h2>
+      <p class="section-sub reveal">Реальные ситуации — что беспокоило, что делали, что изменилось</p>
+
+      <!-- Mini-cases: 3 glassmorphism cards -->
+      <div class="cases-grid stagger-parent">
+
+        <!-- Case 1 — placeholder -->
+        <div class="case-card reveal">
+          <div class="case-step">
+            <div class="case-step-icon problem">
+              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Ситуация</div>
+              <p class="case-step-text">[Описание — что беспокоило клиента]</p>
+            </div>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-step">
+            <div class="case-step-icon action">
+              <svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Что делали</div>
+              <p class="case-step-text">[Методика, количество сеансов]</p>
+            </div>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-step">
+            <div class="case-step-icon result">
+              <svg viewBox="0 0 14 14"><path d="M2 7.5l3.5 3.5 6.5-7"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Результат</div>
+              <p class="case-step-text">[Что изменилось после работы]</p>
+            </div>
+          </div>
+          <p class="case-ph-note">Заменить реальным кейсом от клиента</p>
+        </div>
+
+        <!-- Case 2 — placeholder -->
+        <div class="case-card reveal">
+          <div class="case-step">
+            <div class="case-step-icon problem">
+              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Ситуация</div>
+              <p class="case-step-text">[Описание — что беспокоило клиента]</p>
+            </div>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-step">
+            <div class="case-step-icon action">
+              <svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Что делали</div>
+              <p class="case-step-text">[Методика, количество сеансов]</p>
+            </div>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-step">
+            <div class="case-step-icon result">
+              <svg viewBox="0 0 14 14"><path d="M2 7.5l3.5 3.5 6.5-7"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Результат</div>
+              <p class="case-step-text">[Что изменилось после работы]</p>
+            </div>
+          </div>
+          <p class="case-ph-note">Заменить реальным кейсом от клиента</p>
+        </div>
+
+        <!-- Case 3 — placeholder -->
+        <div class="case-card reveal">
+          <div class="case-step">
+            <div class="case-step-icon problem">
+              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Ситуация</div>
+              <p class="case-step-text">[Описание — что беспокоило клиента]</p>
+            </div>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-step">
+            <div class="case-step-icon action">
+              <svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Что делали</div>
+              <p class="case-step-text">[Методика, количество сеансов]</p>
+            </div>
+          </div>
+          <div class="case-divider"></div>
+          <div class="case-step">
+            <div class="case-step-icon result">
+              <svg viewBox="0 0 14 14"><path d="M2 7.5l3.5 3.5 6.5-7"/></svg>
+            </div>
+            <div class="case-step-body">
+              <div class="case-step-label">Результат</div>
+              <p class="case-step-text">[Что изменилось после работы]</p>
+            </div>
+          </div>
+          <p class="case-ph-note">Заменить реальным кейсом от клиента</p>
+        </div>
+
+      </div><!-- /cases-grid -->
+
+      <!-- Reviews slider -->
+      <div class="reviews-slider-wrap reveal" id="reviewsSlider">
+        <div class="reviews-track" id="reviewsTrack">
+
+          <!-- Review 1: Надежда -->
+          <div class="review-card">
+            <div class="review-stars">
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="review-text">«Была впервые на аппаратном лимфодренажном массаже — мне понравилось, было комфортно и интересно. Буду ходить раз в неделю, уверена что будет польза. Обязательно приведу мужа и детей на диагностику к Марии с позвоночниками, потому что в этом она МЕГАПРОФИ. После массажа она поколдовала с моим позвоночником — выровняла каркас, сровняла длину моих ног, шею "почила" — в общем я в шоке и диком восторге от её профессионализма. И очень рада что у нас в городе есть такой специалист, рекомендую всем!»</p>
+            <div class="review-author">
+              <div class="review-avatar">Н</div>
+              <div>
+                <div class="review-name">Надежда</div>
+                <div class="review-meta">30 мая 2024 · Лимфодренажный массаж</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2: Анатолий -->
+          <div class="review-card">
+            <div class="review-stars">
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="review-text">«Мастер своего дела»</p>
+            <div class="review-author">
+              <div class="review-avatar">А</div>
+              <div>
+                <div class="review-name">Анатолий</div>
+                <div class="review-meta">23 февраля 2025 · Остеопракт</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3: placeholder -->
+          <div class="review-card review-card-ph">
+            <div class="review-stars">
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="review-text review-text-ph">[Текст отзыва — заменить реальным с Авито]</p>
+            <div class="review-author">
+              <div class="review-avatar">?</div>
+              <div>
+                <div class="review-name">[Имя]</div>
+                <div class="review-meta">[Дата · Услуга]</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /reviews-track -->
+      </div><!-- /reviews-slider-wrap -->
+
+      <div class="slider-controls">
+        <button class="slider-btn" id="reviewPrev" aria-label="Предыдущий отзыв">
+          <svg viewBox="0 0 18 18"><polyline points="11 14 6 9 11 4"/></svg>
+        </button>
+        <div class="slider-dots" id="reviewDots">
+          <button class="slider-dot" aria-label="Отзыв 1"></button>
+          <button class="slider-dot" aria-label="Отзыв 2"></button>
+          <button class="slider-dot" aria-label="Отзыв 3"></button>
+        </div>
+        <button class="slider-btn" id="reviewNext" aria-label="Следующий отзыв">
+          <svg viewBox="0 0 18 18"><polyline points="7 4 12 9 7 14"/></svg>
+        </button>
+      </div>
+
+      <div class="reviews-footer">
+        <a class="avito-badge" href="https://www.avito.ru/brands/i311263298/all?sellerId=7322f9f2167513c3321ddeaee2eee008" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 9.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm.75-3.25a.75.75 0 0 1-1.5 0V5.5a.75.75 0 0 1 1.5 0v2.75z"/></svg>
+          Все отзывы на Авито
+        </a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ═══════════════════ FAQ ═══════════════════ -->
   <section class="section faq-section bg-soft" id="faq">
     <div class="container container-narrow">
@@ -1750,6 +2071,38 @@
         }
       });
     });
+
+    // ── Reviews slider ────────────────────────────────
+    (function () {
+      const track = document.getElementById('reviewsTrack');
+      const dotsWrap = document.getElementById('reviewDots');
+      const prevBtn = document.getElementById('reviewPrev');
+      const nextBtn = document.getElementById('reviewNext');
+      if (!track) return;
+
+      const dots = dotsWrap ? dotsWrap.querySelectorAll('.slider-dot') : [];
+      const total = track.children.length;
+      let current = 0;
+
+      function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = 'translateX(-' + current * 100 + '%)';
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
+
+      let startX = 0;
+      track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', function (e) {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+      }, { passive: true });
+
+      goTo(0);
+    }());
 
     // ── Форма (заглушка до Шага 8) ───────────────────
     function openForm() {
