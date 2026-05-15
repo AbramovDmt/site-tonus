@@ -67,11 +67,14 @@
 - Фото переехало из `Fhoto/main2.avif` → `img/hero.avif` (добавлено в git, 30 КБ AVIF)
 - Органичный blob заменён на прямоугольную 3D-рамку:
   - `.hero-frame-outer` — `transform: perspective(1200px) rotateY(-4deg) rotateX(2deg)` — перспективный наклон
-  - `::before` — градиентное кольцо `inset: -5px`, `opacity: .56` + `@keyframes frameShimmer` каждые 3 сек (glow пульс через `drop-shadow`)
-  - `::after` — смещённая объёмная тень: `top/left: +24px`, `right: -32px`, `bottom: -38px`, `blur: 16px`, `opacity: .30`
-  - `.hero-frame-inner` — 4-слойный `box-shadow`, белый бортик 5px, `overflow: hidden`
-- `prefers-reduced-motion`: shimmer отключается
+  - `overflow: hidden` на outer клипирует вращающийся `::before`
+  - `box-shadow`: 3D-глубина + белое кольцо 5px через `0 0 0 5px rgba(255,255,255,.92)`
+  - `::before` — 142%-квадрат с `conic-gradient` — **двойной блик** (два дуговых пятна 180° друг от друга); sweep по диагонали 0.72s + 3.3s пауза (`glintSweep` + `glintFade` анимации); `@property --glint-angle`
+  - `::after` — внутренний inset-shadow оверлей поверх фото
+  - `.hero-frame-inner` — `position: absolute; inset: 5px` — создаёт видимое 5px кольцо подложки
+- `prefers-reduced-motion`: анимация отключается
 - JS mouse-parallax удалён; floating badges убраны
+- На мобильном ≤960px: `transform: none`
 
 ---
 
@@ -100,7 +103,13 @@
 - Плейсхолдер для биографии (пунктирная рамка, курсив) — заменится на текст от клиента
 - Плейсхолдер для цитаты (синяя левая граница, серый текст) — заменится на текст от клиента
 - Статы: 23 года / 6 лет / 500+ клиентов
-- **Карусель 13 дипломов** (было 4-тайловая сетка): `overflow-x: auto`, `scroll-snap`, кнопки ←/→, тайлы `flex: 0 0 160px` (фиксированные пиксели — % не работают в скроллируемом flex); на mobile ≤480px → 130px
+- **Карусель 13 дипломов**: `overflow-x: auto`, `scroll-snap`, кнопки ←/→
+  - Показывает 3 тайла (desktop) / 2 тайла (≤480px) — остальные скроллируются
+  - JS устанавливает `flexBasis` (не `width`) — иначе CSS `flex-basis` перебивал бы
+  - `requestAnimationFrame` + `load` event гарантируют правильный `clientWidth`
+  - **Ключевой фикс**: `grid-template-columns: 360px minmax(0, 1fr)` — без `minmax(0,...)` колонка `1fr` расширялась до min-content содержимого (~1882px), ломая всю страницу
+  - `min-width: 0` на `.specialist-content` — дополнительная страховка для flex-элемента
+  - `width: 100%` на `.diplomas-carousel-wrap`
 
 ### ✅ Шаг 4 — Подход + Timeline
 
