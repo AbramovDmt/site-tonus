@@ -264,9 +264,16 @@
     /* Логотип — крупнее и заметнее */
     .logo {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: 10px;
       flex-shrink: 0;
+    }
+    .logo-img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 50%;
     }
     .logo-name {
       font-family: var(--font-heading);
@@ -788,8 +795,9 @@
       /* Container — 16px сторона */
       .container { padding: 0 16px; }
 
-      /* Логотип: убираем разделитель и подпись */
+      /* Логотип: убираем разделитель и подпись, чуть меньше иконка */
       .logo-sep, .logo-sub { display: none; }
+      .logo-img { width: 36px; height: 36px; }
 
       /* Hero заголовок */
       .hero-title { font-size: clamp(1.9rem, 9vw, 2.4rem); }
@@ -835,6 +843,7 @@
     <div class="container header-inner">
 
       <a href="#" class="logo" aria-label="Студия ТОНУС — на главную">
+        <img src="img/logo.png" alt="" class="logo-img" width="44" height="44" aria-hidden="true">
         <span class="logo-name">ТОНУС</span>
         <span class="logo-sep" aria-hidden="true"></span>
         <span class="logo-sub">студия реабилитации</span>
