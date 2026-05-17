@@ -1375,6 +1375,286 @@
       .hero-load, .hero-visual-load { opacity: 1; transform: none; animation: none; }
     }
 
+    /* ═══════════════════ ШАГ 8: CTA-СЕКЦИЯ ════════════════════ */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #1A6099 100%);
+      color: #fff;
+      text-align: center;
+      padding: var(--space-16) 0;
+    }
+    .cta-section .section-title { color: #fff; }
+    .cta-section .section-sub { color: rgba(255,255,255,.82); }
+    .cta-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: var(--space-6) 0 var(--space-8);
+    }
+    .cta-badge {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,.92);
+    }
+    .cta-main-btn {
+      background: #fff;
+      color: var(--color-primary);
+      border: none;
+      border-radius: 50px;
+      padding: 18px 44px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: var(--font-head);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    }
+    .cta-main-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,.22); }
+    .cta-alt {
+      margin-top: var(--space-6);
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,.75);
+    }
+    .cta-alt-links { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+    .cta-alt-link {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 50px; padding: 8px 18px;
+      color: #fff; text-decoration: none;
+      font-size: var(--text-sm); font-weight: 600;
+      transition: background .2s;
+    }
+    .cta-alt-link:hover { background: rgba(255,255,255,.22); }
+
+    /* ═══════════════════ WIZARD MODAL ══════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(26,43,60,.6);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .modal-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      background: #fff;
+      border-radius: 20px;
+      width: 100%; max-width: 520px;
+      padding: 40px 40px 36px;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0,0,0,.18);
+      transform: translateY(20px);
+      transition: transform .28s ease;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+    }
+    .modal-overlay.is-open .modal-card { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: var(--color-bg-soft);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-muted); font-size: 18px;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: #e0e8f0; }
+    .wizard-header { margin-bottom: 24px; }
+    .wizard-progress-track {
+      height: 4px; background: #e8edf2; border-radius: 2px; margin-bottom: 16px; overflow: hidden;
+    }
+    .wizard-progress-fill {
+      height: 100%; background: var(--color-primary); border-radius: 2px;
+      transition: width .35s ease;
+    }
+    .wizard-step-label { font-size: var(--text-sm); color: var(--color-text-muted); }
+    .wizard-question { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--color-text); margin-bottom: 20px; line-height: 1.35; }
+    .wizard-options { display: flex; flex-direction: column; gap: 10px; }
+    .wizard-option {
+      display: flex; align-items: center; gap: 12px;
+      border: 2px solid #e0e8f0; border-radius: 12px;
+      padding: 14px 16px; cursor: pointer;
+      transition: border-color .15s, background .15s;
+      font-size: var(--text-base); color: var(--color-text);
+      background: #fff;
+      text-align: left; width: 100%;
+    }
+    .wizard-option:hover { border-color: var(--color-primary-light); background: var(--color-bg-soft); }
+    .wizard-option.selected { border-color: var(--color-primary); background: var(--color-bg-accent); }
+    .wizard-option-circle {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid #c5d5e8; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, background .15s;
+    }
+    .wizard-option.selected .wizard-option-circle { border-color: var(--color-primary); background: var(--color-primary); }
+    .wizard-option.selected .wizard-option-circle::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+    .wizard-phone-row { margin-top: 12px; display: none; flex-direction: column; gap: 8px; }
+    .wizard-phone-row.visible { display: flex; }
+    .wizard-phone-input {
+      border: 2px solid #e0e8f0; border-radius: 12px; padding: 14px 16px;
+      font-size: var(--text-base); font-family: var(--font-body);
+      color: var(--color-text); outline: none; transition: border-color .15s;
+      width: 100%;
+    }
+    .wizard-phone-input:focus { border-color: var(--color-primary); }
+    .wizard-phone-input.error { border-color: #e05252; }
+    .wizard-error { font-size: var(--text-sm); color: #c0392b; display: none; }
+    .wizard-error.visible { display: block; }
+    .wizard-nav { display: flex; gap: 12px; margin-top: 24px; }
+    .wizard-back {
+      border: 2px solid #e0e8f0; background: #fff; border-radius: 50px;
+      padding: 12px 24px; font-size: var(--text-base); font-weight: 600;
+      cursor: pointer; color: var(--color-text-muted); transition: border-color .2s;
+    }
+    .wizard-back:hover { border-color: var(--color-primary-light); }
+    .wizard-next {
+      flex: 1; border: none; background: var(--color-primary); color: #fff;
+      border-radius: 50px; padding: 14px 24px;
+      font-size: var(--text-base); font-weight: 700; font-family: var(--font-head);
+      cursor: pointer; transition: background .2s, transform .15s;
+    }
+    .wizard-next:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .wizard-next:disabled { background: #c5d5e8; cursor: not-allowed; transform: none; }
+    .wizard-success { text-align: center; padding: 20px 0 8px; display: none; }
+    .wizard-success.visible { display: block; }
+    .wizard-success-icon { font-size: 3rem; margin-bottom: 16px; }
+    .wizard-success-title { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
+    .wizard-success-text { color: var(--color-text-muted); line-height: 1.6; }
+    .wizard-form-area { transition: opacity .2s; }
+    .wizard-privacy { font-size: 11px; color: var(--color-text-muted); text-align: center; margin-top: 12px; }
+    .wizard-privacy a { color: var(--color-primary); }
+
+    @media (max-width: 560px) {
+      .modal-card { padding: 28px 20px 24px; }
+      .wizard-question { font-size: 1.05rem; }
+    }
+
+    /* ═══════════════════ ШАГ 9: КАРТА ══════════════════════════ */
+    .map-section { padding: var(--space-16) 0; }
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-10);
+      align-items: start;
+    }
+    .map-info-title { font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; color: var(--color-text); margin-bottom: var(--space-6); }
+    .map-detail { display: flex; gap: 12px; margin-bottom: 18px; align-items: flex-start; }
+    .map-detail-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--color-bg-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--color-primary); }
+    .map-detail-body { flex: 1; }
+    .map-detail-label { font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+    .map-detail-value { font-size: var(--text-base); font-weight: 600; color: var(--color-text); }
+    .map-detail-value a { color: var(--color-text); text-decoration: none; }
+    .map-detail-value a:hover { color: var(--color-primary); }
+    .map-messengers { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .map-messenger-btn {
+      display: flex; align-items: center; gap: 8px;
+      border-radius: 50px; padding: 10px 20px;
+      font-size: var(--text-sm); font-weight: 600; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .map-messenger-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+    .map-messenger-btn.wa { background: #25D366; color: #fff; }
+    .map-messenger-btn.tg { background: #229ED9; color: #fff; }
+    .map-messenger-btn.phone { background: var(--color-primary); color: #fff; }
+    .map-embed {
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.1);
+      height: 380px;
+    }
+    .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+    .map-2gis {
+      margin-top: 12px; text-align: center;
+    }
+    .map-2gis a {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--color-primary); font-size: var(--text-sm); font-weight: 600; text-decoration: none;
+    }
+    .map-2gis a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .map-grid { grid-template-columns: 1fr; }
+      .map-embed { height: 280px; }
+    }
+
+    /* ═══════════════════ FOOTER ═════════════════════════════════ */
+    .site-footer {
+      background: var(--color-text);
+      color: rgba(255,255,255,.75);
+      padding: var(--space-10) 0 var(--space-6);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: var(--space-8);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: var(--space-6);
+    }
+    .footer-logo { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; color: #fff; letter-spacing: -.02em; margin-bottom: 6px; }
+    .footer-tagline { font-size: var(--text-sm); color: rgba(255,255,255,.55); line-height: 1.5; }
+    .footer-col-title { font-size: var(--text-sm); font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 14px; }
+    .footer-col p, .footer-col a {
+      font-size: var(--text-sm); color: rgba(255,255,255,.65);
+      text-decoration: none; display: block; margin-bottom: 8px; line-height: 1.5;
+    }
+    .footer-col a:hover { color: var(--color-primary-light); }
+    .footer-messenger-links { display: flex; gap: 10px; margin-top: 4px; }
+    .footer-messenger-links a {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.1);
+      color: #fff; text-decoration: none; transition: background .2s;
+    }
+    .footer-messenger-links a:hover { background: var(--color-primary); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.4); }
+    .footer-privacy { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: none; }
+    .footer-privacy:hover { color: rgba(255,255,255,.7); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+    }
+
+    /* ═══════════════════ STICKY MOBILE BAR ═════════════════════ */
+    .sticky-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 1500;
+      height: 60px;
+      background: #fff;
+      border-top: 1px solid #e0e8f0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.1);
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+    }
+    .sticky-bar-cta {
+      flex: 1;
+      background: var(--color-primary);
+      color: #fff;
+      border: none; border-radius: 50px;
+      padding: 10px 20px;
+      font-size: var(--text-sm); font-weight: 700; font-family: var(--font-head);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .sticky-bar-cta:hover { background: var(--color-primary-dark); }
+    .sticky-bar-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; flex-shrink: 0;
+      transition: transform .2s;
+    }
+    .sticky-bar-icon:hover { transform: scale(1.08); }
+    .sticky-bar-icon.phone { background: var(--color-bg-accent); color: var(--color-primary); }
+    .sticky-bar-icon.wa { background: #e8fdf0; color: #25D366; }
+    .sticky-bar-icon.tg { background: #e6f4fb; color: #229ED9; }
+    @media (max-width: 960px) {
+      body { padding-bottom: 60px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1994,6 +2274,76 @@
 
         <div class="faq-item reveal">
           <button class="faq-q" aria-expanded="false">
+            <span>Сколько стоит первый сеанс?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Первый сеанс — полноценная работа с телом, средняя стоимость <strong>4 000 рублей</strong> (может меняться в зависимости от объёма работы). Точную программу и её стоимость обсудим после визита, когда станет понятно, сколько сеансов нужно именно вам.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Сколько сеансов обычно нужно?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Зависит от ситуации. Острая боль в спине — как правило 3–5 сеансов. Реабилитация после операции или длительные хронические нарушения — больше. После первого визита будет конкретный план: что делаем, сколько раз, с каким ожидаемым результатом.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Как проходит первый сеанс?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Кратко расскажете о своей ситуации — и сразу работа. Специалист осмотрит, поработает с телом и объяснит, что происходит и что делать дальше. Всё в рамках одного визита — никакой «диагностики» отдельно от работы.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Нужно ли направление от врача или МРТ?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Не обязательно. Приходите как есть. Если есть снимки, МРТ или направление — возьмите с собой, это поможет. Но мы работаем с любой стартовой точкой.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Чем вы отличаетесь от обычного массажиста?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Массаж работает с мышцами — это временное облегчение. Остеопатия и реабилитация работают с причиной: позвонками, суставами, нервными корешками, связками в комплексе. Плюс специальное оборудование — правúло, лимфодренаж, тракционный стол — которого нет у массажиста.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Это безопасно при моём диагнозе?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Расскажите о своей ситуации перед первым сеансом — специалист подберёт подход. Есть состояния, с которыми мы не работаем: в таком случае честно об этом скажем и направим к нужному специалисту. Никаких рисков вслепую — только то, что уместно именно вам.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Что если не поможет?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Честно скажем об этом после первого сеанса. Если ваша ситуация требует другого подхода — порекомендуем, куда обратиться. Работаем только с теми случаями, где можем реально помочь.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
             <span>Что такое остеопатия?</span>
             <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -2020,51 +2370,307 @@
           </div>
         </div>
 
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Чем вы отличаетесь от обычного массажиста?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Массаж работает с мышцами — это временное облегчение. Остеопатия и реабилитация работают с причиной: позвонками, суставами, нервными корешками, связками в комплексе. Плюс специальное оборудование — правúло, лимфодренаж, тракционный стол — которого нет у массажиста.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Нужно ли направление от врача или МРТ?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Не обязательно. Приходите как есть. Если есть снимки, МРТ или направление — возьмите с собой, это поможет. Но мы работаем с любой стартовой точкой.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Как проходит первый сеанс?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Кратко расскажете о своей ситуации — и сразу работа. Специалист осмотрит, поработает с телом и объяснит, что происходит и что делать дальше. Всё в рамках одного визита — никакой «диагностики» отдельно от работы.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Сколько стоит первый сеанс?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Первый сеанс — полноценная работа с телом, средняя стоимость <strong>4 000 рублей</strong> (может меняться в зависимости от объёма работы). Точную программу и её стоимость обсудим после визита, когда станет понятно, сколько сеансов нужно именно вам.</p>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Следующие блоки появятся на Шагах 2–9 -->
+  <!-- ═══════════════════ БЛОК 8: CTA + ОПРОСНИК ═══════════════ -->
+  <section class="cta-section" id="form-section" aria-label="Запись на первый сеанс">
+    <div class="container container-narrow" style="text-align:center">
+      <h2 class="section-title reveal" style="color:#fff">Расскажите о себе</h2>
+      <p class="section-sub reveal" style="color:rgba(255,255,255,.82)">Первый сеанс начнётся уже подготовленным — специалист будет знать, как вам помочь</p>
+
+      <div class="cta-badges reveal">
+        <span class="cta-badge">5 вопросов · 1–2 минуты</span>
+        <span class="cta-badge">Перезвоним в удобное время</span>
+        <span class="cta-badge">Без обязательств</span>
+      </div>
+
+      <button class="cta-main-btn reveal" onclick="openForm()" aria-label="Открыть опросник">
+        Заполнить короткий опросник
+      </button>
+
+      <div class="cta-alt reveal">
+        <p>Или просто свяжитесь — расскажем всё сразу:</p>
+        <div class="cta-alt-links">
+          <a href="tel:+79164940333" class="cta-alt-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 0.97 1.21 2 2 0 013 1a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L4.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            Позвонить
+          </a>
+          <a href="https://wa.me/79164940333" class="cta-alt-link" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.948-1.424A9.96 9.96 0 0012 22c5.522 0 10-4.477 10-10S17.522 2 12 2z"/></svg>
+            WhatsApp
+          </a>
+          <a href="https://t.me/tonus03" class="cta-alt-link" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
+            Telegram
+          </a>
+        </div>
+      </div>
+
+      <noscript>
+        <p style="margin-top:20px;color:rgba(255,255,255,.8)">Для записи напишите нам в <a href="https://wa.me/79164940333" style="color:#fff">WhatsApp</a> или позвоните <a href="tel:+79164940333" style="color:#fff">+7 (916) 494-03-33</a></p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ БЛОК 9: КАРТА ════════════════════════ -->
+  <section class="section map-section" id="map" aria-label="Как нас найти">
+    <div class="container">
+      <h2 class="section-title reveal">Как нас найти</h2>
+      <p class="section-sub reveal">Студия в центре Дмитрова — удобная парковка рядом</p>
+
+      <div class="map-grid">
+        <div class="map-info reveal">
+          <div class="map-detail">
+            <div class="map-detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="map-detail-body">
+              <div class="map-detail-label">Адрес</div>
+              <div class="map-detail-value">г. Дмитров, ул. Архитектора В.В. Белоброва, 7</div>
+            </div>
+          </div>
+          <div class="map-detail">
+            <div class="map-detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="map-detail-body">
+              <div class="map-detail-label">Часы работы</div>
+              <div class="map-detail-value">8:00 — 18:00, ежедневно</div>
+            </div>
+          </div>
+          <div class="map-detail">
+            <div class="map-detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 0.97 1.21 2 2 0 013 1a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L4.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="map-detail-body">
+              <div class="map-detail-label">Телефон</div>
+              <div class="map-detail-value"><a href="tel:+79164940333">+7 (916) 494-03-33</a></div>
+            </div>
+          </div>
+          <div class="map-messengers">
+            <a href="tel:+79164940333" class="map-messenger-btn phone" aria-label="Позвонить">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 0.97 1.21 2 2 0 013 1a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L4.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              Позвонить
+            </a>
+            <a href="https://wa.me/79164940333" class="map-messenger-btn wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.948-1.424A9.96 9.96 0 0012 22c5.522 0 10-4.477 10-10S17.522 2 12 2z"/></svg>
+              WhatsApp
+            </a>
+            <a href="https://t.me/tonus03" class="map-messenger-btn tg" target="_blank" rel="noopener" aria-label="Telegram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
+              Telegram
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="map-embed">
+            <iframe
+              title="Студия ТОНУС на карте"
+              src="https://yandex.ru/map-widget/v1/?ll=37.527&z=16&text=%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%2C+%D1%83%D0%BB.+%D0%90%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0+%D0%91%D0%B5%D0%BB%D0%BE%D0%B1%D1%80%D0%BE%D0%B2%D0%B0%2C+7&pt=37.5267,56.3448"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </div>
+          <div class="map-2gis">
+            <a href="https://2gis.ru/dmitrov/search/%D0%A2%D0%9E%D0%9D%D0%A3%D0%A1" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Открыть в 2ГИС
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ════════════════════════════════ -->
+  <footer class="site-footer" aria-label="Подвал сайта">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">ТОНУС</div>
+          <p class="footer-tagline">Студия реабилитации и восстановления.<br>г. Дмитров</p>
+          <div class="footer-messenger-links" style="margin-top:16px">
+            <a href="tel:+79164940333" aria-label="Позвонить">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 0.97 1.21 2 2 0 013 1a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L4.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </a>
+            <a href="https://wa.me/79164940333" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.948-1.424A9.96 9.96 0 0012 22c5.522 0 10-4.477 10-10S17.522 2 12 2z"/></svg>
+            </a>
+            <a href="https://t.me/tonus03" target="_blank" rel="noopener" aria-label="Telegram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Контакты</div>
+          <a href="tel:+79164940333">+7 (916) 494-03-33</a>
+          <a href="mailto:tonus-03@yandex.ru">tonus-03@yandex.ru</a>
+          <p>Режим работы: 8:00 — 18:00</p>
+          <p>г. Дмитров, ул. Архитектора В.В. Белоброва, 7</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Студия</div>
+          <a href="#specialist">О специалисте</a>
+          <a href="#approach">Наш подход</a>
+          <a href="#equipment">Оборудование</a>
+          <a href="#results">Отзывы</a>
+          <a href="#faq">Вопросы</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 Студия ТОНУС. Все права защищены.</span>
+        <a href="#" class="footer-privacy">Политика обработки персональных данных</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ STICKY MOBILE BAR ════════════════════ -->
+  <div class="sticky-bar" id="stickyBar" role="complementary" aria-label="Быстрый контакт">
+    <button class="sticky-bar-cta" onclick="openForm()">Записаться</button>
+    <a href="tel:+79164940333" class="sticky-bar-icon phone" aria-label="Позвонить">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 0.97 1.21 2 2 0 013 1a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L4.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>
+    <a href="https://wa.me/79164940333" class="sticky-bar-icon wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.948-1.424A9.96 9.96 0 0012 22c5.522 0 10-4.477 10-10S17.522 2 12 2z"/></svg>
+    </a>
+    <a href="https://t.me/tonus03" class="sticky-bar-icon tg" target="_blank" rel="noopener" aria-label="Telegram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
+    </a>
+  </div>
+
+  <!-- ═══════════════════ WIZARD MODAL ═════════════════════════ -->
+  <div class="modal-overlay" id="wizardOverlay" role="dialog" aria-modal="true" aria-labelledby="wizardTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="wizardClose" aria-label="Закрыть">✕</button>
+
+      <div class="wizard-form-area" id="wizardFormArea">
+        <div class="wizard-header">
+          <div class="wizard-progress-track">
+            <div class="wizard-progress-fill" id="wizardProgress" style="width:20%"></div>
+          </div>
+          <div class="wizard-step-label" id="wizardStepLabel">Шаг 1 из 5</div>
+        </div>
+
+        <!-- Шаг 1 -->
+        <div class="wizard-step" id="step1">
+          <div class="wizard-question" id="wizardTitle">Что беспокоит больше всего?</div>
+          <div class="wizard-options">
+            <button class="wizard-option" data-step="1" data-value="Боль в спине / пояснице">
+              <span class="wizard-option-circle"></span>Боль в спине / пояснице
+            </button>
+            <button class="wizard-option" data-step="1" data-value="Боль в шее / головные боли">
+              <span class="wizard-option-circle"></span>Боль в шее / головные боли
+            </button>
+            <button class="wizard-option" data-step="1" data-value="Боли в суставах">
+              <span class="wizard-option-circle"></span>Боли в суставах
+            </button>
+            <button class="wizard-option" data-step="1" data-value="Восстановление после операции или травмы">
+              <span class="wizard-option-circle"></span>Восстановление после операции или травмы
+            </button>
+            <button class="wizard-option" data-step="1" data-value="Послеродовое восстановление">
+              <span class="wizard-option-circle"></span>Послеродовое восстановление
+            </button>
+            <button class="wizard-option" data-step="1" data-value="Другое">
+              <span class="wizard-option-circle"></span>Другое
+            </button>
+          </div>
+        </div>
+
+        <!-- Шаг 2 -->
+        <div class="wizard-step" id="step2" style="display:none">
+          <div class="wizard-question">Как давно беспокоит?</div>
+          <div class="wizard-options">
+            <button class="wizard-option" data-step="2" data-value="Меньше месяца — острая ситуация">
+              <span class="wizard-option-circle"></span>Меньше месяца — острая ситуация
+            </button>
+            <button class="wizard-option" data-step="2" data-value="1–6 месяцев">
+              <span class="wizard-option-circle"></span>1–6 месяцев
+            </button>
+            <button class="wizard-option" data-step="2" data-value="Более полугода">
+              <span class="wizard-option-circle"></span>Более полугода
+            </button>
+            <button class="wizard-option" data-step="2" data-value="Годами / хроническое">
+              <span class="wizard-option-circle"></span>Годами / хроническое
+            </button>
+          </div>
+        </div>
+
+        <!-- Шаг 3 -->
+        <div class="wizard-step" id="step3" style="display:none">
+          <div class="wizard-question">Вы уже обращались куда-то с этим?</div>
+          <div class="wizard-options">
+            <button class="wizard-option" data-step="3" data-value="Нет, первый раз">
+              <span class="wizard-option-circle"></span>Нет, первый раз
+            </button>
+            <button class="wizard-option" data-step="3" data-value="Да, помогло временно">
+              <span class="wizard-option-circle"></span>Да, помогло временно
+            </button>
+            <button class="wizard-option" data-step="3" data-value="Да, не помогло">
+              <span class="wizard-option-circle"></span>Да, не помогло
+            </button>
+            <button class="wizard-option" data-step="3" data-value="Есть МРТ / снимки / направление">
+              <span class="wizard-option-circle"></span>Есть МРТ / снимки / направление
+            </button>
+          </div>
+        </div>
+
+        <!-- Шаг 4 -->
+        <div class="wizard-step" id="step4" style="display:none">
+          <div class="wizard-question">Что мешает больше всего прямо сейчас?</div>
+          <div class="wizard-options">
+            <button class="wizard-option" data-step="4" data-value="Боль при движении">
+              <span class="wizard-option-circle"></span>Боль при движении
+            </button>
+            <button class="wizard-option" data-step="4" data-value="Боль в покое или ночью">
+              <span class="wizard-option-circle"></span>Боль в покое или ночью
+            </button>
+            <button class="wizard-option" data-step="4" data-value="Ограничение подвижности">
+              <span class="wizard-option-circle"></span>Ограничение подвижности
+            </button>
+            <button class="wizard-option" data-step="4" data-value="Онемение или слабость">
+              <span class="wizard-option-circle"></span>Онемение или слабость
+            </button>
+          </div>
+        </div>
+
+        <!-- Шаг 5 -->
+        <div class="wizard-step" id="step5" style="display:none">
+          <div class="wizard-question">Как удобнее, чтобы мы связались?</div>
+          <div class="wizard-options">
+            <button class="wizard-option" data-step="5" data-value="phone" id="optPhone">
+              <span class="wizard-option-circle"></span>Позвоните мне
+            </button>
+            <button class="wizard-option" data-step="5" data-value="wa" id="optWa">
+              <span class="wizard-option-circle"></span>Я напишу сам в WhatsApp
+            </button>
+            <button class="wizard-option" data-step="5" data-value="tg" id="optTg">
+              <span class="wizard-option-circle"></span>Я напишу сам в Telegram
+            </button>
+          </div>
+          <div class="wizard-phone-row" id="phoneRow">
+            <input type="tel" class="wizard-phone-input" id="phoneInput" placeholder="+7 (___) ___-__-__" autocomplete="tel" />
+            <div class="wizard-error" id="phoneError">Пожалуйста, укажите номер телефона</div>
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button class="wizard-back" id="wizardBack" style="display:none">← Назад</button>
+          <button class="wizard-next" id="wizardNext" disabled>Далее →</button>
+        </div>
+        <p class="wizard-privacy">Нажимая «Отправить», вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
+      </div>
+
+      <div class="wizard-success" id="wizardSuccess">
+        <div class="wizard-success-icon">✓</div>
+        <div class="wizard-success-title">Ваши ответы получены</div>
+        <p class="wizard-success-text" id="wizardSuccessText">Мы свяжемся с вами в ближайшее время.</p>
+        <button class="cta-main-btn" style="margin-top:24px;width:100%;font-size:1rem" onclick="closeWizard()">Закрыть</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // ── Sticky header ─────────────────────────────────
@@ -2211,15 +2817,171 @@
       goTo(0);
     }());
 
-    // ── Форма (заглушка до Шага 8) ───────────────────
-    function openForm() {
-      const el = document.getElementById('form-section');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        alert('Форма будет добавлена на следующем шаге!');
+    // ── Wizard ────────────────────────────────────────
+    (function () {
+      var overlay  = document.getElementById('wizardOverlay');
+      var closeBtn = document.getElementById('wizardClose');
+      var backBtn  = document.getElementById('wizardBack');
+      var nextBtn  = document.getElementById('wizardNext');
+      var progress = document.getElementById('wizardProgress');
+      var stepLabel = document.getElementById('wizardStepLabel');
+      var formArea = document.getElementById('wizardFormArea');
+      var successEl = document.getElementById('wizardSuccess');
+      var phoneRow = document.getElementById('phoneRow');
+      var phoneInput = document.getElementById('phoneInput');
+      var phoneError = document.getElementById('phoneError');
+
+      var TOTAL = 5;
+      var currentStep = 1;
+      var answers = {};
+
+      function getStepEl(n) { return document.getElementById('step' + n); }
+
+      function updateUI() {
+        for (var i = 1; i <= TOTAL; i++) {
+          var el = getStepEl(i);
+          if (el) el.style.display = i === currentStep ? '' : 'none';
+        }
+        progress.style.width = (currentStep / TOTAL * 100) + '%';
+        stepLabel.textContent = 'Шаг ' + currentStep + ' из ' + TOTAL;
+        backBtn.style.display = currentStep > 1 ? '' : 'none';
+        nextBtn.textContent = currentStep === TOTAL ? 'Отправить' : 'Далее →';
+        updateNextState();
       }
+
+      function updateNextState() {
+        var hasAnswer = !!answers[currentStep];
+        if (currentStep === 5 && answers[5] === 'phone') {
+          hasAnswer = hasAnswer && phoneInput.value.trim().length >= 5;
+        }
+        nextBtn.disabled = !hasAnswer;
+      }
+
+      document.querySelectorAll('.wizard-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var step = parseInt(btn.dataset.step, 10);
+          var value = btn.dataset.value;
+          answers[step] = value;
+          document.querySelectorAll('.wizard-option[data-step="' + step + '"]').forEach(function (b) {
+            b.classList.remove('selected');
+          });
+          btn.classList.add('selected');
+          if (step === 5) {
+            phoneRow.classList.toggle('visible', value === 'phone');
+            if (value !== 'phone') {
+              phoneError.classList.remove('visible');
+              phoneInput.classList.remove('error');
+            }
+          }
+          updateNextState();
+        });
+      });
+
+      phoneInput.addEventListener('input', updateNextState);
+
+      nextBtn.addEventListener('click', function () {
+        if (currentStep === TOTAL) {
+          submitWizard();
+          return;
+        }
+        currentStep++;
+        updateUI();
+      });
+
+      backBtn.addEventListener('click', function () {
+        if (currentStep > 1) { currentStep--; updateUI(); }
+      });
+
+      function submitWizard() {
+        if (answers[5] === 'phone') {
+          var phone = phoneInput.value.trim();
+          if (phone.length < 5) {
+            phoneError.classList.add('visible');
+            phoneInput.classList.add('error');
+            return;
+          }
+          answers.phone = phone;
+        }
+        sendToTelegram(answers, function (ok) {
+          formArea.style.display = 'none';
+          successEl.classList.add('visible');
+          var contactText = '';
+          if (answers[5] === 'phone') contactText = 'Ждите звонка на ' + answers.phone + '.';
+          else if (answers[5] === 'wa') contactText = 'Вы можете написать нам в <a href="https://wa.me/79164940333" style="color:var(--color-primary)">WhatsApp</a> прямо сейчас.';
+          else if (answers[5] === 'tg') contactText = 'Вы можете написать нам в <a href="https://t.me/tonus03" style="color:var(--color-primary)">Telegram</a> прямо сейчас.';
+          document.getElementById('wizardSuccessText').innerHTML = 'Мы свяжемся с вами в течение нескольких минут. ' + contactText;
+        });
+      }
+
+      function sendToTelegram(data, cb) {
+        var BOT_TOKEN = '';
+        var CHAT_ID   = '';
+        if (!BOT_TOKEN || !CHAT_ID) { cb(false); return; }
+        var text = '📋 *Новая заявка ТОНУС*\n\n'
+          + '❓ Беспокоит: ' + (data[1] || '—') + '\n'
+          + '⏱ Как давно: ' + (data[2] || '—') + '\n'
+          + '🔍 Обращались: ' + (data[3] || '—') + '\n'
+          + '⚡ Мешает: ' + (data[4] || '—') + '\n'
+          + '📞 Связь: ' + (data[5] || '—')
+          + (data.phone ? ' → ' + data.phone : '');
+        fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' })
+        }).then(function () { cb(true); }).catch(function () { cb(false); });
+      }
+
+      function resetWizard() {
+        currentStep = 1;
+        answers = {};
+        document.querySelectorAll('.wizard-option').forEach(function (b) { b.classList.remove('selected'); });
+        phoneRow.classList.remove('visible');
+        phoneInput.value = '';
+        phoneError.classList.remove('visible');
+        phoneInput.classList.remove('error');
+        formArea.style.display = '';
+        successEl.classList.remove('visible');
+        updateUI();
+      }
+
+      window.openWizard = function () {
+        resetWizard();
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      };
+      window.closeWizard = function () {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      };
+
+      closeBtn.addEventListener('click', window.closeWizard);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) window.closeWizard();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) window.closeWizard();
+      });
+
+      updateUI();
+    }());
+
+    function openForm() {
+      window.openWizard();
     }
+
+    // ── Sticky bar — мобильные, после скролла за hero ─
+    (function () {
+      var bar  = document.getElementById('stickyBar');
+      var hero = document.getElementById('hero');
+      if (!bar || !hero) return;
+      function updateBar() {
+        if (window.innerWidth > 960) { bar.style.display = 'none'; return; }
+        var pastHero = hero.getBoundingClientRect().bottom < 0;
+        bar.style.display = pastHero ? 'flex' : 'none';
+      }
+      window.addEventListener('scroll', updateBar, { passive: true });
+      window.addEventListener('resize', updateBar, { passive: true });
+    }());
   </script>
 
 </body>
