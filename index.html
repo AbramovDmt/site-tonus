@@ -759,6 +759,20 @@
       line-height: 1.75;
       font-size: var(--text-md);
     }
+    .specialist-bio-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .specialist-bio-list li {
+      display: flex; align-items: baseline; gap: 12px;
+      font-size: var(--text-md); color: var(--color-text-muted); line-height: 1.55;
+    }
+    .bio-year {
+      flex-shrink: 0;
+      font-weight: 700; font-size: var(--text-sm);
+      color: var(--color-primary);
+      min-width: 52px;
+    }
     .specialist-bio.placeholder {
       color: var(--color-border);
       border: 1.5px dashed var(--color-border);
@@ -1863,9 +1877,15 @@
             <p class="specialist-role">Специалист по реабилитации и восстановлению</p>
           </div>
 
-          <p class="specialist-bio placeholder">
-            Биография будет добавлена позже — 2–3 предложения от первого лица.
-          </p>
+          <div class="specialist-bio">
+            <ul class="specialist-bio-list">
+              <li><span class="bio-year">~2005</span> Кашинское медицинское училище — специальность «Лечебное дело»</li>
+              <li><span class="bio-year">~2018</span> РГСУ, Москва — факультет адаптивной физической культуры, бакалавриат</li>
+              <li><span class="bio-year">~2022</span> Школа остеопрактики А.Е. Смирнова</li>
+              <li><span class="bio-year">2025</span> Институт восточной медицины и восстановления Артёма Тена</li>
+              <li><span class="bio-year">сейчас</span> Ассистент школы остеопрактики А.Е. Смирнова</li>
+            </ul>
+          </div>
 
           <blockquote class="specialist-quote placeholder">
             Цитата специалиста будет добавлена позже.
