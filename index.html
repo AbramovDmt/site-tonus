@@ -3055,7 +3055,7 @@
     document.getElementById('certLightbox').classList.remove('is-open');
     document.body.style.overflow = '';
   }
-  document.getElementById('certLightbox').addEventListener('click', function(e) {
+  var _certLb = document.getElementById('certLightbox'); if (_certLb) _certLb.addEventListener('click', function(e) {
     if (e.target === this) closeCertLightbox();
   });
   document.addEventListener('keydown', function(e) {
