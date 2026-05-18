@@ -883,7 +883,7 @@
     .diploma-tile.has-photo {
       position: relative; border: none !important; overflow: hidden;
       cursor: zoom-in; border-radius: 14px;
-      box-shadow: 0 2px 6px rgba(0,0,0,.06), 0 8px 28px rgba(26,43,60,.11);
+      box-shadow: 0 1px 3px rgba(0,0,0,.09), 0 5px 18px rgba(26,43,60,.15);
       transition: transform .42s cubic-bezier(.22,.68,0,1.2), box-shadow .42s ease;
     }
     .diploma-tile.has-photo img {
@@ -1777,10 +1777,10 @@
 
     /* === Hero frame: diagonal 3D float (bottom-left → top-right) === */
     @keyframes frame-float {
-      0%   { transform: perspective(1200px) rotateY(-4deg)   rotateX(2deg)    translateX(0px)   translateY(0px);   }
-      35%  { transform: perspective(1200px) rotateY(-7.5deg) rotateX(4.5deg)  translateX(-10px) translateY(12px);  }
-      70%  { transform: perspective(1200px) rotateY(-1.5deg) rotateX(0deg)    translateX(12px)  translateY(-20px); }
-      100% { transform: perspective(1200px) rotateY(-4deg)   rotateX(2deg)    translateX(0px)   translateY(0px);   }
+      0%   { transform: perspective(1200px) rotateY(-4deg)   rotateX(2deg);   }
+      40%  { transform: perspective(1200px) rotateY(-5.5deg) rotateX(3deg);   }
+      75%  { transform: perspective(1200px) rotateY(-2.5deg) rotateX(1deg);   }
+      100% { transform: perspective(1200px) rotateY(-4deg)   rotateX(2deg);   }
     }
     /* === Specialist blob: shape morph + strong 3D tilt === */
     @keyframes blobFloat {
