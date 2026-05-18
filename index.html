@@ -114,6 +114,11 @@
     .container-narrow { max-width: var(--container-narrow); margin: 0 auto; }
     section { padding: var(--space-20) 0; }
     .bg-soft { background: var(--color-bg-soft); }
+    .parallax-bg { background-attachment: fixed; background-size: cover; background-position: center center; background-repeat: no-repeat; }
+    #approach.parallax-bg { background-image: linear-gradient(rgba(244,248,252,.88),rgba(244,248,252,.88)),url(img/bg-approach.jpg); }
+    #results.parallax-bg { background-image: linear-gradient(rgba(244,248,252,.88),rgba(244,248,252,.88)),url(img/bg-reviews.jpg); }
+    @media (max-width:768px) { .parallax-bg { background-attachment: scroll; } }
+    @media (prefers-reduced-motion: reduce) { .parallax-bg { background-attachment: scroll; } }
 
     .section-title {
       text-align: center;
@@ -1943,7 +1948,7 @@
   </section>
 
   <!-- ═══════════════════ APPROACH ═══════════════════ -->
-  <section class="section bg-soft" id="approach">
+  <section class="section parallax-bg" id="approach">
     <div class="container">
 
       <h2 class="section-title reveal">Наш подход</h2>
@@ -2085,7 +2090,7 @@
   </section>
 
   <!-- ═══════════════════ RESULTS + REVIEWS ═══════════════════ -->
-  <section class="section bg-soft" id="results">
+  <section class="section parallax-bg" id="results">
     <div class="container">
 
       <h2 class="section-title reveal">Истории клиентов</h2>
