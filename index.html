@@ -3070,40 +3070,80 @@
       var cards = Array.from(reel.children);
       var total = cards.length, cur = 0;
 
-      function render() {
-        var stageW = stage.getBoundingClientRect().width;
-        if (!stageW) { requestAnimationFrame(render); return; }
-        var cardW = cards[0].offsetWidth;
-        if (!cardW)  { requestAnimationFrame(render); return; }
-        /* center current card: card[cur].offsetLeft is its natural x from wrap */
-        var offset = stageW / 2 - cardW / 2 - cards[cur].offsetLeft;
-        reel.style.transform = 'translateX(' + Math.round(offset) + 'px)';
+      /* ── lightbox (click to open, click again to close, no X) ── */
+      var lb = null;
+      function openGalleryLb(img) {
+        if (!lb) {
+          lb = document.createElement('div');
+          lb.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+          var lbImg = document.createElement('img');
+          lbImg.style.cssText = 'max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 8px 60px rgba(0,0,0,.6);';
+          lb.appendChild(lbImg);
+          lb.addEventListener('click', function () { lb.style.display = 'none'; });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb) lb.style.display = 'none'; });
+          document.body.appendChild(lb);
+        }
+        lb.querySelector('img').src = img.src;
+        lb.style.display = 'flex';
+      }
+
+      /* ── layout helpers ── */
+      function getL() {
+        var cs  = window.getComputedStyle(cards[0]);
+        var ml  = parseFloat(cs.marginLeft)  || 0;
+        var mr  = parseFloat(cs.marginRight) || 0;
+        var cw  = cards[0].offsetWidth;
+        var sw  = stage.getBoundingClientRect().width;
+        return { ml: ml, mr: mr, cw: cw, sw: sw, slot: cw + ml + mr };
+      }
+
+      /* ── render ── */
+      function render(animated) {
+        var L = getL();
+        if (!L.sw || !L.cw) { setTimeout(function () { render(false); }, 60); return; }
+
+        /* center reel on current card */
+        var centerFromLeft = L.ml + cur * L.slot + L.cw / 2;
+        var offset = Math.round(L.sw / 2 - centerFromLeft);
+        if (!animated) {
+          reel.style.transition = 'none';
+          reel.style.transform  = 'translateX(' + offset + 'px)';
+          reel.offsetHeight;          /* force reflow */
+          reel.style.transition = '';
+        } else {
+          reel.style.transform = 'translateX(' + offset + 'px)';
+        }
+
+        /* 3-D scale + angle per card */
         cards.forEach(function (el, i) {
-          var d = i - cur;
-          var a = Math.abs(d), sg = d >= 0 ? 1 : -1;
+          var d  = i - cur;
+          var a  = Math.abs(d);
+          var sg = d >= 0 ? 1 : -1;
           var sc, ry, op;
-          if (a === 0)      { sc = 1.00; ry = 0;      op = 1.00; el.classList.add('cf-active'); }
-          else if (a === 1) { sc = 0.76; ry = 42*sg;  op = 0.85; el.classList.remove('cf-active'); }
-          else if (a === 2) { sc = 0.58; ry = 65*sg;  op = 0.55; el.classList.remove('cf-active'); }
-          else              { sc = 0.44; ry = 78*sg;  op = 0;    el.classList.remove('cf-active'); }
+          if      (a === 0) { sc = 1.00; ry =  0;      op = 1.00; el.classList.add('cf-active'); }
+          else if (a === 1) { sc = 0.76; ry = 42 * sg; op = 0.85; el.classList.remove('cf-active'); }
+          else if (a === 2) { sc = 0.58; ry = 65 * sg; op = 0.55; el.classList.remove('cf-active'); }
+          else              { sc = 0.44; ry = 78 * sg; op = 0;    el.classList.remove('cf-active'); }
           el.style.transform     = 'perspective(900px) scale(' + sc + ') rotateY(' + ry + 'deg)';
           el.style.opacity       = op;
           el.style.pointerEvents = op === 0 ? 'none' : 'auto';
         });
       }
 
+      /* ── navigation ── */
       function go(dir) {
         cur = Math.max(0, Math.min(total - 1, cur + dir));
-        render();
+        render(true);
       }
 
       cards.forEach(function (el, i) {
         el.addEventListener('click', function () {
-          if (i !== cur) { cur = i; render(); }
-          else { var img = el.querySelector('img'); if (img) openCertLightbox(img); }
+          if (i !== cur) { cur = i; render(true); }
+          else { var img = el.querySelector('img'); if (img) openGalleryLb(img); }
         });
       });
 
+      /* ── wheel (only over stage) ── */
       var wt;
       stage.addEventListener('wheel', function (e) {
         e.preventDefault();
@@ -3111,15 +3151,18 @@
         wt = setTimeout(function () { go(e.deltaY > 0 ? 1 : -1); }, 80);
       }, { passive: false });
 
+      /* ── touch swipe ── */
       var tx0 = 0;
       stage.addEventListener('touchstart', function (e) { tx0 = e.touches[0].clientX; }, { passive: true });
       stage.addEventListener('touchend',   function (e) {
-        var dx = tx0 - e.changedTouches[0].clientX;
-        if (Math.abs(dx) > 44) go(dx > 0 ? 1 : -1);
+        if (Math.abs(tx0 - e.changedTouches[0].clientX) > 44)
+          go(tx0 > e.changedTouches[0].clientX ? 1 : -1);
       }, { passive: true });
 
-      requestAnimationFrame(render);
-      window.addEventListener('resize', render);
+      /* ── init ── */
+      if (document.readyState === 'complete') { render(false); }
+      else { window.addEventListener('load', function () { render(false); }); }
+      window.addEventListener('resize', function () { render(false); });
     }());
 </script>
 
