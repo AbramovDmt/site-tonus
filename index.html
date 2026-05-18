@@ -3055,9 +3055,8 @@
     document.getElementById('certLightbox').classList.remove('is-open');
     document.body.style.overflow = '';
   }
-  document.getElementById('certLightbox').addEventListener('click', function(e) {
-    if (e.target === this) closeCertLightbox();
-  });
+  var _clb = document.getElementById('certLightbox');
+  if (_clb) _clb.addEventListener('click', function(e) { if (e.target === this) closeCertLightbox(); });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeCertLightbox();
   });
@@ -3100,8 +3099,7 @@
       /* ── render ── */
       function render(animated) {
         var L = getL();
-        if (!L.sw || !L.cw) { setTimeout(function () { render(false); }, 60); return; }
-
+                if (!L.sw || !L.cw) { 
         /* center reel on current card */
         var centerFromLeft = L.ml + cur * L.slot + L.cw / 2;
         var offset = Math.round(L.sw / 2 - centerFromLeft);
