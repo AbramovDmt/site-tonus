@@ -1040,6 +1040,7 @@
       transition: transform .4s ease;
     }
     .eq-card:hover .eq-photo img { transform: scale(1.04); }
+    .eq-photo.eq-photo-real { cursor: zoom-in; }
 
     .eq-photo-ph {
       width: 100%;
@@ -2042,17 +2043,8 @@
 
         <!-- Правило -->
         <div class="eq-card reveal">
-          <div class="eq-photo">
-            <div class="eq-photo-ph">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--color-primary)" stroke-width="1.5" aria-hidden="true">
-                <rect x="20" y="8" width="24" height="48" rx="12"/>
-                <line x1="32" y1="18" x2="32" y2="46"/>
-                <line x1="26" y1="26" x2="38" y2="26"/>
-                <line x1="26" y1="32" x2="38" y2="32"/>
-                <line x1="26" y1="38" x2="38" y2="38"/>
-              </svg>
-              <span>Фото аппарата</span>
-            </div>
+          <div class="eq-photo eq-photo-real" onclick="openCertLightbox(this.querySelector('img'))">
+            <img src="img/eq-pravilo.jpg" alt="Тренажёр Правúло" loading="lazy">
           </div>
           <div class="eq-body">
             <span class="eq-tag">Позвоночник и спина</span>
@@ -2081,17 +2073,8 @@
 
         <!-- Тракционный стол -->
         <div class="eq-card reveal">
-          <div class="eq-photo">
-            <div class="eq-photo-ph">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--color-primary)" stroke-width="1.5" aria-hidden="true">
-                <rect x="10" y="26" width="44" height="12" rx="4"/>
-                <line x1="18" y1="38" x2="18" y2="50"/>
-                <line x1="46" y1="38" x2="46" y2="50"/>
-                <polyline points="6,32 12,28 12,36 6,32"/>
-                <polyline points="58,32 52,28 52,36 58,32"/>
-              </svg>
-              <span>Фото аппарата</span>
-            </div>
+          <div class="eq-photo eq-photo-real" onclick="openCertLightbox(this.querySelector('img'))">
+            <img src="img/eq-traction.jpg" alt="Тракционный стол" loading="lazy">
           </div>
           <div class="eq-body">
             <span class="eq-tag">Позвоночник и суставы</span>
@@ -2375,6 +2358,16 @@
           </button>
           <div class="faq-a">
             <p>Расскажите о своей ситуации перед первым сеансом — специалист подберёт подход. Есть состояния, с которыми мы не работаем: в таком случае честно об этом скажем и направим к нужному специалисту. Никаких рисков вслепую — только то, что уместно именно вам.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            <span>Есть ли противопоказания?</span>
+            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Противопоказаний немного: острые респираторно-вирусные заболевания, стадии обострения и онкология. В остальных случаях работаем без ограничений.</p>
           </div>
         </div>
 
