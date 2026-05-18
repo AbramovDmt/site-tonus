@@ -2295,7 +2295,6 @@
     <section class="section" id="gallery" aria-label="Фотогалерея">
     <div class="container">
       <h2 class="section-title reveal">Фотогалерея</h2>
-      <p class="section-sub reveal">Кабинеты, оборудование и живой процесс работы</p>
       <div class="coverflow-wrap">
         <div class="coverflow-track" id="galleryTrack">
           <div class="cf-item"><img src="img/gallery-1.jpg" alt="Зона ожидания" loading="lazy"></div>
@@ -3118,7 +3117,7 @@
         if (Math.abs(dx) > 44) go(dx > 0 ? 1 : -1);
       }, { passive: true });
 
-      render();
+      requestAnimationFrame(render);
       window.addEventListener('resize', render);
     }());
 </script>
