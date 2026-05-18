@@ -3070,6 +3070,7 @@
 
       function render() {
         var w = items[0].offsetWidth;
+        if (!w) { requestAnimationFrame(render); return; }
         items.forEach(function (el, i) {
           var d = ((i - cur) % total + total) % total;
           if (d > total / 2) d -= total;
