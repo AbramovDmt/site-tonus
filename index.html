@@ -1701,19 +1701,15 @@
       cursor: pointer; transition: background .15s;
     }
     .cert-lightbox-close:hover { background: rgba(255,255,255,.28); }
-      /* === Gallery === */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: var(--space-8); }
-    .gallery-item { position: relative; overflow: hidden; border-radius: 14px; aspect-ratio: 4/3; cursor: zoom-in; background: var(--color-bg-soft); box-shadow: 0 2px 20px rgba(26,43,60,.09); }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.25,.46,.45,.94); }
-    .gallery-item::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top,rgba(26,43,60,.65) 0%,rgba(26,43,60,.08) 55%,transparent 100%); opacity: 0; transition: opacity .38s ease; z-index: 1; pointer-events: none; }
-    .gallery-item::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(.55); width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.95) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232B7FBF' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.5' y1='16.5' x2='22' y2='22'/%3E%3C/svg%3E") center/22px no-repeat; opacity: 0; transition: opacity .38s ease,transform .42s cubic-bezier(.34,1.56,.64,1); z-index: 2; pointer-events: none; }
-    .gallery-item:hover img { transform: scale(1.09); }
-    .gallery-item:hover::before { opacity: 1; }
-    .gallery-item:hover::after { opacity: 1; transform: translate(-50%,-50%) scale(1); }
-    .gallery-grid .gallery-item:nth-child(1){transition-delay:.04s} .gallery-grid .gallery-item:nth-child(2){transition-delay:.10s} .gallery-grid .gallery-item:nth-child(3){transition-delay:.16s} .gallery-grid .gallery-item:nth-child(4){transition-delay:.22s} .gallery-grid .gallery-item:nth-child(5){transition-delay:.28s} .gallery-grid .gallery-item:nth-child(6){transition-delay:.34s} .gallery-grid .gallery-item:nth-child(7){transition-delay:.40s} .gallery-grid .gallery-item:nth-child(8){transition-delay:.46s} .gallery-grid .gallery-item:nth-child(9){transition-delay:.52s}
-    @media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}}
-    @media(max-width:480px){.gallery-grid{grid-template-columns:1fr}}
-    @media(prefers-reduced-motion:reduce){.gallery-item img,.gallery-item::before,.gallery-item::after{transition:none}}
+          /* === Coverflow Gallery === */
+    .coverflow-wrap { overflow: hidden; padding: 20px 0 50px; user-select: none; -webkit-user-select: none; }
+    .coverflow-track { position: relative; height: 440px; display: flex; align-items: center; justify-content: center; perspective: 1100px; }
+    .cf-item { position: absolute; width: 46%; max-width: 510px; aspect-ratio: 4/3; border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 8px 40px rgba(26,43,60,.18); transition: transform .52s cubic-bezier(.25,.46,.45,.94), opacity .52s ease, box-shadow .52s ease; will-change: transform, opacity; }
+    .cf-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .cf-item.cf-active { box-shadow: 0 20px 64px rgba(26,43,60,.28), 0 0 0 3px rgba(43,127,191,.18); }
+    @media(max-width:900px){ .coverflow-track{height:320px} .cf-item{width:68%} }
+    @media(max-width:600px){ .coverflow-track{height:240px} .cf-item{width:82%} }
+    @media(prefers-reduced-motion:reduce){ .cf-item{transition:none} }
 </style>
 </head>
 <body>
@@ -2296,20 +2292,22 @@
 
   <!-- ═══════════════════ FAQ ═══════════════════ -->
   <!-- ГАЛЕРЕЯ -->
-  <section class="section" id="gallery" aria-label="Галерея студии">
+    <section class="section" id="gallery" aria-label="Фотогалерея">
     <div class="container">
-      <h2 class="section-title reveal">Студия изнутри</h2>
+      <h2 class="section-title reveal">Фотогалерея</h2>
       <p class="section-sub reveal">Кабинеты, оборудование и живой процесс работы</p>
-      <div class="gallery-grid">
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-1.jpg" alt="Зона ожидания" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-2.jpg" alt="Зал студии" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-3.jpg" alt="Тренажёр Правило" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-4.jpg" alt="Процедурный кабинет" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-5.jpg" alt="Занятие на Правиле" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-6.jpg" alt="Работа на Правиле" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-7.jpg" alt="Специалист за работой" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-8.jpg" alt="Остеопатический сеанс" loading="lazy"></div>
-        <div class="gallery-item reveal" onclick="openCertLightbox(this.querySelector('img'))"><img src="img/gallery-9.jpg" alt="Лимфодренажный сеанс" loading="lazy"></div>
+      <div class="coverflow-wrap">
+        <div class="coverflow-track" id="galleryTrack">
+          <div class="cf-item"><img src="img/gallery-1.jpg" alt="Зона ожидания" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-2.jpg" alt="Зал студии" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-3.jpg" alt="Тренажёр Правило" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-4.jpg" alt="Процедурный кабинет" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-5.jpg" alt="Занятие на Правиле" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-6.jpg" alt="Работа на Правиле" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-7.jpg" alt="Специалист за работой" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-8.jpg" alt="Остеопатический сеанс" loading="lazy"></div>
+          <div class="cf-item"><img src="img/gallery-9.jpg" alt="Лимфодренажный сеанс" loading="lazy"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -3063,7 +3061,69 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeCertLightbox();
   });
-  </script>
+  
+    // ── Coverflow Gallery
+    (function () {
+      var track = document.getElementById('galleryTrack');
+      if (!track) return;
+      var items = Array.from(track.children);
+      var total = items.length, cur = 0, busy = false;
+
+      function render() {
+        var w = items[0].offsetWidth;
+        items.forEach(function (el, i) {
+          var d = ((i - cur) % total + total) % total;
+          if (d > total / 2) d -= total;
+          var a = Math.abs(d), s = d === 0 ? 1 : Math.sign(d);
+          var x, sc, ry, op, z;
+          if (a === 0)      { x = 0;          sc = 1.00; ry = 0;      op = 1.00; z = 5; el.classList.add('cf-active'); }
+          else if (a === 1) { x = w*0.70*s;   sc = 0.82; ry = -32*s;  op = 0.88; z = 4; el.classList.remove('cf-active'); }
+          else if (a === 2) { x = w*1.16*s;   sc = 0.65; ry = -50*s;  op = 0.68; z = 3; el.classList.remove('cf-active'); }
+          else              { x = w*2.0*s;     sc = 0.52; ry = -58*s;  op = 0;    z = 1; el.classList.remove('cf-active'); }
+          el.style.transform     = 'translateX('+x+'px) scale('+sc+') rotateY('+ry+'deg)';
+          el.style.opacity       = op;
+          el.style.zIndex        = z;
+          el.style.pointerEvents = op === 0 ? 'none' : 'auto';
+        });
+      }
+
+      function go(dir) {
+        if (busy) return;
+        busy = true;
+        cur = ((cur + dir) % total + total) % total;
+        render();
+        setTimeout(function () { busy = false; }, 540);
+      }
+
+      items.forEach(function (el, i) {
+        el.addEventListener('click', function () {
+          var d = ((i - cur + total) % total);
+          if (d > total / 2) d -= total;
+          if (d !== 0) { go(Math.sign(d)); }
+          else { var img = el.querySelector('img'); if (img) openCertLightbox(img); }
+        });
+      });
+
+      var sect = document.getElementById('gallery'), wt;
+      document.addEventListener('wheel', function (e) {
+        var r = sect.getBoundingClientRect();
+        if (e.clientY < r.top || e.clientY > r.bottom) return;
+        e.preventDefault();
+        clearTimeout(wt);
+        wt = setTimeout(function () { go(e.deltaY > 0 ? 1 : -1); }, 55);
+      }, { passive: false });
+
+      var tx0 = 0;
+      track.addEventListener('touchstart', function (e) { tx0 = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend',   function (e) {
+        var dx = tx0 - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 44) go(dx > 0 ? 1 : -1);
+      }, { passive: true });
+
+      render();
+      window.addEventListener('resize', render);
+    }());
+</script>
 
 
   <!-- Certificate Lightbox -->
