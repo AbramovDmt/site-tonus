@@ -1702,13 +1702,13 @@
     }
     .cert-lightbox-close:hover { background: rgba(255,255,255,.28); }
           /* === Coverflow Gallery === */
-    .coverflow-wrap  { position: relative; overflow: hidden; height: 420px; margin: 10px 0 40px; user-select: none; -webkit-user-select: none; }
-    .coverflow-track { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
-    .cf-item { position: absolute; width: 300px; height: 225px; left: -150px; top: -112px; border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 8px 40px rgba(26,43,60,.18); transition: transform .52s cubic-bezier(.25,.46,.45,.94), opacity .52s ease, box-shadow .52s ease; will-change: transform, opacity; }
+    .coverflow-wrap  { position: relative; overflow: hidden; height: 420px; margin: 10px 0 40px; perspective: 1400px; user-select: none; -webkit-user-select: none; }
+    .coverflow-track { display: contents; }
+    .cf-item { position: absolute; width: 300px; height: 225px; border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 8px 40px rgba(26,43,60,.18); transition: transform .52s cubic-bezier(.25,.46,.45,.94), opacity .52s ease, box-shadow .52s ease; will-change: transform, opacity; }
     .cf-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
     .cf-item.cf-active { box-shadow: 0 20px 64px rgba(26,43,60,.28), 0 0 0 3px rgba(43,127,191,.18); }
-    @media(max-width:900px){ .coverflow-wrap{height:340px} .cf-item{width:240px;height:180px;left:-120px;top:-90px} }
-    @media(max-width:600px){ .coverflow-wrap{height:260px} .cf-item{width:185px;height:139px;left:-92px;top:-69px} }
+    @media(max-width:900px){ .coverflow-wrap{height:340px} .cf-item{width:240px;height:180px} }
+    @media(max-width:600px){ .coverflow-wrap{height:260px} .cf-item{width:185px;height:139px} }
     @media(prefers-reduced-motion:reduce){ .cf-item{transition:none} }
 </style>
 </head>
@@ -3069,21 +3069,29 @@
       var total = items.length, cur = 0, busy = false;
 
       function render() {
-        var w = items[0].offsetWidth || 300;
-        var s1 = Math.round(w * 0.88);
-        var s2 = Math.round(w * 1.60);
+        var wrapW = wrap.offsetWidth;
+        if (!wrapW) { requestAnimationFrame(render); return; }
+        var iw = items[0].offsetWidth || 300;
+        var ih = items[0].offsetHeight || 225;
+        var wrapH = wrap.offsetHeight || 420;
+        var baseLeft = Math.round((wrapW - iw) / 2);
+        var baseTop  = Math.round((wrapH - ih) / 2);
+        var s1 = Math.round(iw * 0.88);
+        var s2 = Math.round(iw * 1.60);
         items.forEach(function (el, i) {
           var d = ((i - cur) % total + total) % total;
           if (d > total / 2) d -= total;
           var a = Math.abs(d), sg = d === 0 ? 1 : Math.sign(d);
           var x, sc, ry, op, z;
-          if (a === 0)      { x = 0;        sc = 1.00; ry = 0;      op = 1.00; z = 5; el.classList.add('cf-active'); }
-          else if (a === 1) { x = s1 * sg;  sc = 0.76; ry = 42*sg; op = 0.82; z = 4; el.classList.remove('cf-active'); }
-          else if (a === 2) { x = s2 * sg;  sc = 0.58; ry = 65*sg; op = 0.52; z = 3; el.classList.remove('cf-active'); }
-          else              { x = (s2 + w) * sg; sc = 0.44; ry = 78*sg; op = 0; z = 1; el.classList.remove('cf-active'); }
-          el.style.transform     = 'translateX('+x+'px) scale('+sc+') rotateY('+ry+'deg)';
-          el.style.opacity       = op;
-          el.style.zIndex        = z;
+          if (a === 0)      { x = 0;           sc = 1.00; ry = 0;      op = 1.00; z = 5; el.classList.add('cf-active'); }
+          else if (a === 1) { x = s1 * sg;     sc = 0.76; ry = 42*sg; op = 0.82; z = 4; el.classList.remove('cf-active'); }
+          else if (a === 2) { x = s2 * sg;     sc = 0.58; ry = 65*sg; op = 0.52; z = 3; el.classList.remove('cf-active'); }
+          else              { x = (s2+iw)*sg;  sc = 0.44; ry = 78*sg; op = 0;    z = 1; el.classList.remove('cf-active'); }
+          el.style.left      = baseLeft + 'px';
+          el.style.top       = baseTop  + 'px';
+          el.style.transform = 'translateX('+x+'px) scale('+sc+') rotateY('+ry+'deg)';
+          el.style.opacity   = op;
+          el.style.zIndex    = z;
           el.style.pointerEvents = op === 0 ? 'none' : 'auto';
         });
       }
