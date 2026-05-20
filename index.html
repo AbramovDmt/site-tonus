@@ -431,7 +431,9 @@
       gap: var(--space-16);
       align-items: center;
       width: 100%;
-      padding: var(--space-16) 0 var(--space-12);
+      min-width: 0;
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-12);
     }
 
     /* Левая колонка */
@@ -1234,6 +1236,8 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-lg);
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
     }
     .reviews-track {
       display: flex;
@@ -1241,7 +1245,8 @@
       will-change: transform;
     }
     .review-card {
-      min-width: 100%;
+      flex: 0 0 100%;
+      width: 100%;
       padding: var(--space-10) var(--space-12);
       background: #fff;
       border-radius: var(--radius-lg);
@@ -1411,8 +1416,8 @@
 
       /* Hero */
       .hero { padding-bottom: var(--space-10); }
-      .hero-grid { padding: var(--space-10) 0 var(--space-8); gap: var(--space-8); }
-      .hero-cta .btn-primary { width: 100%; justify-content: center; }
+      .hero-grid { padding-top: var(--space-10); padding-bottom: var(--space-8); gap: var(--space-8); }
+      .hero-cta .btn-primary { width: 100%; justify-content: center; white-space: normal; text-align: center; }
       .hero-frame-outer { width: 260px; height: 310px; }
 
       /* FAQ */
@@ -1431,12 +1436,12 @@
       .hero-title { font-size: clamp(1.9rem, 9vw, 2.4rem); }
 
       /* Hero отступы */
-      .hero-grid { padding: var(--space-8) 0 var(--space-6); }
+      .hero-grid { padding-top: var(--space-8); padding-bottom: var(--space-6); }
       .hero-content { gap: var(--space-4); }
       .hero-frame-outer { width: 220px; height: 265px; }
 
-      /* Кнопка CTA — полная ширина */
-      .hero-cta .btn-primary { width: 100%; justify-content: center; }
+      /* Кнопка CTA — полная ширина, текст переносится */
+      .hero-cta .btn-primary { width: 100%; justify-content: center; white-space: normal; text-align: center; padding: 16px 24px; font-size: var(--text-base); }
 
       /* Мессенджеры — компактнее */
       .btn-messenger { padding: 8px 12px; font-size: var(--text-xs); gap: 5px; }
@@ -1864,7 +1869,7 @@
         </h1>
 
         <p class="hero-subtitle hero-load">
-          Работаем с причиной, а не с симптомом. Остеопатия, реабилитация и специальное оборудование — работа начинается с первого же сеанса.
+          Не просто снимаем напряжение, а помогаем организму восстановить естественную работу и внутренний баланс
         </p>
 
         <div class="hero-cta hero-load">
@@ -1979,8 +1984,8 @@
             </ul>
           </div>
 
-          <blockquote class="specialist-quote placeholder">
-            Цитата специалиста будет добавлена позже.
+          <blockquote class="specialist-quote">
+            «Я работаю не с симптомом, а с человеком в целом — чтобы результат был не временным, а устойчивым.»
           </blockquote>
 
           <div class="specialist-stats">
@@ -2373,7 +2378,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ FAQ ═══════════════════ -->
+  <!-- ═══════════════════ FAQ ═══════════════════ -->
   <!-- ГАЛЕРЕЯ -->
     <section class="section" id="gallery" aria-label="Фотогалерея">
     <div class="container">
