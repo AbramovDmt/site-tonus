@@ -1770,14 +1770,14 @@
     }
     .cert-lightbox-close:hover { background: rgba(255,255,255,.28); }
           /* === Coverflow Gallery === */
-    .coverflow-wrap  { position: relative; overflow: hidden; height: 360px; max-width: 900px; margin: 10px auto 40px; user-select: none; -webkit-user-select: none; cursor: grab; }
+    .coverflow-wrap  { position: relative; overflow: hidden; height: 420px; max-width: 1100px; margin: 10px auto 40px; user-select: none; -webkit-user-select: none; cursor: grab; }
     .coverflow-wrap:active { cursor: grabbing; }
     .coverflow-track { position: absolute; inset: 0; }
     .cf-item { position: absolute; left: 50%; top: 50%; width: 280px; height: 210px; border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 8px 40px rgba(26,43,60,.18); transition: transform .52s cubic-bezier(.25,.46,.45,.94), opacity .52s ease, box-shadow .52s ease; will-change: transform, opacity; }
     .cf-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-    .cf-item.cf-active { box-shadow: 0 20px 64px rgba(26,43,60,.28), 0 0 0 3px rgba(43,127,191,.18); }
-    @media(max-width:900px){ .coverflow-wrap{height:280px} .cf-item{width:220px;height:165px} }
-    @media(max-width:600px){ .coverflow-wrap{height:200px} .cf-item{width:155px;height:116px} }
+    .cf-item.cf-active { box-shadow: 0 64px 80px -24px rgba(26,43,60,.55), 0 24px 48px rgba(26,43,60,.22), 0 0 0 3px rgba(43,127,191,.20); }
+    @media(max-width:900px){ .coverflow-wrap{height:310px} .cf-item{width:220px;height:165px} }
+    @media(max-width:600px){ .coverflow-wrap{height:210px} .cf-item{width:155px;height:116px} }
     @media(prefers-reduced-motion:reduce){ .cf-item{transition:none} }
 
     /* === Hero frame: diagonal 3D float (bottom-left → top-right) === */
@@ -3174,19 +3174,30 @@
         lb.style.display = 'flex';
       }
 
+      /* позиции: вычисляются по фактической ширине карточки — работает на любом брейкпоинте */
+      var cx1 = 0, cx2 = 0;
+      function computeLayout() {
+        var W = cards[0].offsetWidth;
+        cx1 = Math.round(W * (1.50 + 0.82) / 2 + 18);
+        cx2 = Math.round(cx1 + W * (0.82 + 0.50) / 2 + 14);
+      }
+
       /* render: snap=true — мгновенно без анимации (первый рендер) */
       function render(snap) {
         if (snap) { cards.forEach(function (el) { el.style.transition = 'none'; }); }
 
         cards.forEach(function (el, i) {
           var d  = i - cur;
+          /* круговое расстояние — всегда есть фото и слева, и справа */
+          if (d >  total / 2) d -= total;
+          if (d < -total / 2) d += total;
           var a  = Math.abs(d);
           var sg = d >= 0 ? 1 : -1;
           var cx, sc, ry, op, zi;
-          if      (a === 0) { cx = 0;        sc = 1.12; ry =  0;       op = 1.00; zi = 10; }
-          else if (a === 1) { cx = sg * 240;  sc = 0.78; ry = sg * 42;  op = 0.90; zi = 5;  }
-          else if (a === 2) { cx = sg * 330;  sc = 0.50; ry = sg * 65;  op = 0.70; zi = 3;  }
-          else              { cx = sg * 330;  sc = 0.44; ry = sg * 78;  op = 0;    zi = 1;  }
+          if      (a === 0) { cx = 0;          sc = 1.50; ry =  0;       op = 1.00; zi = 10; }
+          else if (a === 1) { cx = sg * cx1;   sc = 0.82; ry = sg * 42;  op = 0.85; zi = 5;  }
+          else if (a === 2) { cx = sg * cx2;   sc = 0.50; ry = sg * 65;  op = 0.65; zi = 3;  }
+          else              { cx = sg * cx2;   sc = 0.44; ry = sg * 78;  op = 0;    zi = 1;  }
           el.style.transform     = 'translate(-50%,-50%) translateX(' + cx + 'px) perspective(900px) scale(' + sc + ') rotateY(' + ry + 'deg)';
           el.style.opacity       = op;
           el.style.zIndex        = zi;
@@ -3229,8 +3240,9 @@
           go(tx0 > e.changedTouches[0].clientX ? 1 : -1);
       }, { passive: true });
 
+      computeLayout();
       render(true);
-      window.addEventListener('resize', function () { render(true); });
+      window.addEventListener('resize', function () { computeLayout(); render(true); });
     }());
 </script>
 
