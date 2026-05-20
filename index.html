@@ -1581,6 +1581,10 @@
     }
     .wizard-option.selected .wizard-option-circle { border-color: var(--color-primary); background: var(--color-primary); }
     .wizard-option.selected .wizard-option-circle::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+    /* Мультивыбор — квадратный чекбокс с галочкой */
+    .wizard-option[data-multi] .wizard-option-circle { border-radius: 5px; }
+    .wizard-option[data-multi].selected .wizard-option-circle::after { width: 11px; height: 6px; border-radius: 0; background: none; border-left: 2.5px solid #fff; border-bottom: 2.5px solid #fff; transform: rotate(-45deg) translateY(-1px); }
+    .wizard-multi-hint { font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: 8px; }
     .wizard-phone-row { margin-top: 12px; display: none; flex-direction: column; gap: 8px; }
     .wizard-phone-row.visible { display: flex; }
     .wizard-phone-input {
@@ -2702,23 +2706,24 @@
         <!-- Шаг 1 -->
         <div class="wizard-step" id="step1">
           <div class="wizard-question" id="wizardTitle">Что беспокоит больше всего?</div>
+          <div class="wizard-multi-hint">Можно выбрать несколько</div>
           <div class="wizard-options">
-            <button class="wizard-option" data-step="1" data-value="Боль в спине / пояснице">
+            <button class="wizard-option" data-step="1" data-multi="true" data-value="Боль в спине / пояснице">
               <span class="wizard-option-circle"></span>Боль в спине / пояснице
             </button>
-            <button class="wizard-option" data-step="1" data-value="Боль в шее / головные боли">
+            <button class="wizard-option" data-step="1" data-multi="true" data-value="Боль в шее / головные боли">
               <span class="wizard-option-circle"></span>Боль в шее / головные боли
             </button>
-            <button class="wizard-option" data-step="1" data-value="Боли в суставах">
+            <button class="wizard-option" data-step="1" data-multi="true" data-value="Боли в суставах">
               <span class="wizard-option-circle"></span>Боли в суставах
             </button>
-            <button class="wizard-option" data-step="1" data-value="Восстановление после операции или травмы">
+            <button class="wizard-option" data-step="1" data-multi="true" data-value="Восстановление после операции или травмы">
               <span class="wizard-option-circle"></span>Восстановление после операции или травмы
             </button>
-            <button class="wizard-option" data-step="1" data-value="Послеродовое восстановление">
+            <button class="wizard-option" data-step="1" data-multi="true" data-value="Послеродовое восстановление">
               <span class="wizard-option-circle"></span>Послеродовое восстановление
             </button>
-            <button class="wizard-option" data-step="1" data-value="Другое">
+            <button class="wizard-option" data-step="1" data-multi="true" data-value="Другое">
               <span class="wizard-option-circle"></span>Другое
             </button>
           </div>
@@ -2765,17 +2770,18 @@
         <!-- Шаг 4 -->
         <div class="wizard-step" id="step4" style="display:none">
           <div class="wizard-question">Что мешает больше всего прямо сейчас?</div>
+          <div class="wizard-multi-hint">Можно выбрать несколько</div>
           <div class="wizard-options">
-            <button class="wizard-option" data-step="4" data-value="Боль при движении">
+            <button class="wizard-option" data-step="4" data-multi="true" data-value="Боль при движении">
               <span class="wizard-option-circle"></span>Боль при движении
             </button>
-            <button class="wizard-option" data-step="4" data-value="Боль в покое или ночью">
+            <button class="wizard-option" data-step="4" data-multi="true" data-value="Боль в покое или ночью">
               <span class="wizard-option-circle"></span>Боль в покое или ночью
             </button>
-            <button class="wizard-option" data-step="4" data-value="Ограничение подвижности">
+            <button class="wizard-option" data-step="4" data-multi="true" data-value="Ограничение подвижности">
               <span class="wizard-option-circle"></span>Ограничение подвижности
             </button>
-            <button class="wizard-option" data-step="4" data-value="Онемение или слабость">
+            <button class="wizard-option" data-step="4" data-multi="true" data-value="Онемение или слабость">
               <span class="wizard-option-circle"></span>Онемение или слабость
             </button>
           </div>
@@ -2979,6 +2985,7 @@
       var TOTAL = 5;
       var currentStep = 1;
       var answers = {};
+      var MULTI = { 1: true, 4: true };
 
       function getStepEl(n) { return document.getElementById('step' + n); }
 
@@ -2995,7 +3002,10 @@
       }
 
       function updateNextState() {
-        var hasAnswer = !!answers[currentStep];
+        var ans = answers[currentStep];
+        var hasAnswer = MULTI[currentStep]
+          ? (Array.isArray(ans) && ans.length > 0)
+          : !!ans;
         if (currentStep === 5 && answers[5] === 'phone') {
           hasAnswer = hasAnswer && phoneInput.value.trim().length >= 5;
         }
@@ -3006,16 +3016,30 @@
         btn.addEventListener('click', function () {
           var step = parseInt(btn.dataset.step, 10);
           var value = btn.dataset.value;
-          answers[step] = value;
-          document.querySelectorAll('.wizard-option[data-step="' + step + '"]').forEach(function (b) {
-            b.classList.remove('selected');
-          });
-          btn.classList.add('selected');
-          if (step === 5) {
-            phoneRow.classList.toggle('visible', value === 'phone');
-            if (value !== 'phone') {
-              phoneError.classList.remove('visible');
-              phoneInput.classList.remove('error');
+
+          if (MULTI[step]) {
+            if (!Array.isArray(answers[step])) answers[step] = [];
+            var idx = answers[step].indexOf(value);
+            if (idx === -1) {
+              answers[step].push(value);
+              btn.classList.add('selected');
+            } else {
+              answers[step].splice(idx, 1);
+              btn.classList.remove('selected');
+              if (answers[step].length === 0) answers[step] = null;
+            }
+          } else {
+            answers[step] = value;
+            document.querySelectorAll('.wizard-option[data-step="' + step + '"]').forEach(function (b) {
+              b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            if (step === 5) {
+              phoneRow.classList.toggle('visible', value === 'phone');
+              if (value !== 'phone') {
+                phoneError.classList.remove('visible');
+                phoneInput.classList.remove('error');
+              }
             }
           }
           updateNextState();
@@ -3062,12 +3086,13 @@
         var BOT_TOKEN = '8927558338:AAHY5lffE_r4RCETHTh5HDw_gV1BDzTomLU';
         var CHAT_ID   = '412994639';
         if (!BOT_TOKEN || !CHAT_ID) { cb(false); return; }
+        function fmt(v) { return Array.isArray(v) ? v.join(', ') : (v || '—'); }
         var text = '📋 *Новая заявка ТОНУС*\n\n'
-          + '❓ Беспокоит: ' + (data[1] || '—') + '\n'
-          + '⏱ Как давно: ' + (data[2] || '—') + '\n'
-          + '🔍 Обращались: ' + (data[3] || '—') + '\n'
-          + '⚡ Мешает: ' + (data[4] || '—') + '\n'
-          + '📞 Связь: ' + (data[5] || '—')
+          + '❓ Беспокоит: ' + fmt(data[1]) + '\n'
+          + '⏱ Как давно: ' + fmt(data[2]) + '\n'
+          + '🔍 Обращались: ' + fmt(data[3]) + '\n'
+          + '⚡ Мешает: ' + fmt(data[4]) + '\n'
+          + '📞 Связь: ' + fmt(data[5])
           + (data.phone ? ' → ' + data.phone : '');
         fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
           method: 'POST',
