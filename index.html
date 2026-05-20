@@ -2803,7 +2803,7 @@
           </div>
           <div class="wizard-phone-row" id="phoneRow">
             <input type="tel" class="wizard-phone-input" id="phoneInput" placeholder="+7 (___) ___-__-__" autocomplete="tel" />
-            <div class="wizard-error" id="phoneError">Пожалуйста, укажите номер телефона</div>
+            <div class="wizard-error" id="phoneError">Пожалуйста, укажите контакт для связи</div>
           </div>
         </div>
 
@@ -3006,8 +3006,8 @@
         var hasAnswer = MULTI[currentStep]
           ? (Array.isArray(ans) && ans.length > 0)
           : !!ans;
-        if (currentStep === 5 && answers[5] === 'phone') {
-          hasAnswer = hasAnswer && phoneInput.value.trim().length >= 5;
+        if (currentStep === 5 && answers[5]) {
+          hasAnswer = hasAnswer && phoneInput.value.trim().length >= 2;
         }
         nextBtn.disabled = !hasAnswer;
       }
@@ -3035,11 +3035,13 @@
             });
             btn.classList.add('selected');
             if (step === 5) {
-              phoneRow.classList.toggle('visible', value === 'phone');
-              if (value !== 'phone') {
-                phoneError.classList.remove('visible');
-                phoneInput.classList.remove('error');
-              }
+              var ph = { phone: '+7 (___) ___-__-__', wa: 'Ваш номер в WhatsApp', tg: '@username в Telegram' };
+              phoneInput.placeholder = ph[value] || '';
+              phoneInput.type = value === 'tg' ? 'text' : 'tel';
+              phoneInput.value = '';
+              phoneError.classList.remove('visible');
+              phoneInput.classList.remove('error');
+              phoneRow.classList.add('visible');
             }
           }
           updateNextState();
@@ -3062,14 +3064,14 @@
       });
 
       function submitWizard() {
-        if (answers[5] === 'phone') {
-          var phone = phoneInput.value.trim();
-          if (phone.length < 5) {
+        if (answers[5]) {
+          var contact = phoneInput.value.trim();
+          if (contact.length < 2) {
             phoneError.classList.add('visible');
             phoneInput.classList.add('error');
             return;
           }
-          answers.phone = phone;
+          answers.phone = contact;
         }
         sendToTelegram(answers, function (ok) {
           formArea.style.display = 'none';
@@ -3092,7 +3094,7 @@
           + '⏱ Как давно: ' + fmt(data[2]) + '\n'
           + '🔍 Обращались: ' + fmt(data[3]) + '\n'
           + '⚡ Мешает: ' + fmt(data[4]) + '\n'
-          + '📞 Связь: ' + fmt(data[5])
+          + '📞 Связь: ' + ({ phone: 'Звонок', wa: 'WhatsApp', tg: 'Telegram' }[data[5]] || fmt(data[5]))
           + (data.phone ? ' → ' + data.phone : '');
         fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
           method: 'POST',
@@ -3107,6 +3109,8 @@
         document.querySelectorAll('.wizard-option').forEach(function (b) { b.classList.remove('selected'); });
         phoneRow.classList.remove('visible');
         phoneInput.value = '';
+        phoneInput.type = 'tel';
+        phoneInput.placeholder = '+7 (___) ___-__-__';
         phoneError.classList.remove('visible');
         phoneInput.classList.remove('error');
         formArea.style.display = '';
