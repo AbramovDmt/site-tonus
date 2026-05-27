@@ -2595,7 +2595,7 @@
           </button>
           <div class="faq-a">
             <p>Слово «биодинамика» происходит от греческих «bios» (жизнь) и «dinos» (сила) — буквально наука о жизненных силах.</p>
-            <p style="margin-top:12px">Биодинамика — особый подход к оздоровлению, берущий начало в Остеопрактики. Ключевое отличие: в Остеопрактики воздействие идёт снаружи внутрь, в биодинамике — <em>изнутри наружу</em>, через жидкости организма.</p>
+            <p style="margin-top:12px">Биодинамика — особый подход к оздоровлению, берущий начало в Остеопатии. Ключевое отличие: в Остеопатии воздействие идёт снаружи внутрь, в биодинамике — <em>изнутри наружу</em>, через жидкости организма.</p>
             <p style="margin-top:12px">Благодаря влиянию на жидкости восстанавливается ритмика движений на микро- и макроуровнях, снимаются ограничения подвижности, нормализуется работа внутренних органов. Биодинамика работает на самых глубоких ритмах тела — там, где встречаются психика, энергия и тело.</p>
           </div>
         </div>
@@ -3187,7 +3187,7 @@
               phoneError.classList.remove('visible');
               phoneInput.classList.remove('error');
               phoneRow.classList.add('visible');
-              if (value !== 'tg') { setTimeout(function(){ phoneInput.setSelectionRange(4,4); phoneInput.focus(); }, 0); }
+              if (value !== 'tg') { setTimeout(function(){ try { phoneInput.setSelectionRange(4,4); } catch (e) {} phoneInput.focus(); }, 0); }
             }
           }
           updateNextState();
@@ -3206,7 +3206,7 @@
           }
           phoneInput.value = result;
           var cur = result.indexOf('_');
-          phoneInput.setSelectionRange(cur !== -1 ? cur : result.length, cur !== -1 ? cur : result.length);
+          try { phoneInput.setSelectionRange(cur !== -1 ? cur : result.length, cur !== -1 ? cur : result.length); } catch (e) {}
         }
         updateNextState();
       });
@@ -3250,7 +3250,7 @@
         var CHAT_ID   = '5913878014';
         if (!BOT_TOKEN || !CHAT_ID) { cb(false); return; }
         function fmt(v) { return Array.isArray(v) ? v.join(', ') : (v || '—'); }
-        var text = '📋 *Новая заявка ТОНУС*\n\n'
+        var text = '📋 <b>Новая заявка ТОНУС</b>\n\n'
           + '❓ Беспокоит: ' + fmt(data[1]) + '\n'
           + '⏱ Как давно: ' + fmt(data[2]) + '\n'
           + '🔍 Обращались: ' + fmt(data[3]) + '\n'
@@ -3260,7 +3260,7 @@
         fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' })
+          body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'HTML' })
         }).then(function () { cb(true); }).catch(function () { cb(false); });
       }
 
