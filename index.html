@@ -887,7 +887,7 @@
     .diplomas-track {
       display: flex;
       gap: var(--space-4);
-      padding-bottom: 2px;
+      padding: 6px 4px 40px;
     }
     .diploma-tile {
       flex: 0 0 auto;  /* ширина задаётся через JS */
@@ -3056,8 +3056,10 @@
       function setTileWidths() {
         var cols = window.innerWidth <= 480 ? 2 : 3;
         var w = Math.floor((wrap.clientWidth - GAP * (cols - 1)) / cols);
+        var h = Math.round(w * 4 / 3);
         Array.prototype.forEach.call(track.querySelectorAll('.diploma-tile'), function (t) {
           t.style.flexBasis = w + 'px';
+          t.style.height = h + 'px';
         });
       }
 
