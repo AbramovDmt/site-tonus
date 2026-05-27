@@ -133,9 +133,9 @@
 - [x] Сертификаты (8 штук)
 - [x] Цитата специалиста (для blockquote)
 - [x] Отзывы: Надежда, Олег, Александр (реальные с Авито)
-- [ ] Минимум 1 мини-кейс (ситуация → что делали → результат)
-- [x] Фото оборудования: правúло (`eq-pravilo.jpg`), тракционный стол (`eq-traction.jpg`)
-- [ ] Фото лимфодренажного аппарата
+- [x] 3 мини-кейса (ребёнок 8 мес., протрузия L4–L5, мигрень)
+- [x] Фото оборудования: правúло (`eq-pravilo.jpg`), тракционный стол (`eq-traction.jpg`), лимфодренаж (`eq-lymph.jpg`)
+- [ ] Ссылки Telegram/Instagram Маши (для соцсетей в шапке/футере)
 - [x] Ответ на вопрос «что если не поможет?» (в FAQ)
 - [x] Противопоказания (в FAQ)
 - [x] Telegram Bot Token + Chat ID
@@ -183,8 +183,13 @@
 - **Форма Марии (blob):** `@keyframes blobFloat` — 3D тилт (rotateY ±8°, rotateX ±5°) + морф border-radius, 11 сек
 - **Сертификаты:** без рамок/лупы; hover: плавный подъём, глубокая тень с голубым свечением, `::before` shimmer-оверлей; стрелки карусели — абсолютно позиционированы по бокам (стекло + blur)
 - **Галерея coverflow:** центр scale(1.12), бока уменьшаются до scale(0.50), зацикленная
-- **Звёзды отзывов:** `@keyframes star-shimmer` волна слева направо, стаггер 0.18 с
+- **Звёзды отзывов:** `@keyframes star-sweep` — скользящий блик через `::after` pseudo-element (заменил per-star shimmer)
 - **Кнопка Авито:** `@keyframes avito-pulse` — расходящийся ореол на границе, +scale при hover
+- **Прогресс-бар скролла:** `#scrollProgress` — фиксированная полоска 5px сверху страницы, градиент primary→secondary
+- **Hero grid (мобиле):** 3-строчный порядок — бейдж+заголовок → фото → остальной текст; десктоп — фото span 2 строки
+- **Кейсы — цвет меток:** «Ситуация» красный, «Что делали» синий, «Результат» бирюзовый
+- **Сертификаты:** белая рамка 5px + тень снизу (без inset border); hover — translateY(-8px) + синее свечение
+- **Слайдер отзывов:** `touch-action: pan-y` для корректного свайпа на мобиле
 - Все анимации уважают `prefers-reduced-motion`
 
 ---
@@ -197,6 +202,6 @@
 - **Gallery coverflow:** абсолютное позиционирование (`left:50%; top:50%`), transform = `translate(-50%,-50%) translateX(cx) perspective(900px) scale(sc) rotateY(ry)`, z-index для peek
 - **certLightbox fix:** элемент находится после `</script>` → `getElementById` возвращал null → краш всего скрипта; исправлено null-guard `if (_clb)`
 - SVG-путь телефона (`phone` Feather Icons): правильный путь с `stroke-linecap="round" stroke-linejoin="round"`
-- Фото `img/specialist.jpg` — 6.5 МБ, перед публикацией сжать до ~150 КБ WebP
+- Фото `img/specialist.jpg` — 100 КБ (Masha_main2.jpg), размер в норме
 - Репозиторий: [github.com/AbramovDmt/site-tonus](https://github.com/AbramovDmt/site-tonus)
 - Превью: [htmlpreview.github.io/?https://raw.githubusercontent.com/AbramovDmt/site-tonus/main/index.html](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AbramovDmt/site-tonus/main/index.html)

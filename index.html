@@ -428,16 +428,29 @@
       z-index: 1;
       display: grid;
       grid-template-columns: 1fr 420px;
-      gap: var(--space-16);
-      align-items: center;
+      grid-template-rows: auto auto;
+      column-gap: var(--space-16);
+      row-gap: var(--space-6);
+      align-items: start;
       width: 100%;
       min-width: 0;
       padding-top: var(--space-16);
       padding-bottom: var(--space-12);
     }
 
-    /* Левая колонка */
-    .hero-content { display: flex; flex-direction: column; gap: var(--space-6); }
+    /* Левая колонка — верх (бейдж + заголовок) */
+    .hero-content-top {
+      grid-column: 1; grid-row: 1;
+      display: flex; flex-direction: column; gap: var(--space-4);
+    }
+    /* Левая колонка — низ (подзаголовок, CTA, доверие) */
+    .hero-content-body {
+      grid-column: 1; grid-row: 2;
+      display: flex; flex-direction: column; gap: var(--space-6);
+    }
+    .hero-content-body > .hero-load:nth-child(1) { animation-delay: .45s; }
+    .hero-content-body > .hero-load:nth-child(2) { animation-delay: .60s; }
+    .hero-content-body > .hero-load:nth-child(3) { animation-delay: .75s; }
 
     .hero-badge {
       display: inline-flex;
@@ -509,6 +522,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
     }
 
     /* Кольцо за блобом */
@@ -836,6 +852,12 @@
       letter-spacing: .04em;
       text-transform: uppercase;
     }
+    .stat-note {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      line-height: 1.35;
+      opacity: .75;
+    }
 
     .diplomas-label {
       font-size: var(--text-sm);
@@ -883,13 +905,16 @@
       transition: border-color var(--transition), background var(--transition), color var(--transition);
     }
     .diploma-tile.has-photo {
-      position: relative; border: none !important; overflow: hidden;
-      cursor: zoom-in; border-radius: 14px;
+      position: relative;
+      border: 5px solid #fff !important;
+      overflow: hidden;
+      cursor: zoom-in;
+      border-radius: 12px;
       box-shadow:
-        inset 0 0 0 1px rgba(43,127,191,.40),
-        0 2px 4px rgba(0,0,0,.12),
-        0 10px 28px rgba(0,0,0,.22),
-        0 22px 44px rgba(26,43,60,.14);
+        0 0 0 1px rgba(43,127,191,.18),
+        0 3px 8px rgba(0,0,0,.14),
+        0 14px 36px rgba(0,0,0,.20),
+        0 28px 56px rgba(26,43,60,.12);
       transition: transform .42s cubic-bezier(.22,.68,0,1.2), box-shadow .42s ease;
     }
     .diploma-tile.has-photo img {
@@ -915,7 +940,7 @@
     .diploma-tile.has-photo:hover {
       transform: translateY(-8px) scale(1.03);
       box-shadow:
-        inset 0 0 0 1px rgba(43,127,191,.65),
+        0 0 0 1.5px rgba(43,127,191,.55),
         0 4px 8px rgba(0,0,0,.10),
         0 20px 56px rgba(43,127,191,.25),
         0 36px 72px rgba(43,127,191,.10);
@@ -1080,6 +1105,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-8);
+      margin-top: var(--space-12);
     }
 
     .eq-card {
@@ -1228,6 +1254,9 @@
     .case-step-icon.result svg  { stroke: var(--color-secondary); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     .case-step-body { flex: 1; }
     .case-step-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-muted); margin-bottom: 3px; }
+    .case-step:has(.case-step-icon.problem) .case-step-label { color: #e05252; }
+    .case-step:has(.case-step-icon.action)  .case-step-label { color: var(--color-primary); }
+    .case-step:has(.case-step-icon.result)  .case-step-label { color: var(--color-secondary); }
     .case-step-text { font-size: var(--text-sm); color: var(--color-text); line-height: 1.55; margin: 0; }
     .case-divider { width: 1px; height: 10px; background: var(--color-border); margin-left: 14px; }
     .case-ph-note {
@@ -1243,6 +1272,7 @@
       border-radius: var(--radius-lg);
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
+      touch-action: pan-y;
     }
     .reviews-track {
       display: flex;
@@ -1258,14 +1288,29 @@
       border: 1px solid var(--color-border);
       box-sizing: border-box;
     }
-    .review-stars { display: flex; gap: 3px; margin-bottom: var(--space-4); }
+    .review-stars {
+      display: flex; gap: 3px; margin-bottom: var(--space-4);
+      position: relative; overflow: hidden;
+      width: fit-content;
+    }
     .review-stars svg { width: 18px; height: 18px; fill: #f59e0b; }
-    @keyframes star-shimmer { 0%,55%,100% { fill: #f59e0b; filter: none; } 75% { fill: #fef08a; filter: drop-shadow(0 0 5px rgba(245,158,11,.75)); } }
-    .review-stars svg:nth-child(1) { animation: star-shimmer 3s ease-in-out infinite 0s; }
-    .review-stars svg:nth-child(2) { animation: star-shimmer 3s ease-in-out infinite .18s; }
-    .review-stars svg:nth-child(3) { animation: star-shimmer 3s ease-in-out infinite .36s; }
-    .review-stars svg:nth-child(4) { animation: star-shimmer 3s ease-in-out infinite .54s; }
-    .review-stars svg:nth-child(5) { animation: star-shimmer 3s ease-in-out infinite .72s; }
+    @keyframes star-sweep {
+      0%    { transform: translateX(-100%); }
+      50%   { transform: translateX(200%); }
+      100%  { transform: translateX(200%); }
+    }
+    .review-stars::after {
+      content: '';
+      position: absolute;
+      top: -3px; left: 0;
+      width: 50%; height: calc(100% + 6px);
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255,255,220,.85) 50%,
+        transparent 100%);
+      animation: star-sweep 4s ease-in-out infinite;
+      pointer-events: none;
+    }
     .review-text {
       font-size: var(--text-base);
       color: var(--color-text);
@@ -1395,10 +1440,13 @@
        МОБИЛЬНЫЙ
     ───────────────────────────────────────── */
     @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; row-gap: var(--space-6); }
 
-      /* Фото — показываем меньшим размером под текстом */
-      .hero-visual { justify-content: center; }
+      /* Явный порядок строк: заголовок → фото → текст */
+      .hero-content-top { grid-column: 1; grid-row: 1; }
+      .hero-visual { grid-column: 1; grid-row: 2; align-self: center; justify-content: center; }
+      .hero-content-body { grid-column: 1; grid-row: 3; }
+
       .hero-frame-outer { width: 300px; height: 360px; transform: none; }
       .hero-ring, .hero-float-badge { display: none; }
     }
@@ -1442,7 +1490,7 @@
 
       /* Hero отступы */
       .hero-grid { padding-top: var(--space-8); padding-bottom: var(--space-6); }
-      .hero-content { gap: var(--space-4); }
+      .hero-content-top, .hero-content-body { gap: var(--space-4); }
       .hero-frame-outer { width: 220px; height: 265px; }
 
       /* Кнопка CTA — полная ширина, текст переносится */
@@ -1468,7 +1516,7 @@
       .hero-badge-dot,
       .hero-frame-outer::before,
       .hero-deco,
-      .review-stars svg,
+      .review-stars::after,
       .avito-badge,
       .hero-cta .btn-primary,
       .cta-main-btn { animation: none !important; }
@@ -1625,6 +1673,14 @@
     .wizard-form-area { transition: opacity .2s; }
     .wizard-privacy { font-size: 11px; color: var(--color-text-muted); text-align: center; margin-top: 12px; }
     .wizard-privacy a { color: var(--color-primary); }
+
+    /* ── Privacy modal ── */
+    .privacy-body h3 { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--color-text); margin: 18px 0 6px; }
+    .privacy-body h3:first-child { margin-top: 0; }
+    .privacy-body p { font-size: 0.875rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 8px; }
+    .privacy-body ul { font-size: 0.875rem; line-height: 1.65; color: var(--color-text-muted); padding-left: 18px; margin: 4px 0 8px; }
+    .privacy-body li { margin-bottom: 3px; }
+    .privacy-body a { color: var(--color-primary); }
 
     @media (max-width: 560px) {
       .modal-card { padding: 28px 20px 24px; }
@@ -1807,9 +1863,20 @@
       .hero-frame-outer { animation: none !important; transform: perspective(1200px) rotateY(-4deg) rotateX(2deg); }
       .specialist-blob  { animation: none !important; }
     }
+
+    #scrollProgress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 5px;
+      background: linear-gradient(90deg, #2B7FBF, #4EADA0);
+      z-index: 9999;
+      pointer-events: none;
+    }
 </style>
 </head>
 <body>
+<div id="scrollProgress" aria-hidden="true"></div>
 
   <!-- ═══════════════════ HEADER ═══════════════════ -->
   <header class="site-header" id="site-header">
@@ -1862,8 +1929,8 @@
 
     <div class="container hero-grid">
 
-      <!-- Левая колонка — текст -->
-      <div class="hero-content">
+      <!-- Верхняя часть текста: бейдж + заголовок -->
+      <div class="hero-content-top">
 
         <div class="hero-load">
           <div class="hero-badge">
@@ -1876,6 +1943,32 @@
           <span class="hero-title-line1">Верните легкость движений</span>
           <span class="hero-title-line2">и здоровье телу</span>
         </h1>
+
+      </div>
+
+      <!-- Визуал (на мобиле — сразу после заголовка) -->
+      <div class="hero-visual hero-visual-load" aria-hidden="true">
+
+        <div class="hero-ring"></div>
+        <div class="hero-ring hero-ring-2"></div>
+
+        <div class="hero-frame-outer">
+          <div class="hero-frame-inner">
+            <img
+              src="img/hero.avif"
+              alt="Мария Федина — специалист по реабилитации и восстановлению, студия ТОНУС"
+              width="440"
+              height="560"
+              loading="eager"
+              fetchpriority="high"
+            >
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Нижняя часть текста: подзаголовок, CTA, доверие -->
+      <div class="hero-content-body">
 
         <p class="hero-subtitle hero-load">
           Не просто снимаем напряжение, а помогаем организму восстановить естественную работу и внутренний баланс
@@ -1910,30 +2003,11 @@
           <span class="hero-trust-sep" aria-hidden="true">·</span>
           <span>23 года в медицине</span>
           <span class="hero-trust-sep" aria-hidden="true">·</span>
+          <span>19 лет на скорой помощи</span>
+          <span class="hero-trust-sep" aria-hidden="true">·</span>
           <span>6 лет Остеопрактики</span>
           <span class="hero-trust-sep" aria-hidden="true">·</span>
           <span>500+ клиентов</span>
-        </div>
-
-      </div>
-
-      <!-- Правая колонка — визуал -->
-      <div class="hero-visual hero-visual-load" aria-hidden="true">
-
-        <div class="hero-ring"></div>
-        <div class="hero-ring hero-ring-2"></div>
-
-        <div class="hero-frame-outer">
-          <div class="hero-frame-inner">
-            <img
-              src="img/hero.avif"
-              alt="Мария Федина — специалист по реабилитации и восстановлению, студия ТОНУС"
-              width="440"
-              height="560"
-              loading="eager"
-              fetchpriority="high"
-            >
-          </div>
         </div>
 
       </div>
@@ -2001,6 +2075,10 @@
             <div class="stat-item">
               <span class="stat-value">23&nbsp;года</span>
               <span class="stat-label">медицинского стажа</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">19&nbsp;лет</span>
+              <span class="stat-label">скорая и неотложная помощь</span>
             </div>
             <div class="stat-item">
               <span class="stat-value">6&nbsp;лет</span>
@@ -2114,13 +2192,13 @@
         <div class="timeline-step reveal">
           <div class="timeline-num">2</div>
           <h4>Запись</h4>
-          <p>Выбираете удобное время, подтверждаете в мессенджере</p>
+          <p>Согласовываете и подтверждаете дату и время визита в мессенджере</p>
         </div>
 
         <div class="timeline-step reveal">
           <div class="timeline-num">3</div>
           <h4>Первый сеанс</h4>
-          <p>Анализ состояния и первая работа с телом — 60–90 минут</p>
+          <p>Анализ состояния и первая работа с телом — 40–90 минут</p>
         </div>
 
         <div class="timeline-step reveal">
@@ -2138,7 +2216,6 @@
     <div class="container">
 
       <h2 class="section-title reveal">Специальное оборудование</h2>
-      <p class="section-sub reveal">Профессиональные аппараты</p>
 
       <div class="equipment-grid stagger-parent">
 
@@ -2148,9 +2225,9 @@
             <img src="img/eq-pravilo.jpg" alt="Тренажёр Правúло" loading="lazy">
           </div>
           <div class="eq-body">
-            <span class="eq-tag">Позвоночник и спина</span>
+            <span class="eq-tag">Мышцы, связки, суставы</span>
             <p class="eq-title">Правúло</p>
-            <p class="eq-desc">Мягко вытягивает и выравнивает позвоночник — снимает нагрузку с дисков и зажатых нервов. Ощущение лёгкости чувствуется уже во время процедуры.</p>
+            <p class="eq-desc">Устройство для глубокой статической и динамической растяжки тела. Прорабатывает труднодоступные группы мышц, укрепляет мышечно-связочный аппарат, связки, суставы и сухожилия. Нормализует кровообращение и лимфоток.</p>
           </div>
         </div>
 
@@ -2172,15 +2249,14 @@
             <img src="img/eq-traction.jpg" alt="Тракционный стол" loading="lazy">
           </div>
           <div class="eq-body">
-            <span class="eq-tag">Позвоночник и суставы</span>
-            <p class="eq-title">Тракционный стол</p>
-            <p class="eq-desc">Безопасно снимает компрессию позвонков — облегчение ощущается уже во время процедуры. Особенно эффективен при грыжах и протрузиях.</p>
+            <span class="eq-tag">Вытяжение позвоночника</span>
+            <p class="eq-title">Традиционный стол</p>
+            <p class="eq-desc">Дозированно вытягивает позвоночник. Проводит вибрационно-тепловой роликовый массаж. Предназначен для профилактики дегенеративно-дистрофических изменений позвоночника. Особенно эффективен при грыжах, протрузиях, сколеозах.</p>
           </div>
         </div>
 
       </div>
 
-      <p class="equipment-note reveal">Такое оборудование есть не в каждой студии</p>
 
     </div>
   </section>
@@ -2195,7 +2271,7 @@
       <!-- Mini-cases: 3 glassmorphism cards -->
       <div class="cases-grid stagger-parent">
 
-        <!-- Case 1 — placeholder -->
+        <!-- Case 1 -->
         <div class="case-card reveal">
           <div class="case-step">
             <div class="case-step-icon problem">
@@ -2203,7 +2279,7 @@
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Ситуация</div>
-              <p class="case-step-text">[Описание — что беспокоило клиента]</p>
+              <p class="case-step-text">Ребёнок 8 месяцев: не переворачивается, не ползает, не присаживается, малоактивен.</p>
             </div>
           </div>
           <div class="case-divider"></div>
@@ -2213,23 +2289,22 @@
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Что делали</div>
-              <p class="case-step-text">[Методика, количество сеансов]</p>
+              <p class="case-step-text">Остеопрактические техники. 3 сеанса с интервалом 1 месяц.</p>
             </div>
           </div>
           <div class="case-divider"></div>
           <div class="case-step">
             <div class="case-step-icon result">
-              <svg viewBox="0 0 14 14"><path d="M2 7.5l3.5 3.5 6.5-7"/></svg>
+              <svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Результат</div>
-              <p class="case-step-text">[Что изменилось после работы]</p>
+              <p class="case-step-text">После 1-го сеанса — стал активным, начал переворачиваться. После 2-го — ползает, самостоятельно сидит, стал более контактным. 3-й сеанс закрепляющий.</p>
             </div>
           </div>
-          <p class="case-ph-note">Заменить реальным кейсом от клиента</p>
         </div>
 
-        <!-- Case 2 — placeholder -->
+        <!-- Case 2 -->
         <div class="case-card reveal">
           <div class="case-step">
             <div class="case-step-icon problem">
@@ -2237,7 +2312,7 @@
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Ситуация</div>
-              <p class="case-step-text">[Описание — что беспокоило клиента]</p>
+              <p class="case-step-text">Мужчина, 38 лет. Протрузия L4–L5, боль отдаёт в левую ногу, онемение. Беспокоит 3 месяца.</p>
             </div>
           </div>
           <div class="case-divider"></div>
@@ -2247,23 +2322,22 @@
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Что делали</div>
-              <p class="case-step-text">[Методика, количество сеансов]</p>
+              <p class="case-step-text">Остеопрактика: коррекция оси тела, таза, выравнивание длины ног. Вытяжение позвоночника на тракционном столе. Работа на тренажёре Правило. 4 сеанса за 2 недели.</p>
             </div>
           </div>
           <div class="case-divider"></div>
           <div class="case-step">
             <div class="case-step-icon result">
-              <svg viewBox="0 0 14 14"><path d="M2 7.5l3.5 3.5 6.5-7"/></svg>
+              <svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Результат</div>
-              <p class="case-step-text">[Что изменилось после работы]</p>
+              <p class="case-step-text">Ось тела выровнена, боли и онемение купированы.</p>
             </div>
           </div>
-          <p class="case-ph-note">Заменить реальным кейсом от клиента</p>
         </div>
 
-        <!-- Case 3 — placeholder -->
+        <!-- Case 3 -->
         <div class="case-card reveal">
           <div class="case-step">
             <div class="case-step-icon problem">
@@ -2271,7 +2345,7 @@
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Ситуация</div>
-              <p class="case-step-text">[Описание — что беспокоило клиента]</p>
+              <p class="case-step-text">Женщина, 32 года. Частые головные боли по типу мигрени на протяжении нескольких лет.</p>
             </div>
           </div>
           <div class="case-divider"></div>
@@ -2281,20 +2355,19 @@
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Что делали</div>
-              <p class="case-step-text">[Методика, количество сеансов]</p>
+              <p class="case-step-text">Остеопрактика: коррекция верхнечелюстного сустава. Биодинамические техники для гармонизации психоэмоционального фона. 3 сеанса за 2 недели.</p>
             </div>
           </div>
           <div class="case-divider"></div>
           <div class="case-step">
             <div class="case-step-icon result">
-              <svg viewBox="0 0 14 14"><path d="M2 7.5l3.5 3.5 6.5-7"/></svg>
+              <svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div class="case-step-body">
               <div class="case-step-label">Результат</div>
-              <p class="case-step-text">[Что изменилось после работы]</p>
+              <p class="case-step-text">Головные боли купированы, психоэмоциональный фон выравнен.</p>
             </div>
           </div>
-          <p class="case-ph-note">Заменить реальным кейсом от клиента</p>
         </div>
 
       </div><!-- /cases-grid -->
@@ -2432,7 +2505,7 @@
             <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a">
-            <p>Зависит от ситуации. Острая боль в спине — как правило 3–5 сеансов. Реабилитация после операции или длительные хронические нарушения — больше. После первого визита будет конкретный план: что делаем, сколько раз, с каким ожидаемым результатом.</p>
+            <p>Зависит от ситуации. Острая боль в спине — как правило <strong>3–5 сеансов</strong>. Реабилитация после операции или длительные хронические нарушения — больше. После первого визита будет конкретный план: что делаем, сколько раз, с каким ожидаемым результатом.</p>
           </div>
         </div>
 
@@ -2442,7 +2515,7 @@
             <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a">
-            <p>Минимальное время разового посещения на одного клиента — 40 минут, максимальное — 90 минут. Всё индивидуально и зависит от характера и комплекса занятий.</p>
+            <p>Минимальное время разового посещения на одного клиента — <strong>40 минут</strong>, максимальное — <strong>90 минут</strong>. Всё индивидуально и зависит от характера и комплекса занятий.</p>
           </div>
         </div>
 
@@ -2462,8 +2535,8 @@
             <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a">
-            <p>Остеопрактик и массажист — это специалисты, которые работают с телом клиента, но их подходы, методы и цели различаются.</p>
-            <p style="margin-top:12px">Остеопрактик использует целостный (холистический) подход. Он рассматривает тело как единую систему, где нарушение в одном месте может влиять на другие участки. Остеопрактик проводит диагностику всего организма, а не только той области, где проявляется боль или дискомфорт. Его цель — выявить первопричину проблемы и устранить её, а не просто снять симптомы.</p>
+            <p>Остеопракт и массажист — специалисты, работающие с телом клиента, но их подходы, методы и цели различаются.</p>
+            <p style="margin-top:12px">Остеопракт использует <strong>целостный (холистический) подход</strong>: рассматривает тело как единую систему, где нарушение в одном месте влияет на другие участки. Цель — выявить <strong>первопричину проблемы</strong> и устранить её, а не просто снять симптомы.</p>
           </div>
         </div>
 
@@ -2483,7 +2556,7 @@
             <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a">
-            <p>Противопоказаний немного: острые респираторно-вирусные заболевания, стадии обострения, онкология и психические расстройства. В остальных случаях работаем без ограничений.</p>
+            <p>Противопоказаний немного: острые респираторно-вирусные заболевания в стадии обострения, онкология и психические расстройства. В остальных случаях работаем без ограничений.</p>
           </div>
         </div>
 
@@ -2537,7 +2610,7 @@
 
       <div class="cta-badges reveal">
         <span class="cta-badge">5 вопросов · 1–2 минуты</span>
-        <span class="cta-badge">Перезвоним в удобное время</span>
+        <span class="cta-badge">Перезвоним в ближайшее время</span>
         <span class="cta-badge">Без обязательств</span>
       </div>
 
@@ -2677,7 +2750,7 @@
       </div>
       <div class="footer-bottom">
         <span class="footer-copy">© 2025 Студия ТОНУС. Все права защищены.</span>
-        <a href="#" class="footer-privacy">Политика обработки персональных данных</a>
+        <a href="#" class="footer-privacy privacy-link">Политика обработки персональных данных</a>
       </div>
     </div>
   </footer>
@@ -2817,7 +2890,7 @@
           <button class="wizard-back" id="wizardBack" style="display:none">← Назад</button>
           <button class="wizard-next" id="wizardNext" disabled>Далее →</button>
         </div>
-        <p class="wizard-privacy">Нажимая «Отправить», вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
+        <p class="wizard-privacy">Нажимая «Отправить», вы соглашаетесь с <a href="#" class="privacy-link">политикой обработки персональных данных</a></p>
       </div>
 
       <div class="wizard-success" id="wizardSuccess">
@@ -2825,6 +2898,61 @@
         <div class="wizard-success-title">Ваши ответы получены</div>
         <p class="wizard-success-text" id="wizardSuccessText">Мы свяжемся с вами в ближайшее время.</p>
         <button class="cta-main-btn" style="margin-top:24px;width:100%;font-size:1rem" onclick="closeWizard()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ PRIVACY MODAL ══════════════════════ -->
+  <div class="modal-overlay" id="privacyOverlay" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+    <div class="modal-card" style="max-width:600px">
+      <button class="modal-close" id="privacyClose" aria-label="Закрыть">✕</button>
+      <h2 id="privacyTitle" style="font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:20px;color:var(--color-text)">Политика обработки персональных данных</h2>
+      <div class="privacy-body">
+        <p>Настоящая Политика определяет порядок обработки персональных данных в студии ТОНУС (далее — Оператор) в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+
+        <h3>1. Оператор</h3>
+        <p>Студия оздоровления ТОНУС, г. Москва.<br>
+        Контакт: <a href="tel:+79164940333">+7 916 494 03 33</a></p>
+
+        <h3>2. Состав персональных данных</h3>
+        <ul>
+          <li>Имя и фамилия</li>
+          <li>Номер телефона</li>
+          <li>Аккаунт в мессенджере (Telegram / WhatsApp)</li>
+          <li>Запрос (область беспокойства, цель обращения)</li>
+        </ul>
+
+        <h3>3. Цели обработки</h3>
+        <ul>
+          <li>Запись на сеанс и связь с вами удобным способом</li>
+          <li>Формирование индивидуальной программы занятий</li>
+          <li>Информирование об акциях и новостях студии</li>
+        </ul>
+
+        <h3>4. Правовые основания</h3>
+        <p>Данные обрабатываются на основании вашего согласия (ст. 9 ФЗ-152), которое вы даёте при заполнении формы на сайте, а также в целях исполнения договора об оказании услуг (п. 5 ч. 1 ст. 6 ФЗ-152).</p>
+
+        <h3>5. Порядок обработки и хранения</h3>
+        <p>Оператор не передаёт персональные данные третьим лицам, за исключением случаев, прямо предусмотренных законодательством РФ. Данные хранятся до отзыва согласия или прекращения оказания услуг, после чего уничтожаются в течение 30 дней. Передача данных осуществляется по защищённым каналам связи.</p>
+
+        <h3>6. Права субъекта персональных данных</h3>
+        <p>Вы вправе:</p>
+        <ul>
+          <li>получить сведения об обработке ваших данных</li>
+          <li>потребовать исправления неточных или неполных данных</li>
+          <li>отозвать согласие на обработку в любой момент</li>
+          <li>потребовать прекращения обработки или удаления данных</li>
+          <li>обжаловать действия Оператора в Роскомнадзоре</li>
+        </ul>
+        <p>Для реализации прав направьте запрос по телефону <a href="tel:+79164940333">+7 916 494 03 33</a>.</p>
+
+        <h3>7. Безопасность данных</h3>
+        <p>Оператор принимает организационные и технические меры для защиты персональных данных от несанкционированного доступа, утраты, изменения и раскрытия третьим лицам.</p>
+
+        <h3>8. Изменения политики</h3>
+        <p>Оператор вправе вносить изменения в настоящую Политику. Актуальная версия всегда доступна на сайте.</p>
+
+        <p style="margin-top:16px;font-size:0.75rem">Дата последнего обновления: май 2025</p>
       </div>
     </div>
   </div>
@@ -2849,7 +2977,9 @@
     // ── Плавный скролл к секциям через меню ──────────
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', e => {
-        const target = document.querySelector(link.getAttribute('href'));
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
         if (!target) return;
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2965,10 +3095,11 @@
       dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
 
       let startX = 0;
-      track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
-      track.addEventListener('touchend', function (e) {
+      const sliderWrap = document.getElementById('reviewsSlider') || track;
+      sliderWrap.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      sliderWrap.addEventListener('touchend', function (e) {
         const dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+        if (Math.abs(dx) > 30) goTo(dx < 0 ? current + 1 : current - 1);
       }, { passive: true });
 
       goTo(0);
@@ -3013,7 +3144,11 @@
           ? (Array.isArray(ans) && ans.length > 0)
           : !!ans;
         if (currentStep === 5 && answers[5]) {
-          hasAnswer = hasAnswer && phoneInput.value.trim().length >= 2;
+          if (phoneInput.type === 'tel') {
+            hasAnswer = hasAnswer && phoneInput.value.replace(/\D/g, '').length === 11;
+          } else {
+            hasAnswer = hasAnswer && phoneInput.value.trim().length >= 2;
+          }
         }
         nextBtn.disabled = !hasAnswer;
       }
@@ -3041,20 +3176,36 @@
             });
             btn.classList.add('selected');
             if (step === 5) {
-              var ph = { phone: '+7 (___) ___-__-__', wa: 'Ваш номер в WhatsApp', tg: '@username в Telegram' };
+              var ph = { phone: '', wa: '', tg: '@username в Telegram' };
               phoneInput.placeholder = ph[value] || '';
               phoneInput.type = value === 'tg' ? 'text' : 'tel';
-              phoneInput.value = '';
+              phoneInput.value = value === 'tg' ? '' : '+7 (___) ___-__-__';
               phoneError.classList.remove('visible');
               phoneInput.classList.remove('error');
               phoneRow.classList.add('visible');
+              if (value !== 'tg') { setTimeout(function(){ phoneInput.setSelectionRange(4,4); phoneInput.focus(); }, 0); }
             }
           }
           updateNextState();
         });
       });
 
-      phoneInput.addEventListener('input', updateNextState);
+      phoneInput.addEventListener('input', function () {
+        var isTg = phoneInput.type === 'text';
+        if (!isTg) {
+          var digits = phoneInput.value.replace(/^\+7/, '').replace(/\D/g, '').slice(0, 10);
+          var mask = '(___) ___-__-__';
+          var result = '+7 ';
+          var di = 0;
+          for (var i = 0; i < mask.length; i++) {
+            result += mask[i] === '_' ? (di < digits.length ? digits[di++] : '_') : mask[i];
+          }
+          phoneInput.value = result;
+          var cur = result.indexOf('_');
+          phoneInput.setSelectionRange(cur !== -1 ? cur : result.length, cur !== -1 ? cur : result.length);
+        }
+        updateNextState();
+      });
 
       nextBtn.addEventListener('click', function () {
         if (currentStep === TOTAL) {
@@ -3086,7 +3237,7 @@
           if (answers[5] === 'phone') contactText = 'Ждите звонка на ' + answers.phone + '.';
           else if (answers[5] === 'wa') contactText = 'Вы можете написать нам в <a href="https://wa.me/79164940333" style="color:var(--color-primary)">WhatsApp</a> прямо сейчас.';
           else if (answers[5] === 'tg') contactText = 'Вы можете написать нам в <a href="https://t.me/tonus03" style="color:var(--color-primary)">Telegram</a> прямо сейчас.';
-          document.getElementById('wizardSuccessText').innerHTML = 'Мы свяжемся с вами в течение нескольких минут. ' + contactText;
+          document.getElementById('wizardSuccessText').innerHTML = 'Свяжемся с вами в ближайшее время.';
         });
       }
 
@@ -3162,6 +3313,17 @@
       window.addEventListener('scroll', updateBar, { passive: true });
       window.addEventListener('resize', updateBar, { passive: true });
     }());
+
+  // ── Scroll progress bar ───────────────────────────
+  (function () {
+    const bar = document.getElementById('scrollProgress');
+    function updateProgress() {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (total > 0 ? scrolled / total * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+  }());
   
   // ── Certificate Lightbox ─────────────────────────
   function openCertLightbox(img) {
@@ -3279,6 +3441,22 @@
       render(true);
       window.addEventListener('resize', function () { computeLayout(); render(true); });
     }());
+
+    // ── Privacy modal ─────────────────────────────────
+    (function () {
+      var overlay  = document.getElementById('privacyOverlay');
+      var closeBtn = document.getElementById('privacyClose');
+      window.openPrivacy  = function () { overlay.classList.add('is-open');    document.body.style.overflow = 'hidden'; };
+      window.closePrivacy = function () { overlay.classList.remove('is-open'); document.body.style.overflow = ''; };
+      closeBtn.addEventListener('click', window.closePrivacy);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) window.closePrivacy(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) window.closePrivacy();
+      });
+    }());
+    document.querySelectorAll('.privacy-link').forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); window.openPrivacy(); });
+    });
 </script>
 
 
