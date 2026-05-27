@@ -124,7 +124,7 @@
 
 - [x] Специалист: Мария Федина
 - [x] Телефон: +7 (916) 494-03-33
-- [x] Telegram: @tonus03 / WhatsApp: wa.me/79164940333
+- [x] Telegram: @Tonus003 / WhatsApp: wa.me/79164940333
 - [x] Email: tonus-03@yandex.ru
 - [x] Часы работы: 8:00 — 18:00, Вс — выходной
 - [x] Ценовой якорь: ~4 000 руб. за сеанс
@@ -147,8 +147,10 @@
 ### ✅ Шаг 10 — Telegram + финал
 
 - `BOT_TOKEN` + `CHAT_ID` получены, бот `@tonus03_bot` подключён
+- `CHAT_ID` обновлён на `5913878014` (@Tonus003 — рабочий аккаунт Маши)
 - `.env` создан (gitignored), `.env.example` — в репозитории
 - `sendToTelegram` работает: заявки приходят в Telegram с полным ответами wizard
+- Все ссылки t.me на сайте обновлены на @Tonus003 (кроме футера)
 - `img/specialist.jpg` заменён на `Masha_main2.jpg` (37 КБ)
 - Остаётся: PageSpeed < 2.5s LCP, Schema.org JSON-LD, финальная проверка iPhone Safari / Android Chrome
 
