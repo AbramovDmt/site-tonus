@@ -4,7 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Студия реабилитации ТОНУС — Дмитров | Остеопрактика, спина, суставы</title>
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/logo.png">
   <meta name="description" content="Реабилитация позвоночника, суставов и опорно-двигательного аппарата в Дмитрове. Специалист по реабилитации и восстановлению. Работа — с первого сеанса.">
+
+  <meta property="og:title" content="Студия реабилитации ТОНУС — Дмитров">
+  <meta property="og:description" content="Реабилитация позвоночника, суставов и опорно-двигательного аппарата. Специалист по реабилитации и восстановлению. Работа — с первого сеанса.">
+  <meta property="og:image" content="https://tonus-studio.ru/img/gallery-7.jpg">
+  <meta property="og:url" content="https://tonus-studio.ru/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Студия ТОНУС">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="google-site-verification" content="jQ9g3LDf4kUhO1ORyth2__R8_1iJYhu2t0zhCZaCdHM" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Студия реабилитации ТОНУС",
+    "url": "https://tonus-studio.ru",
+    "telephone": "+79164940333",
+    "description": "Реабилитация позвоночника, суставов и опорно-двигательного аппарата в Дмитрове. Специалист по реабилитации и восстановлению.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ул. Архитектора В.В. Белоброва, 7",
+      "addressLocality": "Дмитров",
+      "addressRegion": "Московская область",
+      "addressCountry": "RU"
+    },
+    "openingHours": "Mo,Tu,We,Th,Fr,Sa 08:00-18:00",
+    "sameAs": [
+      "https://t.me/Tonus003"
+    ]
+  }
+  </script>
 
   <link rel="preload" as="image" href="img/hero.avif" type="image/avif" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1775,6 +1808,10 @@
     }
 
     /* ═══════════════════ STICKY MOBILE BAR ═════════════════════ */
+    .scroll-top { position: fixed; bottom: 24px; right: 20px; z-index: 900; width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(43,127,191,.35); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; }
+    .scroll-top:hover { transform: translateY(-3px); }
+    @media(max-width:600px){ .scroll-top { bottom: 80px; } }
     .sticky-bar {
       display: none;
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 1500;
@@ -1836,6 +1873,10 @@
       cursor: pointer; transition: background .15s;
     }
     .cert-lightbox-close:hover { background: rgba(255,255,255,.28); }
+    .cert-lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.18); border: none; color: #fff; font-size: 2rem; line-height: 1; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background .2s; }
+    .cert-lightbox-nav:hover { background: rgba(255,255,255,.32); }
+    .cert-lightbox-nav.prev { left: 16px; }
+    .cert-lightbox-nav.next { right: 16px; }
           /* === Coverflow Gallery === */
     .coverflow-wrap  { position: relative; overflow: hidden; height: 420px; max-width: 1100px; margin: 10px auto 40px; user-select: none; -webkit-user-select: none; cursor: grab; }
     .coverflow-wrap:active { cursor: grabbing; }
@@ -1973,7 +2014,7 @@
       <div class="hero-content-body">
 
         <p class="hero-subtitle hero-load">
-          Не просто снимаем напряжение, а помогаем организму восстановить естественную работу и внутренний баланс
+          Помогаем избавиться от боли в спине и восстановить здоровье всего тела с помощью остеопрактики и реабилитации.
         </p>
 
         <div class="hero-cta hero-load">
@@ -2127,7 +2168,7 @@
   <section class="section parallax-bg" id="approach">
     <div class="container">
 
-      <h2 class="section-title reveal">Наш подход</h2>
+      <h2 class="section-title reveal">Наш подход к восстановлению здоровья тела</h2>
       <p class="section-sub reveal">Пять направлений — один результат: вы двигаетесь без боли</p>
 
       <!-- 5 направлений -->
@@ -2217,7 +2258,7 @@
   <section class="section" id="equipment">
     <div class="container">
 
-      <h2 class="section-title reveal">Специальное оборудование</h2>
+      <h2 class="section-title reveal">Специальное оборудование для работы с телом</h2>
 
       <div class="equipment-grid stagger-parent">
 
@@ -2267,8 +2308,8 @@
   <section class="section parallax-bg" id="results">
     <div class="container">
 
-      <h2 class="section-title reveal">Истории клиентов</h2>
-      <p class="section-sub reveal">Реальные ситуации — что беспокоило, что делали, что изменилось</p>
+      <h2 class="section-title reveal">Истории людей</h2>
+      <p class="section-sub reveal">От боли и ограничений — к свободе движения и лучшему самочувствию</p>
 
       <!-- Mini-cases: 3 glassmorphism cards -->
       <div class="cases-grid stagger-parent">
@@ -2648,7 +2689,7 @@
   <section class="section map-section" id="map" aria-label="Как нас найти">
     <div class="container">
       <h2 class="section-title reveal">Как нас найти</h2>
-      <p class="section-sub reveal">Студия в центре Дмитрова — удобная парковка рядом</p>
+      <p class="section-sub reveal">Студия в Дмитрове — удобная парковка рядом</p>
 
       <div class="map-grid">
         <div class="map-info reveal">
@@ -2699,7 +2740,7 @@
           <div class="map-embed">
             <iframe
               title="Студия ТОНУС на карте"
-              src="https://yandex.ru/map-widget/v1/?ll=37.527&z=16&text=%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%2C+%D1%83%D0%BB.+%D0%90%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0+%D0%91%D0%B5%D0%BB%D0%BE%D0%B1%D1%80%D0%BE%D0%B2%D0%B0%2C+7&pt=37.5267,56.3448"
+              src="https://yandex.ru/map-widget/v1/?ll=37.534033,56.371817&z=16&text=%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%2C+%D1%83%D0%BB.+%D0%90%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0+%D0%91%D0%B5%D0%BB%D0%BE%D0%B1%D1%80%D0%BE%D0%B2%D0%B0%2C+7&pt=37.534033,56.371817"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen></iframe>
@@ -2739,7 +2780,7 @@
           <a href="tel:+79164940333">+7 (916) 494-03-33</a>
           <a href="mailto:tonus-03@yandex.ru">tonus-03@yandex.ru</a>
           <p>Режим работы: 8:00 — 18:00, Вс — вых.</p>
-          <p>г. Дмитров, ул. Архитектора В.В. Белоброва, 7</p>
+          <p>г. Дмитров, ул. Архитектора В.В.&nbsp;Белоброва,&nbsp;7</p>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Студия</div>
@@ -3331,11 +3372,15 @@
   }());
   
   // ── Certificate Lightbox ─────────────────────────
+  var _certImages = [], _certIdx = 0;
   function openCertLightbox(img) {
+    var grid = img.parentElement.parentElement;
+    _certImages = Array.from(grid.querySelectorAll('img'));
+    _certIdx = _certImages.indexOf(img);
+    if (_certIdx < 0) _certIdx = 0;
     var lb = document.getElementById('certLightbox');
     var lbImg = document.getElementById('certLightboxImg');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
+    lbImg.src = img.src; lbImg.alt = img.alt;
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     lb.focus();
@@ -3344,11 +3389,26 @@
     document.getElementById('certLightbox').classList.remove('is-open');
     document.body.style.overflow = '';
   }
-  var _certLb = document.getElementById('certLightbox'); if (_certLb) _certLb.addEventListener('click', function(e) {
-    if (e.target === this) closeCertLightbox();
-  });
+  function _certNav(dir) {
+    _certIdx = (_certIdx + dir + _certImages.length) % _certImages.length;
+    var img = _certImages[_certIdx];
+    document.getElementById('certLightboxImg').src = img.src;
+    document.getElementById('certLightboxImg').alt = img.alt;
+  }
+  var _certLb = document.getElementById('certLightbox');
+  if (_certLb) {
+    _certLb.addEventListener('click', function(e) { if (e.target === this) closeCertLightbox(); });
+    var _ctx = 0;
+    _certLb.addEventListener('touchstart', function(e) { _ctx = e.touches[0].clientX; }, { passive: true });
+    _certLb.addEventListener('touchend', function(e) {
+      if (Math.abs(_ctx - e.changedTouches[0].clientX) > 44) _certNav(_ctx > e.changedTouches[0].clientX ? 1 : -1);
+    }, { passive: true });
+  }
   document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('certLightbox').classList.contains('is-open')) return;
     if (e.key === 'Escape') closeCertLightbox();
+    if (e.key === 'ArrowLeft') _certNav(-1);
+    if (e.key === 'ArrowRight') _certNav(1);
   });
   
     // ── Coverflow Gallery
@@ -3359,21 +3419,46 @@
       var cards = Array.from(reel.children);
       var total = cards.length, cur = 0;
 
-      /* lightbox — click to open, click to close, no X */
-      var lb = null;
+      /* lightbox с навигацией */
+      var lb = null, lbImg = null, lbIdx = 0;
       function openGalleryLb(img) {
+        lbIdx = cards.indexOf(img.parentElement);
         if (!lb) {
           lb = document.createElement('div');
-          lb.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
-          var lbImg = document.createElement('img');
-          lbImg.style.cssText = 'max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 8px 60px rgba(0,0,0,.6);';
-          lb.appendChild(lbImg);
-          lb.addEventListener('click', function () { lb.style.display = 'none'; });
-          document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb) lb.style.display = 'none'; });
+          lb.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;';
+          var btnStyle = 'position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.18);border:none;color:#fff;font-size:2rem;line-height:1;width:48px;height:48px;border-radius:50%;cursor:pointer;';
+          var prev = document.createElement('button');
+          prev.innerHTML = '&#8249;'; prev.style.cssText = btnStyle + 'left:16px;';
+          prev.addEventListener('click', function(e) { e.stopPropagation(); lbGalNav(-1); });
+          var next = document.createElement('button');
+          next.innerHTML = '&#8250;'; next.style.cssText = btnStyle + 'right:16px;';
+          next.addEventListener('click', function(e) { e.stopPropagation(); lbGalNav(1); });
+          lbImg = document.createElement('img');
+          lbImg.style.cssText = 'max-width:88vw;max-height:88vh;border-radius:12px;box-shadow:0 8px 60px rgba(0,0,0,.6);';
+          lbImg.addEventListener('click', function(e) { e.stopPropagation(); });
+          lb.appendChild(prev); lb.appendChild(lbImg); lb.appendChild(next);
+          lb.addEventListener('click', function() { lb.style.display = 'none'; });
+          var _gtx = 0;
+          lb.addEventListener('touchstart', function(e) { _gtx = e.touches[0].clientX; }, { passive: true });
+          lb.addEventListener('touchend', function(e) {
+            if (Math.abs(_gtx - e.changedTouches[0].clientX) > 44) lbGalNav(_gtx > e.changedTouches[0].clientX ? 1 : -1);
+          }, { passive: true });
+          document.addEventListener('keydown', function(e) {
+            if (!lb || lb.style.display !== 'flex') return;
+            if (e.key === 'Escape') lb.style.display = 'none';
+            if (e.key === 'ArrowLeft') lbGalNav(-1);
+            if (e.key === 'ArrowRight') lbGalNav(1);
+          });
           document.body.appendChild(lb);
         }
-        lb.querySelector('img').src = img.src;
+        lbImg.src = img.src; lbImg.alt = img.alt || '';
         lb.style.display = 'flex';
+      }
+      function lbGalNav(dir) {
+        lbIdx = (lbIdx + dir + total) % total;
+        cur = lbIdx; render(false);
+        var img = cards[lbIdx].querySelector('img');
+        if (img) { lbImg.src = img.src; lbImg.alt = img.alt || ''; }
       }
 
       /* позиции: вычисляются по фактической ширине карточки — работает на любом брейкпоинте */
@@ -3462,13 +3547,28 @@
     document.querySelectorAll('.privacy-link').forEach(function (a) {
       a.addEventListener('click', function (e) { e.preventDefault(); window.openPrivacy(); });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('scrollTop');
+      if (!btn) return;
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 400);
+      });
+      btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
 </script>
 
 
   <!-- Certificate Lightbox -->
+  <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <div id="certLightbox" class="cert-lightbox" role="dialog" aria-modal="true" aria-label="Просмотр сертификата">
     <button class="cert-lightbox-close" onclick="closeCertLightbox()" aria-label="Закрыть">&#x2715;</button>
+    <button class="cert-lightbox-nav prev" onclick="_certNav(-1)" aria-label="Предыдущий">&#8249;</button>
     <img id="certLightboxImg" class="cert-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+    <button class="cert-lightbox-nav next" onclick="_certNav(1)" aria-label="Следующий">&#8250;</button>
   </div>
 </body>
 </html>
