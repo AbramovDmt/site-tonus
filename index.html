@@ -43,6 +43,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="content.js"></script>
 
   <style>
 
@@ -1940,9 +1941,9 @@
       </nav>
 
       <div class="header-contacts">
-        <a href="tel:+79164940333" class="header-phone" aria-label="Позвонить">
+        <a href="tel:+79164940333" class="header-phone" aria-label="Позвонить" data-c="phone-href">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.81a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.49 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>+7 (916) 494-03-33</span>
+          <span data-c="phone-text">+7 (916) 494-03-33</span>
         </a>
         <button class="btn-primary btn-sm" onclick="openForm()">Записаться</button>
       </div>
@@ -1957,7 +1958,7 @@
       <a href="#approach">Подход</a>
       <a href="#results">Отзывы</a>
       <a href="#faq">Вопросы</a>
-      <a href="tel:+79164940333">+7 (916) 494-03-33</a>
+      <a href="tel:+79164940333" data-c="phone-link">+7 (916) 494-03-33</a>
       <button class="btn-primary" onclick="openForm(); closeMenu()">Записаться</button>
     </nav>
   </header>
@@ -2025,15 +2026,15 @@
           </div>
           <div class="hero-messengers">
             <span class="hero-messengers-label">Или сразу:</span>
-            <a href="tel:+79164940333" class="btn-messenger" aria-label="Позвонить">
+            <a href="tel:+79164940333" class="btn-messenger" aria-label="Позвонить" data-c="phone-href">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.81a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.49 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               Позвонить
             </a>
-            <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="btn-messenger" target="_blank" rel="noopener" aria-label="MAX">
+            <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="btn-messenger" target="_blank" rel="noopener" aria-label="MAX" data-c="max-href">
               <svg width="14" height="14" viewBox="0 0 42 42" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z"/></svg>
               MAX
             </a>
-            <a href="https://t.me/Tonus003" class="btn-messenger" target="_blank" rel="noopener" aria-label="Telegram">
+            <a href="https://t.me/Tonus003" class="btn-messenger" target="_blank" rel="noopener" aria-label="Telegram" data-c="tg-href">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
               Telegram
             </a>
@@ -2311,170 +2312,13 @@
       <h2 class="section-title reveal">Истории людей</h2>
       <p class="section-sub reveal">От боли и ограничений — к свободе движения и лучшему самочувствию</p>
 
-      <!-- Mini-cases: 3 glassmorphism cards -->
-      <div class="cases-grid stagger-parent">
-
-        <!-- Case 1 -->
-        <div class="case-card reveal">
-          <div class="case-step">
-            <div class="case-step-icon problem">
-              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Ситуация</div>
-              <p class="case-step-text">Ребёнок 8 месяцев: не переворачивается, не ползает, не присаживается, малоактивен.</p>
-            </div>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-step">
-            <div class="case-step-icon action">
-              <svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Что делали</div>
-              <p class="case-step-text">Остеопрактические техники. 3 сеанса с интервалом 1 месяц.</p>
-            </div>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-step">
-            <div class="case-step-icon result">
-              <svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Результат</div>
-              <p class="case-step-text">После 1-го сеанса — стал активным, начал переворачиваться. После 2-го — ползает, самостоятельно сидит, стал более контактным. 3-й сеанс закрепляющий.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 2 -->
-        <div class="case-card reveal">
-          <div class="case-step">
-            <div class="case-step-icon problem">
-              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Ситуация</div>
-              <p class="case-step-text">Мужчина, 38 лет. Протрузия L4–L5, боль отдаёт в левую ногу, онемение. Беспокоит 3 месяца.</p>
-            </div>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-step">
-            <div class="case-step-icon action">
-              <svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Что делали</div>
-              <p class="case-step-text">Остеопрактика: коррекция оси тела, таза, выравнивание длины ног. Вытяжение позвоночника на тракционном столе. Работа на тренажёре Правило. 4 сеанса за 2 недели.</p>
-            </div>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-step">
-            <div class="case-step-icon result">
-              <svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Результат</div>
-              <p class="case-step-text">Ось тела выровнена, боли и онемение купированы.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 3 -->
-        <div class="case-card reveal">
-          <div class="case-step">
-            <div class="case-step-icon problem">
-              <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Ситуация</div>
-              <p class="case-step-text">Женщина, 32 года. Частые головные боли по типу мигрени на протяжении нескольких лет.</p>
-            </div>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-step">
-            <div class="case-step-icon action">
-              <svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Что делали</div>
-              <p class="case-step-text">Остеопрактика: коррекция верхнечелюстного сустава. Биодинамические техники для гармонизации психоэмоционального фона. 3 сеанса за 2 недели.</p>
-            </div>
-          </div>
-          <div class="case-divider"></div>
-          <div class="case-step">
-            <div class="case-step-icon result">
-              <svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="case-step-body">
-              <div class="case-step-label">Результат</div>
-              <p class="case-step-text">Головные боли купированы, психоэмоциональный фон выравнен.</p>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /cases-grid -->
+      <!-- Mini-cases: rendered from content.js SITE.cases -->
+      <div class="cases-grid stagger-parent" id="cases-grid"></div>
 
       <!-- Reviews slider -->
       <div class="reviews-slider-wrap reveal" id="reviewsSlider">
         <div class="reviews-track" id="reviewsTrack">
-
-          <!-- Review 1: Надежда -->
-          <div class="review-card">
-            <div class="review-stars">
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-            <p class="review-text">«Была впервые на аппаратном лимфодренажном массаже — мне понравилось, было комфортно и интересно. Буду ходить раз в неделю, уверена что будет польза. Обязательно приведу мужа и детей на диагностику к Марии с позвоночниками, потому что в этом она МЕГАПРОФИ. После массажа она поколдовала с моим позвоночником — выровняла каркас, сровняла длину моих ног, шею "почила" — в общем я в шоке и диком восторге от её профессионализма. И очень рада что у нас в городе есть такой специалист, рекомендую всем!»</p>
-            <div class="review-author">
-              <div class="review-avatar">Н</div>
-              <div>
-                <div class="review-name">Надежда</div>
-                <div class="review-meta">30 мая 2024 · Лимфодренажный массаж</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Review 2: Олег -->
-          <div class="review-card">
-            <div class="review-stars">
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-            <p class="review-text">«Первый опыт прошел на отлично. Это действительно Остеопрактика, в отличие от многих массажистов-самозванцев. Очень информативно — Мария объясняет всё, что она делает. Результаты Остеопрактики проявляются не сразу, я к этому был готов. Возможно, со временем добавлю отзыв.»</p>
-            <div class="review-author">
-              <div class="review-avatar">О</div>
-              <div>
-                <div class="review-name">Олег</div>
-                <div class="review-meta">28 октября 2024 · Остеопракт</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Review 3: Александр -->
-          <div class="review-card">
-            <div class="review-stars">
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-            <p class="review-text">«Ездили всей семьёй, доктор всех выслушала и выполнила прекрасное лечение, очень чуткая и вникающая в проблему, внимательная, понравилось всем. Очень рекомендую! Качество услуг на высшем уровне при этом стоимость доступная. Приедем ещё!»</p>
-            <div class="review-author">
-              <div class="review-avatar">А</div>
-              <div>
-                <div class="review-name">Александр</div>
-                <div class="review-meta">6 июля 2025 · Вытяжение позвоночника</div>
-              </div>
-            </div>
-          </div>
+          <!-- reviews rendered from content.js SITE.reviews -->
 
         </div><!-- /reviews-track -->
       </div><!-- /reviews-slider-wrap -->
@@ -2483,11 +2327,7 @@
         <button class="slider-btn" id="reviewPrev" aria-label="Предыдущий отзыв">
           <svg viewBox="0 0 18 18"><polyline points="11 14 6 9 11 4"/></svg>
         </button>
-        <div class="slider-dots" id="reviewDots">
-          <button class="slider-dot" aria-label="Отзыв 1"></button>
-          <button class="slider-dot" aria-label="Отзыв 2"></button>
-          <button class="slider-dot" aria-label="Отзыв 3"></button>
-        </div>
+        <div class="slider-dots" id="reviewDots"></div>
         <button class="slider-btn" id="reviewNext" aria-label="Следующий отзыв">
           <svg viewBox="0 0 18 18"><polyline points="7 4 12 9 7 14"/></svg>
         </button>
@@ -2530,117 +2370,8 @@
       <h2 class="section-title reveal">Частые вопросы</h2>
       <p class="section-sub reveal">Отвечаем честно — без медицинского жаргона</p>
 
-      <div class="faq-list stagger-parent">
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Сколько стоит занятие?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Каждое занятие индивидуально — только после диагностики можно определить объём работы. В среднем это <strong>4 000 рублей</strong> за одно посещение. Мы лояльно относимся к каждому клиенту и не против детских, семейных и абонементных скидок в пределах разумного.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Сколько сеансов обычно нужно?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Зависит от ситуации. Острая боль в спине — как правило <strong>3–5 сеансов</strong>. Реабилитация после операции или длительные хронические нарушения — больше. После первого визита будет конкретный план: что делаем, сколько раз, с каким ожидаемым результатом.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Сколько времени длится занятие?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Минимальное время разового посещения на одного клиента — <strong>40 минут</strong>, максимальное — <strong>90 минут</strong>. Всё индивидуально и зависит от характера и комплекса занятий.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Нужно ли направление от врача или МРТ?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Не обязательно. Приходите как есть. Если есть снимки, МРТ или направление — возьмите с собой, это поможет. Но мы работаем с любой стартовой точкой.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Чем вы отличаетесь от обычного массажиста?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Остеопракт и массажист — специалисты, работающие с телом клиента, но их подходы, методы и цели различаются.</p>
-            <p style="margin-top:12px">Остеопракт использует <strong>целостный (холистический) подход</strong>: рассматривает тело как единую систему, где нарушение в одном месте влияет на другие участки. Цель — выявить <strong>первопричину проблемы</strong> и устранить её, а не просто снять симптомы.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Это безопасно при моём диагнозе?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Расскажите о своей ситуации перед первым сеансом — специалист подберёт подход. Есть состояния, с которыми мы не работаем: в таком случае честно об этом скажем и направим к нужному специалисту. Никаких рисков вслепую — только то, что уместно именно вам.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Есть ли противопоказания?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Противопоказаний немного: острые респираторно-вирусные заболевания в стадии обострения, онкология и психические расстройства. В остальных случаях работаем без ограничений.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Что если не поможет?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Честно скажем об этом после первого сеанса. Если ваша ситуация требует другого подхода — порекомендуем, куда обратиться. Работаем только с теми случаями, где можем реально помочь.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Что такое Остеопрактика?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Остеопрактика — система оздоровления, основанная на взаимосвязи между мышечно-скелетной структурой и функционированием организма. Нарушения в опорно-двигательном аппарате могут приводить к сбоям во внутренних органах, а воздействие на кости, суставы и мягкие ткани благотворно влияет на общее состояние.</p>
-            <p style="margin-top:12px"><strong>Основные принципы:</strong></p>
-            <ul class="faq-list-inner">
-              <li><strong>Целостный подход.</strong> Рассматриваем клиента как единое целое, а не только ту область, где болит.</li>
-              <li><strong>Причина, а не симптом.</strong> Ищем и устраняем первопричину — боль уходит сама.</li>
-              <li><strong>Мануальные методы.</strong> Мягкие растяжения, работа с фасциями и суставами — снимаем напряжение, улучшаем кровообращение и лимфоток, оптимизируем работу нервной системы.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false">
-            <span>Что такое биодинамика?</span>
-            <svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">
-            <p>Слово «биодинамика» происходит от греческих «bios» (жизнь) и «dinos» (сила) — буквально наука о жизненных силах.</p>
-            <p style="margin-top:12px">Биодинамика — особый подход к оздоровлению, берущий начало в Остеопатии. Ключевое отличие: в Остеопатии воздействие идёт снаружи внутрь, в биодинамике — <em>изнутри наружу</em>, через жидкости организма.</p>
-            <p style="margin-top:12px">Благодаря влиянию на жидкости восстанавливается ритмика движений на микро- и макроуровнях, снимаются ограничения подвижности, нормализуется работа внутренних органов. Биодинамика работает на самых глубоких ритмах тела — там, где встречаются психика, энергия и тело.</p>
-          </div>
-        </div>
-
+      <div class="faq-list stagger-parent" id="faq-list">
+        <!-- faq rendered from content.js SITE.faq -->
       </div>
     </div>
   </section>
@@ -2664,15 +2395,15 @@
       <div class="cta-alt reveal">
         <p>Или просто свяжитесь — расскажем всё сразу:</p>
         <div class="cta-alt-links">
-          <a href="tel:+79164940333" class="cta-alt-link">
+          <a href="tel:+79164940333" class="cta-alt-link" data-c="phone-href">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.81a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.49 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             Позвонить
           </a>
-          <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="cta-alt-link" target="_blank" rel="noopener">
+          <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="cta-alt-link" target="_blank" rel="noopener" data-c="max-href">
             <svg width="16" height="16" viewBox="0 0 42 42" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z"/></svg>
             MAX
           </a>
-          <a href="https://t.me/Tonus003" class="cta-alt-link" target="_blank" rel="noopener">
+          <a href="https://t.me/Tonus003" class="cta-alt-link" target="_blank" rel="noopener" data-c="tg-href">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
             Telegram
           </a>
@@ -2708,7 +2439,7 @@
             </div>
             <div class="map-detail-body">
               <div class="map-detail-label">Часы работы</div>
-              <div class="map-detail-value">8:00 — 18:00, Вс — выходной</div>
+              <div class="map-detail-value" data-c="hours-full">8:00 — 18:00, Вс — выходной</div>
             </div>
           </div>
           <div class="map-detail">
@@ -2717,19 +2448,19 @@
             </div>
             <div class="map-detail-body">
               <div class="map-detail-label">Телефон</div>
-              <div class="map-detail-value"><a href="tel:+79164940333">+7 (916) 494-03-33</a></div>
+              <div class="map-detail-value"><a href="tel:+79164940333" data-c="phone-link">+7 (916) 494-03-33</a></div>
             </div>
           </div>
           <div class="map-messengers">
-            <a href="tel:+79164940333" class="map-messenger-btn phone" aria-label="Позвонить">
+            <a href="tel:+79164940333" class="map-messenger-btn phone" aria-label="Позвонить" data-c="phone-href">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.81a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.49 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               Позвонить
             </a>
-            <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="map-messenger-btn max" target="_blank" rel="noopener" aria-label="MAX">
+            <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="map-messenger-btn max" target="_blank" rel="noopener" aria-label="MAX" data-c="max-href">
               <svg width="18" height="18" viewBox="0 0 42 42" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z"/></svg>
               MAX
             </a>
-            <a href="https://t.me/Tonus003" class="map-messenger-btn tg" target="_blank" rel="noopener" aria-label="Telegram">
+            <a href="https://t.me/Tonus003" class="map-messenger-btn tg" target="_blank" rel="noopener" aria-label="Telegram" data-c="tg-href">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
               Telegram
             </a>
@@ -2764,22 +2495,22 @@
           <div class="footer-logo">ТОНУС</div>
           <p class="footer-tagline">Физкультурно оздоровительная студия.<br>г. Дмитров</p>
           <div class="footer-messenger-links" style="margin-top:16px">
-            <a href="tel:+79164940333" aria-label="Позвонить">
+            <a href="tel:+79164940333" aria-label="Позвонить" data-c="phone-href">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.81a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.49 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </a>
-            <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" target="_blank" rel="noopener" aria-label="MAX">
+            <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" target="_blank" rel="noopener" aria-label="MAX" data-c="max-href">
               <svg width="18" height="18" viewBox="0 0 42 42" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z"/></svg>
             </a>
-            <a href="https://t.me/tonus03" target="_blank" rel="noopener" aria-label="Telegram">
+            <a href="https://t.me/tonus03" target="_blank" rel="noopener" aria-label="Telegram" data-c="tg-href">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
             </a>
           </div>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Контакты</div>
-          <a href="tel:+79164940333">+7 (916) 494-03-33</a>
-          <a href="mailto:tonus-03@yandex.ru">tonus-03@yandex.ru</a>
-          <p>Режим работы: 8:00 — 18:00, Вс — вых.</p>
+          <a href="tel:+79164940333" data-c="phone-link">+7 (916) 494-03-33</a>
+          <a href="mailto:tonus-03@yandex.ru" data-c="email-link">tonus-03@yandex.ru</a>
+          <p>Режим работы: <span data-c="hours-short">8:00 — 18:00, Вс — вых.</span></p>
           <p>г. Дмитров, ул. Архитектора В.В.&nbsp;Белоброва,&nbsp;7</p>
         </div>
         <div class="footer-col">
@@ -2801,13 +2532,13 @@
   <!-- ═══════════════════ STICKY MOBILE BAR ════════════════════ -->
   <div class="sticky-bar" id="stickyBar" role="complementary" aria-label="Быстрый контакт">
     <button class="sticky-bar-cta" onclick="openForm()">Записаться</button>
-    <a href="tel:+79164940333" class="sticky-bar-icon phone" aria-label="Позвонить">
+    <a href="tel:+79164940333" class="sticky-bar-icon phone" aria-label="Позвонить" data-c="phone-href">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.81a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.49 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     </a>
-    <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="sticky-bar-icon max" target="_blank" rel="noopener" aria-label="MAX">
+    <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" class="sticky-bar-icon max" target="_blank" rel="noopener" aria-label="MAX" data-c="max-href">
       <svg width="20" height="20" viewBox="0 0 42 42" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z"/></svg>
     </a>
-    <a href="https://t.me/Tonus003" class="sticky-bar-icon tg" target="_blank" rel="noopener" aria-label="Telegram">
+    <a href="https://t.me/Tonus003" class="sticky-bar-icon tg" target="_blank" rel="noopener" aria-label="Telegram" data-c="tg-href">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.91.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.51.25l.18-2.57 4.66-4.21c.2-.18-.04-.28-.31-.1l-5.76 3.63-2.48-.77c-.54-.17-.55-.54.11-.8l9.68-3.73c.45-.17.84.1.7.8z"/></svg>
     </a>
   </div>
@@ -3001,6 +2732,77 @@
   </div>
 
   <script>
+    // ── Контент из content.js ─────────────────────────
+    (function () {
+      if (typeof SITE === 'undefined') return;
+      var s = SITE;
+
+      // Contacts injection
+      document.querySelectorAll('[data-c]').forEach(function (el) {
+        var c = el.getAttribute('data-c');
+        if (c === 'phone-href')  el.href = 'tel:' + s.phone;
+        if (c === 'phone-text')  el.textContent = s.phoneDisplay;
+        if (c === 'phone-link')  { el.href = 'tel:' + s.phone; el.textContent = s.phoneDisplay; }
+        if (c === 'tg-href')     el.href = 'https://t.me/' + s.telegram;
+        if (c === 'max-href')    el.href = s.maxUrl;
+        if (c === 'email-link')  { el.href = 'mailto:' + s.email; el.textContent = s.email; }
+        if (c === 'hours-full')  el.textContent = s.hoursFull;
+        if (c === 'hours-short') el.textContent = s.hoursShort;
+      });
+
+      // FAQ
+      var SVG_ARR = '<svg class="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+      var faqList = document.getElementById('faq-list');
+      if (faqList && s.faq) {
+        faqList.innerHTML = s.faq.map(function (item) {
+          return '<div class="faq-item reveal">' +
+            '<button class="faq-q" aria-expanded="false"><span>' + item.q + '</span>' + SVG_ARR + '</button>' +
+            '<div class="faq-a">' + item.a + '</div></div>';
+        }).join('');
+      }
+
+      // Отзывы
+      var SVG_STAR = '<svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+      var STARS5 = SVG_STAR + SVG_STAR + SVG_STAR + SVG_STAR + SVG_STAR;
+      var track = document.getElementById('reviewsTrack');
+      if (track && s.reviews) {
+        track.innerHTML = s.reviews.map(function (r) {
+          return '<div class="review-card">' +
+            '<div class="review-stars">' + STARS5 + '</div>' +
+            '<p class="review-text">' + r.text + '</p>' +
+            '<div class="review-author"><div class="review-avatar">' + r.initial + '</div>' +
+            '<div><div class="review-name">' + r.name + '</div>' +
+            '<div class="review-meta">' + r.meta + '</div></div></div></div>';
+        }).join('');
+        var dotsWrap = document.getElementById('reviewDots');
+        if (dotsWrap) {
+          dotsWrap.innerHTML = s.reviews.map(function (_, i) {
+            return '<button class="slider-dot" aria-label="Отзыв ' + (i + 1) + '"></button>';
+          }).join('');
+        }
+      }
+
+      // Кейсы
+      var SVG_PROB = '<svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5" stroke-linecap="round"/></svg>';
+      var SVG_ACT  = '<svg viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg>';
+      var SVG_RES  = '<svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5" fill="none" stroke="#4EADA0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var casesGrid = document.getElementById('cases-grid');
+      if (casesGrid && s.cases) {
+        casesGrid.innerHTML = s.cases.map(function (c) {
+          return '<div class="case-card reveal">' +
+            '<div class="case-step"><div class="case-step-icon problem">' + SVG_PROB + '</div>' +
+            '<div class="case-step-body"><div class="case-step-label">Ситуация</div><p class="case-step-text">' + c.situation + '</p></div></div>' +
+            '<div class="case-divider"></div>' +
+            '<div class="case-step"><div class="case-step-icon action">' + SVG_ACT + '</div>' +
+            '<div class="case-step-body"><div class="case-step-label">Что делали</div><p class="case-step-text">' + c.action + '</p></div></div>' +
+            '<div class="case-divider"></div>' +
+            '<div class="case-step"><div class="case-step-icon result">' + SVG_RES + '</div>' +
+            '<div class="case-step-body"><div class="case-step-label">Результат</div><p class="case-step-text">' + c.result + '</p></div></div>' +
+            '</div>';
+        }).join('');
+      }
+    })();
+
     // ── Sticky header ─────────────────────────────────
     const header = document.getElementById('site-header');
     window.addEventListener('scroll', () => {
@@ -3070,19 +2872,23 @@
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ── FAQ аккордеон ─────────────────────────────────
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.querySelector('.faq-q').addEventListener('click', () => {
-        const isOpen = item.classList.contains('is-open');
-        document.querySelectorAll('.faq-item.is-open').forEach(i => {
+    var faqListEl = document.getElementById('faq-list');
+    if (faqListEl) {
+      faqListEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('.faq-q');
+        if (!btn) return;
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('is-open');
+        faqListEl.querySelectorAll('.faq-item.is-open').forEach(function (i) {
           i.classList.remove('is-open');
           i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
         });
         if (!isOpen) {
           item.classList.add('is-open');
-          item.querySelector('.faq-q').setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-expanded', 'true');
         }
       });
-    });
+    }
 
     // ── Diplomas carousel ─────────────────────────────
     (function () {
@@ -3280,8 +3086,8 @@
           successEl.classList.add('visible');
           var contactText = '';
           if (answers[5] === 'phone') contactText = 'Ждите звонка на ' + answers.phone + '.';
-          else if (answers[5] === 'max') contactText = 'Вы можете написать нам в <a href="https://max.ru/u/f9LHodD0cOIuMKQpHE2baT00jv4QcZl9sKP8orzy7j-WPO4VbF8SsfRuN4g" style="color:var(--color-primary)">MAX</a> прямо сейчас.';
-          else if (answers[5] === 'tg') contactText = 'Вы можете написать нам в <a href="https://t.me/Tonus003" style="color:var(--color-primary)">Telegram</a> прямо сейчас.';
+          else if (answers[5] === 'max') contactText = 'Вы можете написать нам в <a href="' + (typeof SITE !== 'undefined' ? SITE.maxUrl : 'https://max.ru') + '" style="color:var(--color-primary)">MAX</a> прямо сейчас.';
+          else if (answers[5] === 'tg') contactText = 'Вы можете написать нам в <a href="https://t.me/' + (typeof SITE !== 'undefined' ? SITE.telegram : 'Tonus003') + '" style="color:var(--color-primary)">Telegram</a> прямо сейчас.';
           document.getElementById('wizardSuccessText').innerHTML = 'Свяжемся с вами в ближайшее время.';
         });
       }
